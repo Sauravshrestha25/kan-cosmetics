@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local"
 
 import "./globals.css";
-import Navbar from "@/Components/Layout/Navbar/Navbar";
+import Navbar from "@/Components/Layout/Navbarv2/Navbar";
 
 const matter = localFont({
   src: [

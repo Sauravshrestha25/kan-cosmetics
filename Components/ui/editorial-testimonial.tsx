@@ -71,7 +71,7 @@ export default function TestimonialsEditorial() {
         <div className="flex-1 pt-6">
           {/* Quote */}
           <blockquote
-            className={`text-2xl md:text-3xl font-matter leading-relaxed text-foreground tracking-wider transition-all duration-300 ${
+            className={`text-2xl md:text-3xl font-matter font-light leading-relaxed text-foreground tracking-wide transition-all duration-300 ${
               isTransitioning ? "opacity-0 translate-x-4" : "opacity-100 translate-x-0"
             }`}
           >

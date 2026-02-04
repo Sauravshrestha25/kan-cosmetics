@@ -25,7 +25,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="fixed right-5 top-1/2 -translate-y-1/2 z-50 hidden md:block">
+      <nav className="fixed  z-50 hidden md:block">
         <div className="relative flex items-center">
           <div
             onMouseLeave={() => setIsActive(false)}

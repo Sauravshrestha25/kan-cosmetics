@@ -10,7 +10,7 @@ const AboutHero = () => {
       <div className="absolute bg-[url('/images/texture_background.jpg')] bg-cover inset-0 -z-10 "></div>
       <div className="flex flex-col  py-2   mx-auto ">
         
-        <div className="flex justify-center lg:justify-start  mb-10 lg:-mb-10 z-20">
+        <div className="hidden md:flex justify-center lg:justify-start  mb-10 lg:-mb-10 z-20">
           <AboutPhotocard 
             imageUrl="/images/IMG_1090.PNG" 
             width={260} 
@@ -63,8 +63,7 @@ const AboutHero = () => {
             <AboutPhotocard 
               imageUrl="/images/IMG_1501.PNG" 
               width={340} 
-              height={300} 
-              title="Brow Gel" 
+              height={400} 
             />
           </div>
         </div>

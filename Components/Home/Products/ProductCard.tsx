@@ -1,7 +1,8 @@
 "use client";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { useRef, useEffect } from "react";
 import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 
 interface ProductCardProps {
   imageUrl: string;
@@ -10,49 +11,55 @@ interface ProductCardProps {
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ imageUrl, name, desc }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const imageRef = useRef<HTMLDivElement>(null);
+  const descRef = useRef<HTMLDivElement>(null);
 
-  const [hovered, setHovered] = useState<boolean>(false);
+  useGSAP(() => {
+    if (!containerRef.current || !imageRef.current || !descRef.current) return;
 
-  useEffect(() => {
+    const descHeight = descRef.current.offsetHeight;
 
-    if (hovered) {
-      gsap.to("#product-details", {
-        yPercent: 0,
-        duration: 0.6,
-        display: "block",
-        ease: "expo.out",
-      })
+    const tl = gsap.timeline({ paused: true });
+    tl
+    .to(imageRef.current, { y: -descHeight, duration: 0.5, ease: "power2.out" })
+    .fromTo(descRef,{yPercent: 20},{yPercent:0} )
 
-    } else {
+    containerRef.current.addEventListener("mouseenter", () => tl.play());
+    containerRef.current.addEventListener("mouseleave", () => tl.reverse());
 
-      gsap.to("#product-details", {
-        y: "100%",
-        duration: 0.6,
-        ease: "power3.in",
-      });
+    return () => {
+      containerRef.current?.removeEventListener("mouseenter", () => tl.play());
+      containerRef.current?.removeEventListener("mouseleave", () => tl.reverse());
     };
-  }, [hovered])
-
+  }, []);
 
   return (
-    <div onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} className="bg-white shadow-sm  overflow-hidden  transition-transform cursor-pointer w-full h-screen ">
-      <div className="h-full">
+    <div
+      ref={containerRef}
+      className="relative w-full cursor-pointer overflow-hidden"
+    >
+      {/* IMAGE */}
+      <div ref={imageRef}>
         <Image
-          id="image"
           src={imageUrl}
           alt={name}
           width={400}
           height={400}
-          className="relative w-full h-full object-contain"
+          className="w-full h-200 object-contain"
         />
-        <div className="absolute w-100 h-1 bg-black "></div>
       </div>
-      <div id="product-details" className={` ${hovered ? "flex flex-col items-start gap-8 px-4 pt-8 bg-[#141c35] hover:bg-gray-100 text-white hover:text-black h-full" : "hidden"}`}>
-        <p className="text-gray-400 uppercase text-sm tracking-widest mb-4">
+
+      {/* DESCRIPTION */}
+      <div
+        ref={descRef}
+        className="absolute bottom-0 left-0 w-full bg-[#141c35] text-white px-4 py-4"
+      >
+        <p className="text-gray-400 uppercase text-sm tracking-widest mb-1">
           {desc}
         </p>
-        <h3 className="text-xl font-semibold mb-2">{name}</h3>
-        <button className="  font-matter cursor-pointer  hover:underline transition-colors">
+        <h3 className="text-xl font-semibold">{name}</h3>
+        <button className="mt-1 font-matter cursor-pointer hover:underline transition-colors">
           Buy Now
         </button>
       </div>

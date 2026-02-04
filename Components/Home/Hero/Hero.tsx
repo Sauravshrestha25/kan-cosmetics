@@ -81,26 +81,23 @@ gsap.timeline()
       id="hero"
       className="relative font-saolDisplay min-h-screen w-full overflow-hidden bg-[url('/images/texture_background.jpg')] bg-cover text-white/80"
     >
-      <div id="topbar" className="absolute top-0 left-0 w-full z-50">
-        <Topbar />
-      </div>
       <div
         id="hero-video"
         className="absolute inset-0 z-10 w-full h-full overflow-hidden mx-auto shadow-2xl"
       >
         <video
-          src="/video/hero_video.mp4"
+          src="/video/hero_video_2.mp4"
           playsInline
           autoPlay
           muted
           loop
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-black/20 z-20" />
+        <div className="absolute inset-0 bg-black/20 -z-20" />
       </div>
       <div
         id="hero-titles"
-        className="relative z-30 flex flex-col items-center pt-40  min-h-screen px-4 text-center"
+        className="z-30 flex flex-col items-center pt-20 md:pt-40   min-h-screen px-4 text-center"
       >
         <div className="flex flex-col gap-6 items-center   tracking-widest w-full">
           <p id="welcome" className="uppercase text-lg md:text-2xl tracking-[0.2em]">
