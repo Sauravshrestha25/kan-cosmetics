@@ -1,5 +1,5 @@
 "use client";
-import { ImageComparisonSlider } from "@/Components/image-comparison-slider-vertical";
+import { ImageComparisonSlider } from "@/Components/ui/image-comparison-slider-vertical";
 import { motion } from "framer-motion";
 import Image from "next/image";
 
