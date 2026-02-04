@@ -68,22 +68,33 @@ export const ImageComparisonSlider = React.forwardRef<
     const handleMouseUp = () => setIsDragging(false);
     const handleTouchEnd = () => setIsDragging(false);
 
-    // Effect to add and remove global event listeners for dragging
-    React.useEffect(() => {
-      if (isDragging) {
-        window.addEventListener("mousemove", handleMouseMove);
-        window.addEventListener("touchmove", handleTouchMove);
-        window.addEventListener("mouseup", handleMouseUp);
-        window.addEventListener("touchend", handleTouchEnd);
-      }
+  React.useEffect(() => {
+  if (!isDragging) return;
 
-      return () => {
-        window.removeEventListener("mousemove", handleMouseMove);
-        window.removeEventListener("touchmove", handleTouchMove);
-        window.removeEventListener("mouseup", handleMouseUp);
-        window.removeEventListener("touchend", handleTouchEnd);
-      };
-    }, [isDragging, handleMouseMove, handleTouchMove, handleMouseUp, handleTouchEnd]);
+  const onMouseMove = (e: MouseEvent) => handleMove(e.clientY);
+  const onMouseUp = () => setIsDragging(false);
+
+  const onTouchMove = (e: TouchEvent) => {
+    e.preventDefault(); // prevent page scroll
+    handleMove(e.touches[0].clientY);
+  };
+  const onTouchEnd = () => setIsDragging(false);
+
+  window.addEventListener("mousemove", onMouseMove);
+  window.addEventListener("mouseup", onMouseUp);
+
+  window.addEventListener("touchmove", onTouchMove, { passive: false });
+  window.addEventListener("touchend", onTouchEnd);
+
+  return () => {
+    window.removeEventListener("mousemove", onMouseMove);
+    window.removeEventListener("mouseup", onMouseUp);
+
+    window.removeEventListener("touchmove", onTouchMove);
+    window.removeEventListener("touchend", onTouchEnd);
+  };
+}, [isDragging]);
+
 
     return (
       <div

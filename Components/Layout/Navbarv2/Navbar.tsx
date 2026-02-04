@@ -103,7 +103,7 @@ const Navbar = () => {
             {/* RIGHT: Images + Info */}
             <div className="flex-1 flex flex-col md:flex-row gap-6">
               {/* Hover images */}
-              <HoverSliderImageWrap className="relative w-full md:w-2/3 h-96 md:h-[500px] flex-1">
+              <HoverSliderImageWrap className="relative w-full md:w-2/3 h-96 md:h-125 flex-1">
                 {MENU_ITEMS.map((item, index) => (
                   <HoverSliderImage
                     key={item.label}
