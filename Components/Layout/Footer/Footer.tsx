@@ -247,7 +247,7 @@ function HoverFooter() {
       </div>
 
       <div className="lg:flex hidden  -mt-30 -mb-36">
-        <TextHoverEffect text="KOREA NEPAL" className="z-50" />
+        <TextHoverEffect text="KOREA & NEPAL" className="z-50" />
       </div>
 
       <FooterBackgroundGradient />
