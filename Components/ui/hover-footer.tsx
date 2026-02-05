@@ -121,7 +121,7 @@ export const TextHoverEffect = ({
         dominantBaseline="middle"
         strokeWidth="0.3"
         mask="url(#textMask)"
-        className="fill-gray-800 font-[helvetica]  text-7xl font-bold"
+        className="fill-white font-[helvetica]  text-7xl font-bold"
       >
         {text}
       </text>

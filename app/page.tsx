@@ -1,5 +1,5 @@
 import Hero from "@/Components/Home/Hero/Hero";
-import About from "./about/page";
+import About from "@/Components/Home/About/AboutHero";
 import ProductShowcase from "@/Components/Home/Products/ProductShowcase";
 import Benefits from '@/Components/Home/Benefits/Benefits'
 import Testimonial from "@/Components/Home/Testimonial/Testimonial";
