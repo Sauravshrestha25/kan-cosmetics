@@ -160,7 +160,7 @@ function CarouselNavigation({
       <button
         type='button'
         className={cn(
-          'pointer-events-auto h-fit w-fit hover:underline transition-all ease-in-out p-2  duration-300 dark:bg-zinc-950 cursor-pointer',
+          'pointer-events-auto h-fit w-fit hover:underline transition-all ease-in-out p-2  duration-300 dark:bg-zinc-950 cursor-pointer  ',
           alwaysShow
             ? 'opacity-100'
             : 'opacity-0 group-hover/hover:opacity-100',

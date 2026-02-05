@@ -22,9 +22,8 @@ const Benefits = () => {
 
 
   return (
-    <section className="min-h-screen w-full flex flex-col md:flex-row  text-black overflow-hidden">
+    <section className="min-h-screen w-full flex flex-col md:flex-row text-black overflow-hidden">
       
-      {/* --- Left Side: Content --- */}
       <div className="w-full md:w-1/2 flex flex-col justify-center px-6 sm:px-12 lg:px-24 py-16 md:py-20 order-2 md:order-1">
         <motion.span 
           initial={{ opacity: 0, y: 20 }}
@@ -53,7 +52,7 @@ const Benefits = () => {
                 <span className="h-0.5 w-6 bg-black group-hover:w-12 transition-all duration-500" />
                 {item.title}
               </h3>
-              <p className="text-black text-base sm:text-lg tracking-wide leading-relaxed pl-9">
+              <p className="text-black text-base sm:text-lg  leading-relaxed pl-9 font-montserrat">
                 {item.desc}
               </p>
             </motion.div>
@@ -61,24 +60,17 @@ const Benefits = () => {
         </div>
       </div>
 
-      {/* --- Right Side: Visuals --- */}
       <div className="w-full md:w-1/2 h-[50vh] md:h-auto relative bg-neutral-200 order-1 md:order-2">
-        {/* <Image 
+        <Image 
           src="/images/model.jpg" 
           alt="k&a model" 
           fill 
           className="object-cover transition-transform duration-1000 hover:scale-105"
           priority
-        /> */}
-        <ImageComparisonSlider 
-          topImage="/images/before.jpg"
-          bottomImage="/images/after.jpg"
-          altTop="KAN Cosmetics"
-          altBottom="KAN Cosmetics"
-          className="relative"
         />
 
-        <div className="absolute bottom-6 right-6 sm:bottom-12 sm:right-12 bg-white/90 backdrop-blur-md p-6 sm:p-8 max-w-70 sm:max-w-xs shadow-xl border-l-4 border-[#141c35]">
+
+        <div className="absolute bottom-6 right-6 sm:bottom-12 sm:right-12 bg-white/90 backdrop-blur-md p-6 sm:p-8 max-w-70 md:max-w-90 sm:max-w-xs shadow-xl border-l-4 border-[#141c35]">
           <p className="text-xs sm:text-lg italic leading-normal text-black font-medium">
             "Smart beauty starts with smart building—we ensure your foundation is as timeless as your style."
           </p>

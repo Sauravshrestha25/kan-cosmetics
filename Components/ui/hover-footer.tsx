@@ -52,11 +52,11 @@ export const TextHoverEffect = ({
         >
           {hovered && (
             <>
-              <stop offset="0%" stopColor="#F2E689" />
+              <stop offset="0%" stopColor="#D9C162" />
               <stop offset="25%" stopColor="#F2E689" />
-              <stop offset="50%" stopColor="#F2E689" />
+              <stop offset="50%" stopColor="#FFF9D4" />
               <stop offset="75%" stopColor="#F2E689" />
-              <stop offset="100%" stopColor="#F2E689" />
+              <stop offset="100%" stopColor="#D9C162" /> 
             </>
           )}
         </linearGradient>
@@ -88,7 +88,7 @@ export const TextHoverEffect = ({
         textAnchor="middle"
         dominantBaseline="middle"
         strokeWidth="0.3"
-        className="fill-transparent stroke-neutral-200 font-[helvetica] text-7xl font-bold dark:stroke-neutral-800"
+        className="fill-gray-800  font-[helvetica] text-7xl font-bold dark:stroke-neutral-800 "
         style={{ opacity: hovered ? 0.7 : 0 }}
       >
         {text}
@@ -99,7 +99,7 @@ export const TextHoverEffect = ({
         textAnchor="middle"
         dominantBaseline="middle"
         strokeWidth="0.3"
-        className="fill-transparent stroke-[#141c2a] font-[helvetica] text-7xl font-bold 
+        className="fill-black/50  font-[helvetica] text-7xl font-bold 
         dark:stroke-[#3ca2fa99]"
         initial={{ strokeDashoffset: 1000, strokeDasharray: 1000 }}
         animate={{
@@ -113,22 +113,21 @@ export const TextHoverEffect = ({
       >
         {text}
       </motion.text>
+      
       <text
         x="50%"
         y="50%"
         textAnchor="middle"
         dominantBaseline="middle"
-        stroke="url(#textGradient)"
         strokeWidth="0.3"
         mask="url(#textMask)"
-        className="fill-transparent font-[helvetica] text-7xl font-bold"
+        className="fill-gray-800 font-[helvetica]  text-7xl font-bold"
       >
         {text}
       </text>
     </svg>
   );
 };
-
 
 export const FooterBackgroundGradient = () => {
   return (

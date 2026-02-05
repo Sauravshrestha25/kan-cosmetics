@@ -5,8 +5,8 @@ import { motion } from "framer-motion";
 import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
 import { FooterBackgroundGradient } from "@/Components/ui/hover-footer";
 import { TextHoverEffect } from "@/Components/ui/hover-footer";
+import { Footer } from "@/Components/ui/footer";
 
-// --- Configuration Data ---
 const NAV_SECTIONS = [
   {
     title: "Discover",
@@ -46,24 +46,21 @@ function HoverFooter() {
   };
 
   return (
-    <footer className="relative w-full bg-[#141c35] pt-28 overflow-hidden border-t border-white/10 font-matter!">
+    <footer className="relative w-full bg-[url('/images/texture_background.jpg')] bg-cover pt-28 overflow-hidden border-t border-white/10 font-montserrat!">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.06),transparent_55%)] pointer-events-none" />
       <div className="relative overflow-hidden ">
-        {/* ATMOSPHERIC OVERLAY */}
-        <div className="absolute inset-0 k pointer-events-none" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.06),transparent_55%)] pointer-events-none" />
-
+        {/* Newsletter */}
         <div className="relative z-40  mx-auto px-2">
-          {/* ===================== INNER CIRCLE ===================== */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 pb-32 border-b border-white/10 items-end">
-            <div className="space-y-10">
-              <h3 className="text-4xl md:text-6xl xl:text-7xl text-white leading-[1.05] tracking-tight">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 pb-8 items-end">
+            <div className="space-y-10 ">
+              <h3 className="text-4xl font-saolDisplay md:text-6xl xl:text-7xl text-white leading-[1.05] tracking-tight">
                 Join the <br />
-                <span className="italic font-light text-neutral-400">
+                <span className="italic font-saolDisplay font-light text-neutral-400">
                   Inner Circle
                 </span>
               </h3>
 
-              <p className="text-xl md:text-2xl text-neutral-400 max-w-xl tracking-wide leading-relaxed">
+              <p className="text-xl md:text-2xl text-neutral-400 max-w-xl tracking-wide font-montserrat leading-relaxed">
                 Receive the blueprint for timeless beauty — ritual knowledge,
                 private releases, and seasonal formulations.
               </p>
@@ -115,139 +112,48 @@ function HoverFooter() {
           </div>
 
           {/* ===================== FOOTER GRID ===================== */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-20 py-32">
-            {/* BRAND */}
-            <div className="space-y-10">
-              <Image
-                src="/images/new_logo.png"
-                alt="Korea and Nepal"
-                width={220}
-                height={70}
-                className="opacity-95"
-              />
 
-              <p className="text-lg md:text-xl text-neutral-300 tracking-wide leading-relaxed">
-                Where Korean science <br />
-                meets Himalayan purity.
-              </p>
-            </div>
-
-            {/* NAV SECTIONS */}
-            {NAV_SECTIONS.map((section) => (
-              <div key={section.title}>
-                <h4
-                  className="
-            text-white text-xs uppercase font-bold
-            tracking-[0.25em] mb-12 opacity-80
-            relative pl-5
-            before:absolute before:left-0 before:top-1
-            before:h-5 before:w-0.5 before:bg-white/30
-          "
-                >
-                  {section.title}
-                </h4>
-
-                <ul className="space-y-7">
-                  {section.links.map((link) => (
-                    <li key={link.label}>
-                      <a
-                        href={link.href}
-                        className="
-                    group inline-block text-xl md:text-2xl
-                    text-neutral-400 hover:text-white
-                    tracking-wide transition-all
-                  "
-                      >
-                        <span className="relative">
-                          {link.label}
-                          <span
-                            className="
-                      absolute left-0 -bottom-1 h-px w-0
-                      bg-white transition-all duration-500
-                      group-hover:w-full
-                    "
-                          />
-                        </span>
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-
-            {/* INQUIRIES */}
-            <div>
-              <h4
-                className="
-          text-white text-xs uppercase font-bold
-          tracking-[0.25em] mb-12 opacity-80
-          relative pl-5
-          before:absolute before:left-0 before:top-1
-          before:h-5 before:w-0.5 before:bg-white/30
-        "
-              >
-                Inquiries
-              </h4>
-
-              <div className="space-y-8">
-                <a
-                  href={`mailto:${CONTACT_INFO.email}`}
-                  className="block text-xl md:text-2xl text-neutral-400 hover:text-white transition"
-                >
-                  {CONTACT_INFO.email}
-                </a>
-
-                <a
-                  href={`tel:${CONTACT_INFO.phone}`}
-                  className="block text-xl md:text-2xl text-neutral-400 hover:text-white transition"
-                >
-                  {CONTACT_INFO.phone}
-                </a>
-
-                <div className="flex gap-10 pt-8">
-                  {CONTACT_INFO.socials.map((social, i) => (
-                    <a
-                      key={i}
-                      href={social.href}
-                      className="
-                  text-neutral-400 hover:text-white
-                  transition-transform duration-300
-                  hover:-translate-y-1 text-3xl
-                "
-                    >
-                      {social.icon}
-                    </a>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* ===================== FOOTER BAR ===================== */}
-          <div
-            className="
-      pb-16 pt-10 border-t border-white/10
-      flex flex-col md:flex-row justify-between items-center
-      text-[11px] uppercase tracking-[0.25em]
-      text-neutral-400 font-bold
-    "
-          >
-            <p>© {currentYear} KOREA AND NEPAL. ALL RIGHTS RESERVED.</p>
-
-            <div className="flex gap-14 mt-6 md:mt-0">
-              <a className="hover:text-white transition underline underline-offset-8 decoration-white/10">
-                Privacy
-              </a>
-              <a className="hover:text-white transition underline underline-offset-8 decoration-white/10">
-                Terms
-              </a>
-            </div>
+          <div className="w-full">
+            <Footer
+              imageUrl="/images/Logo/Logo_Light.svg"
+              brandName="Awesome Corp"
+              socialLinks={[
+                {
+                  icon: <FaTwitter className="h-5 w-5" />,
+                  href: "https://twitter.com",
+                  label: "Twitter",
+                },
+                {
+                  icon: <FaInstagram className="h-5 w-5" />,
+                  href: "https://instagram.com",
+                  label: "Instagram",
+                },
+                {
+                  icon: <FaFacebook className="h-5 w-5" />,
+                  href: "https://facebook.com",
+                  label: "Facebook",
+                },
+              ]}
+              mainLinks={[
+                { href: "/", label: "Home" },
+                { href: "/collection", label: "Collection" },
+                { href: "/about", label: "About" },
+              ]}
+              legalLinks={[
+                { href: "/privacy", label: "Privacy" },
+                { href: "/terms", label: "Terms" },
+              ]}
+              copyright={{
+                text: "© 2024 Korea & Nepal",
+                license: "All rights reserved",
+              }}
+            />
           </div>
         </div>
       </div>
 
-      <div className="lg:flex hidden  -mt-30 -mb-36">
-        <TextHoverEffect text="KOREA & NEPAL" className="z-50" />
+      <div className="lg:flex hidden  -mt-30 -mb-36 ">
+        <TextHoverEffect text="KOREA & NEPAL" className="z-50 " />
       </div>
 
       <FooterBackgroundGradient />

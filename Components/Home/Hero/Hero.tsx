@@ -3,7 +3,6 @@ import React from "react";
 import gsap from "gsap";
 import { ScrollTrigger, SplitText } from "gsap/all";
 import { useGSAP } from "@gsap/react";
-import Topbar from "@/Components/Layout/Topbar/Topbar";
 import PremiumButton from "@/Components/ui/ArrowBtn";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
@@ -81,6 +80,7 @@ gsap.timeline()
       id="hero"
       className="relative font-saolDisplay min-h-screen w-full overflow-hidden bg-[url('/images/texture_background.jpg')] bg-cover text-white/80"
     >
+           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.06),transparent_55%)] pointer-events-none" />
       <div
         id="hero-video"
         className="absolute inset-0 z-10 w-full h-full overflow-hidden mx-auto shadow-2xl"

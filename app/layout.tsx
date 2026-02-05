@@ -1,8 +1,14 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local"
-
+import {Montserrat} from "next/font/google"
 import "./globals.css";
 import Navbar from "@/Components/Layout/Navbarv2/Navbar";
+
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-montserrat", 
+});
 
 const matter = localFont({
   src: [
@@ -66,7 +72,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={` ${matter.variable} ${saolDisplay.variable}  antialiased`}
+        className={` ${matter.variable} ${saolDisplay.variable} ${montserrat.variable}  antialiased`}
       >
         <Navbar/>
         {children}
