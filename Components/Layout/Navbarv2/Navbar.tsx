@@ -74,7 +74,7 @@ const Navbar = () => {
           {/* LOGO */}
           <div className="absolute left-1/2 -translate-x-1/2 pointer-events-auto">
             <Image
-              src="/images/logo/Logo_Light.svg"
+              src="/images/Logo/Logo_Light.svg"
               alt="KAN Cosmetics"
               width={160}
               height={200}
