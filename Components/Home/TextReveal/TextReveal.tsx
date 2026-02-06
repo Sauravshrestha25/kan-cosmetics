@@ -43,7 +43,7 @@ const TextReveal = () => {
     >
       <h1
         ref={textRef}
-        className="text-2xl sm:text-7xl max-w-7xl text-[#2b3962] px-8 mx-auto text-center font-theseasons space-y-4"
+        className="text-4xl sm:text-7xl max-w-7xl text-[#2b3962] px-8 mx-auto text-center font-theseasons space-y-4"
       >
        Rare botanicals.  Elevated by Nature. Meticulously refined. A collection as singular as you.
       </h1>

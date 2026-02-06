@@ -64,10 +64,10 @@ const ProductShowcase = () => {
       </Carousel> */}
          <div className="flex flex-col md:flex-row items-center justify-center px-10 my-10">
           <div className="flex flex-col gap-4 items-center justify-center">
-  <h2 className=" font-theseasons text-6xl text-[#141c35]">
+  <h2 className=" font-theseasons text-2xl sm:text-6xl text-[#141c35]">
             THE MODERN LUXE
           </h2>
-          <h2 className="font-theseasons text-2xl text-[#141c35]">
+          <h2 className="font-theseasons text-xl sm:text-4xl text-[#141c35]">
             Curated For You
           </h2>
           </div>

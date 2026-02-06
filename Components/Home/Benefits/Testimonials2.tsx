@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { FaGreaterThan } from "react-icons/fa";
+import Testimonial from "../Testimonial/Testimonial";
+// import Testimonial from "@/components/Testimonial"; // 👈 import later
 
 const testimonials = [
   {
@@ -44,22 +46,47 @@ const testimonials = [
 
 const Testimonials2 = () => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState<boolean | null>(null);
 
+  // ✅ Detect mobile safely
   useEffect(() => {
+    const checkScreen = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkScreen();
+    window.addEventListener("resize", checkScreen);
+
+    return () => window.removeEventListener("resize", checkScreen);
+  }, []);
+
+  // ✅ Auto rotate testimonials (desktop only)
+  useEffect(() => {
+    if (isMobile) return;
+
     const timer = setTimeout(() => {
-      if (activeIndex === 4) {
-        setActiveIndex(0);
-      } else {
-        setActiveIndex(activeIndex + 1);
-      }
+      setActiveIndex((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1));
     }, 5000);
 
     return () => clearTimeout(timer);
-  }, [activeIndex]);
+  }, [activeIndex, isMobile]);
 
+  // 🚫 Avoid hydration mismatch
+  if (isMobile === null) return null;
+
+  // 📱 Mobile component
+  if (isMobile) {
+    return (
+      <div className="w-full">
+        <Testimonial />
+      </div>
+    );
+  }
+
+  // 💻 Desktop component
   return (
-    <section className="min-h-screen w-full flex flex-col   text-[#2b3962] bg-white overflow-hidden py-8 px-12">
-      <div className="flex flex-col items-center justify-center pt-8 mb-10">
+    <section className="min-h-screen w-full flex flex-col text-[#2b3962] bg-white overflow-hidden sm:py-8 px-12">
+      <div className="flex flex-col items-center justify-center sm:pt-8 mb-10">
         <h2 className="text-4xl sm:text-5xl lg:text-6xl font-theseasons leading-tight">
           Confidence
         </h2>
@@ -68,14 +95,14 @@ const Testimonials2 = () => {
         </p>
       </div>
 
-      {/* Quotes */}
-      <div className="w-full flex flex-row-reverse items-center justify-between gap-20 text-white   ">
-        <div className="space-y-2 md:space-y-2">
+      <div className="w-full flex flex-row-reverse items-center justify-between gap-20">
+        {/* Quotes */}
+        <div className="space-y-2">
           {testimonials.map((item, i) => (
             <div
               key={item.id}
               onMouseEnter={() => setActiveIndex(i)}
-              className={` cursor-pointer transition-all px-4 py-2  text-[#141c35] ${
+              className={`cursor-pointer transition-all px-4 py-2 text-[#141c35] ${
                 activeIndex === i
                   ? "opacity-100"
                   : "opacity-50 hover:opacity-80"
@@ -87,7 +114,7 @@ const Testimonials2 = () => {
 
               <p className="text-md font-montserrat flex items-center gap-2">
                 <span
-                  className={`h-0.5 transition-all  ${
+                  className={`h-0.5 transition-all ${
                     activeIndex === i
                       ? "w-8 bg-[#141c35]"
                       : "w-4 bg-neutral-400"
@@ -98,7 +125,9 @@ const Testimonials2 = () => {
             </div>
           ))}
         </div>
-        <div className="w-3/4 md:w-1/2 h-[80vh] my-auto  relative bg-neutral-200 order-1 md:order-2">
+
+        {/* Image */}
+        <div className="w-3/4 md:w-1/2 h-[80vh] relative bg-neutral-200">
           <Image
             key={activeIndex}
             src={testimonials[activeIndex].image}
@@ -108,40 +137,35 @@ const Testimonials2 = () => {
             className="object-cover transition-opacity duration-700"
           />
 
-          <div className="absolute bottom-6 left-6 flex items-center gap-4 bg-black/20 backdrop-blur-md p-4 sm:bottom-12 sm:right-12 sm:p-4 max-w-xs shadow-2xl ">
+          <div className="absolute bottom-6 left-6 flex items-center gap-4 bg-black/20 backdrop-blur-md p-4 max-w-xs shadow-2xl">
             <button
-              onClick={() => {
-                if (activeIndex === 0) {
-                  setActiveIndex(4);
-                } else {
-                  setActiveIndex(activeIndex - 1);
-                }
-              }}
-              className="flex items-center justify-center p-3 text-white border border-gray-200 hover:bg-black hover:text-white transition-colors duration-300"
+              onClick={() =>
+                setActiveIndex((prev) =>
+                  prev === 0 ? testimonials.length - 1 : prev - 1
+                )
+              }
+              className="p-3 text-white border hover:bg-black transition"
             >
               <FaGreaterThan className="rotate-180 text-xs" />
             </button>
 
-            <p className="flex-1 text-center text-sm sm:text-2xl  text-white font-semibold tracking-tight">
+            <p className="flex-1 text-center text-sm sm:text-2xl text-white font-semibold">
               {testimonials[activeIndex].author}
             </p>
 
             <button
-              onClick={() => {
-                if (activeIndex === 4) {
-                  setActiveIndex(0);
-                } else {
-                  setActiveIndex(activeIndex + 1);
-                }
-              }}
-              className="flex items-center justify-center p-3 text-white border  hover:bg-black hover:text-white transition-colors duration-300"
+              onClick={() =>
+                setActiveIndex((prev) =>
+                  prev === testimonials.length - 1 ? 0 : prev + 1
+                )
+              }
+              className="p-3 text-white border hover:bg-black transition"
             >
               <FaGreaterThan className="text-xs" />
             </button>
           </div>
         </div>
       </div>
-
     </section>
   );
 };

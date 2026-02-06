@@ -89,7 +89,7 @@ useEffect(() => {
               alt="KAN Cosmetics"
               width={100}
               height={80}
-              className="h-4 md:h-8 w-auto "
+              className="h-6 md:h-8 w-auto "
             />
           </div>
 
@@ -101,7 +101,7 @@ useEffect(() => {
                 !open ? "bg-[#2b3962] text-white scale-90" : "text-[#2b3962] bg-white"
               )}
             >
-              <Hamburger toggled={open} size={24} /><span className=" pr-2 font-montserrat text-lg">MENU</span>
+              <Hamburger toggled={open} size={24} /><span className="hidden sm:pr-2 font-montserrat sm:text-lg">MENU</span>
             </button>
           </div>
         </div>
@@ -119,7 +119,7 @@ useEffect(() => {
                 <Link onClick={() => setOpen(!open)} key={item.label} href={item.href} className="menu-item-link">
                   <TextStaggerHover
                     index={index}
-                    className="cursor-pointer text-5xl  font-bold  tracking-tighter text-white font-theseasons "
+                    className="cursor-pointer text-5xl uppercase  font-bold  tracking-tighter text-white font-theseasons "
                     text={item.label}
                   />
                 </Link>

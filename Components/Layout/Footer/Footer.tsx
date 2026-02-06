@@ -46,34 +46,34 @@ function HoverFooter() {
   };
 
   return (
-    <footer className="relative w-full bg-white  backdrop-blur-2xl overflow-hidden  font-montserrat! px-12">
+    <footer className="relative w-full bg-white  backdrop-blur-2xl overflow-hidden   font-montserrat! px-12">
       {/* <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.06),transparent_55%)] pointer-events-none" /> */}
       <div className="relative h-full z-20 ">
         {/* Newsletter */}
         <div className="relative z-40 mx-auto px-2">
           <div className="flex flex-col sm:flex-row justify-between items-end">
             <div className="space-y-10 ">
-              <h3 className="text-4xl  font-theseasons md:text-6xl xl:text-8xl text-[#2b3962] leading-[1.05] tracking-tight">
+              <h3 className="text-4xl  font-theseasons md:text-6xl  text-[#2b3962] leading-[1.05] tracking-tight">
                 Join the <br />
                 <span className="  text-[#2b3962]">
                   Inner Circle
                 </span>
               </h3>
 
-              <p className="text-xl md:text-2xl text-[#2b3962] max-w-xl tracking-wide font-montserrat leading-relaxed">
+              <p className="text-md md:text-xl  text-[#2b3962] max-w-xl tracking-wide font-montserrat leading-relaxed">
                 Receive the blueprint for timeless beauty — ritual knowledge,
                 private releases, and seasonal formulations.
               </p>
             </div>
 
             {/* SUBSCRIBE */}
-            <div className="flex flex-col gap-8">
+            <div className="flex flex-col pt-4 sm:pt-0 gap-8">
               <form
                 onSubmit={handleSubscribe}
                 className="
           group flex flex-col sm:flex-row items-stretch
           border border-[#2b3962] focus-within:border-white
-          transition-all duration-500 overflow-hidden
+          transition-all duration-500 overflow-hidden 
           backdrop-blur-sm
         "
               >
@@ -84,8 +84,8 @@ function HoverFooter() {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your email"
                   className="
-            flex-1 bg-transparent px-8 py-7 w-120
-            text-xl text-black
+            flex-1 bg-transparent px-8 py-4 w-[80%] mx-auto sm:w-100
+            text-lg text-black
             placeholder:text-neutral-600
             focus:outline-[#2b3962] tracking-wide
           "
@@ -96,15 +96,15 @@ function HoverFooter() {
                   whileHover={{
                     backgroundColor: "#2b3962",
                     color: "#ffffff",
-                    letterSpacing: "0.45em",
+                    letterSpacing: "0.2em",
                   }}
                   transition={{ duration: 0.4, ease: "easeOut" }}
                   className="
-            bg-[#2b3962] text-white px-14 py-7
+            bg-[#2b3962] text-white px-6 py-4 sm:py-0
             text-xs uppercase font-bold
             tracking-[0.35em]
             border-t sm:border-t-0 sm:border-l border-white/20
-            transition-all
+            sm:transition-all
           "
                 >
                   Subscribe
