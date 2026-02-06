@@ -88,7 +88,7 @@ export const TextHoverEffect = ({
         textAnchor="middle"
         dominantBaseline="middle"
         strokeWidth="0.3"
-        className="fill-gray-800  font-[helvetica] text-7xl font-bold dark:stroke-neutral-800 "
+        className="fill-zinc-200  font-matter text-7xl font-bold "
         style={{ opacity: hovered ? 0.7 : 0 }}
       >
         {text}
@@ -99,8 +99,8 @@ export const TextHoverEffect = ({
         textAnchor="middle"
         dominantBaseline="middle"
         strokeWidth="0.3"
-        className="fill-black/50  font-[helvetica] text-7xl font-bold 
-        dark:stroke-[#3ca2fa99]"
+        className="fill-zinc-200  font-matter text-7xl font-bold 
+        "
         initial={{ strokeDashoffset: 1000, strokeDasharray: 1000 }}
         animate={{
           strokeDashoffset: 0,
@@ -121,7 +121,7 @@ export const TextHoverEffect = ({
         dominantBaseline="middle"
         strokeWidth="0.3"
         mask="url(#textMask)"
-        className="fill-white font-[helvetica]  text-7xl font-bold"
+        className="fill-[#394c85] font-matter  text-7xl font-bold"
       >
         {text}
       </text>
@@ -135,7 +135,7 @@ export const FooterBackgroundGradient = () => {
       className="absolute inset-0 z-0"
       style={{
         background:
-          "radial-gradient(125% 125% at 50% 10%, #0F0F1166 50%, #3ca2fa33 100%)",
+          "radial-gradient(125% 125% at 100% 100%, #0F0F1166 50%, #3ca2fa33 100%)",
       }}
     />
   );

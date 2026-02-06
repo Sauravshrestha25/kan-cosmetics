@@ -3,7 +3,6 @@ import Image from "next/image";
 import React, { useRef, useState } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import Link from "next/link";
 
 interface ProductCardProps {
   imageUrl: string;
@@ -75,17 +74,17 @@ const ProductCard: React.FC<ProductCardProps> = ({ imageUrl, name, desc }) => {
       {/* DESCRIPTION */}
       <div
         ref={descRef}
-        className="absolute font-montserrat text-[#2b3962] bottom-0 left-0 w-full bg-zinc-100 px-6 py-6 md:px-10 md:py-8 flex flex-col justify-center translate-y-full z-10"
+        className="absolute bottom-0 left-0 w-full bg-zinc-300 text-[#2b3962] px-6 py-6 md:px-10 md:py-8 flex flex-col justify-center translate-y-full z-10"
       >
-        <p className=" uppercase text-sm  md:text-sm  mb-2">
+        <p className="text-[#2b3962] uppercase text-xs md:text-sm tracking-[0.2em] mb-2">
           {desc}
         </p>
-        <h3 className=" font-theseasons font-bold text-2xl md:text-3xl lg:text-4xl  mb-4 leading-tight">
+        <h3 className="text-[#2b3962] text-2xl md:text-3xl lg:text-4xl font-bold mb-4 leading-tight">
           {name}
         </h3>
-        <Link href="/collection" className="w-fit  pb-1 text-sm md:text-base font-medium hover:underline transition-transform duration-500 ">
+        <button className="w-fit  pb-1 text-sm md:text-base font-medium hover:text-[#1] transition-colors">
           VIEW PRODUCT
-        </Link>
+        </button>
       </div>
     </div>
   );

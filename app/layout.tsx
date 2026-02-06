@@ -3,6 +3,7 @@ import localFont from "next/font/local"
 import {Montserrat} from "next/font/google"
 import "./globals.css";
 import Navbar from "@/Components/Layout/Navbarv2/Navbar";
+import LenisProvider from "@/Components/LenisProvider";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -58,9 +59,46 @@ const saolDisplay = localFont({
   display: "block",
 });
 
+const theseasons = localFont({
+  src: [
+    {
+      path: "../public/fonts/theseasons/TheSeasons-Regular.ttf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/theseasons/TheSeasons-Light.ttf",
+      weight: "300",
+      style: " normal",
+    },
+    {
+      path: "../public/fonts/theseasons/TheSeasons-Bold.ttf",
+      weight: "700",
+      style: " normal",
+    },
+    {
+      path: "../public/fonts/theseasons/TheSeasons-Italic.ttf",
+      weight: "300",
+      style: " normal",
+    },
+    {
+      path: "../public/fonts/theseasons/TheSeasons-Bold-Italic.ttf",
+      weight: "700",
+      style: " italic",
+    },
+    {
+      path: "../public/fonts/theseasons/TheSeasons-Light-Italic.ttf",
+      weight: "300",
+      style: " italic",
+    },
+  ],
+  variable: "--font-seasons",
+  display: "block"
+});
+
 
 export const metadata: Metadata = {
-  title: "K & N",
+  title: "Korea & Nepal",
   description: "Korea & Nepal - Cosmetics",
 };
 
@@ -72,8 +110,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={` ${matter.variable} ${saolDisplay.variable} ${montserrat.variable}  antialiased`}
+        className={` ${matter.variable} ${saolDisplay.variable} ${montserrat.variable} ${theseasons.variable}  antialiased`}
       >
+        <LenisProvider />
         <Navbar/>
         {children}
       </body>

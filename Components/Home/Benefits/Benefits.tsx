@@ -70,7 +70,7 @@ const Benefits = () => {
         />
 
 
-        <div className="absolute bottom-6 right-6 sm:bottom-12 sm:right-12 bg-white/90 backdrop-blur-md p-6 sm:p-8 max-w-70 md:max-w-90 sm:max-w-xs shadow-xl border-l-4 border-[#141c35]">
+        <div className="absolute bottom-6 right-6 sm:bottom-12 sm:right-12 bg-white/90 backdrop-blur-md p-6 sm:p-8 max-w-70 md:max-w-90 sm:max-w-xs shadow-xl border-l-4 border-yellow-600">
           <p className="text-xs sm:text-lg italic leading-normal text-black font-medium">
             "Smart beauty starts with smart building—we ensure your foundation is as timeless as your style."
           </p>

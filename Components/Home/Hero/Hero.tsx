@@ -34,7 +34,6 @@ const Hero = () => {
       },
     })
       .to('#continue-btn', { opacity: 0})
-      .to("#welcome", { y: -10, opacity: 0 })
       .to(split.lines, { y: 50, opacity: 0, stagger: 0.05 }, 0)
       .fromTo(
         "#hero-video",
@@ -56,7 +55,6 @@ const Hero = () => {
   const handleClick = () => {
 gsap.timeline()
      .to('#continue-btn', { opacity: 0})
-      .to("#welcome", { y: -10, opacity: 0 })
       .fromTo(
         "#hero-video",
         {
@@ -78,12 +76,13 @@ gsap.timeline()
   return (
     <section
       id="hero"
-      className="relative font-saolDisplay min-h-screen w-full overflow-hidden bg-[url('/images/texture_background.jpg')] bg-cover text-white/80"
+      className="relative font-theseasons min-h-screen w-full h-auto overflow-hidden bg-white   text-black"
     >
-           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.06),transparent_55%)] pointer-events-none" />
+      
+           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.06),transparent_55%)]  pointer-events-none" />
       <div
         id="hero-video"
-        className="absolute inset-0 z-10 w-full h-full overflow-hidden mx-auto shadow-2xl"
+        className="absolute inset-0 z-10 w-full h-[120vh] overflow-hidden mx-auto shadow-2xl"
       >
         <video
           src="/video/hero_video_2.mp4"
@@ -91,7 +90,7 @@ gsap.timeline()
           autoPlay
           muted
           loop
-          className="w-full h-full object-cover"
+          className="w-full h-auto object-cover"
         />
         <div className="absolute inset-0 bg-black/20 -z-20" />
       </div>
@@ -100,21 +99,14 @@ gsap.timeline()
         className="z-30 flex flex-col items-center pt-20 md:pt-40   min-h-screen px-4 text-center"
       >
         <div className="flex flex-col gap-6 items-center   tracking-widest w-full">
-          <p id="welcome" className="uppercase text-lg md:text-2xl tracking-[0.2em]">
-            Welcome
+         
+
+          <p id="hero-motto" className=" text-[#2b3962] text-4xl sm:text-6xl  leading-tight flex flex-col items-center">
+           High-performance makeup,<br/> crafted for skin that deserves care.
           </p>
 
-          <div id="hero-motto" className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl leading-tight flex flex-col items-center">
-            <p className="block">
-              <span className="italic">Craft</span> beauty that lasts
-            </p>
-            <p className="block">
-              beyond <span className="italic">trends</span>
-            </p>
-          </div>
-
-          <div id="continue-btn">
-            <PremiumButton text="continue" onClick={handleClick} />
+          <div id="continue-btn font-matter">
+            <PremiumButton text="Explore Shades" onClick={handleClick} className=" text-white" />
           </div>
         </div>
       </div>

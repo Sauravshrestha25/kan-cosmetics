@@ -6,6 +6,7 @@ import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
 import { useGSAP } from "@gsap/react";
+import { section } from "framer-motion/client";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -91,52 +92,91 @@ export const ImageComparisonSlider = React.forwardRef<
       };
     }, [isDragging, isHovering]);
 
-    useGSAP(() => {
-      if (!containerRef.current) return;
+    // useGSAP(() => {
+    //   if (!containerRef.current) return;
 
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top top",
-          end: "center 60%",
-          scrub: true,
-          pin: true,
-          invalidateOnRefresh: true,
-        },
-      });
+    //   const tl = gsap.timeline({
+    //     scrollTrigger: {
+    //       trigger: containerRef.current,
+    //       start: "top top",
+    //       end: "center 60%",
+    //       scrub: true,
+    //       pin: true,
+    //       invalidateOnRefresh: true,
+    //     },
+    //   });
 
-      tl.fromTo(
-        "#product-div",
-        {
-          width: "100vw",
-          height: "100vh",
-          backdropFilter: "blur(20px)",
-        },
-        {
-          width: "100px",
-          height: "200px",
-          backdropFilter: "blur(0px)",
-          ease: "none",
-        },
-        0
-      ).fromTo(
-        "#image",
-        {
-          scale: 2,
-        },
-        {
-          scale: 1,
-          ease: "none",
-        },
-        0
-      );
-    }, []);
+    //   tl.fromTo(
+    //     "#product-div",
+    //     {
+    //       width: "100vw",
+    //       height: "100vh",
+    //       backdropFilter: "blur(20px)",
+    //     },
+    //     {
+    //       width: "100px",
+    //       height: "200px",
+    //       backdropFilter: "blur(0px)",
+    //       ease: "none",
+    //     },
+    //     0
+    //   ).fromTo(
+    //     "#image",
+    //     {
+    //       scale: 2,
+    //     },
+    //     {
+    //       scale: 1,
+    //       ease: "none",
+    //     },
+    //     0
+    //   );
+    // }, []);
+
+// 1. Update the GSAP Logic
+// useGSAP(() => {
+//   if (!containerRef.current) return;
+
+//   const tl = gsap.timeline({
+//     scrollTrigger: {
+//       trigger: containerRef.current,
+//       start: "top top",
+//       end: "+=100%", 
+//       scrub: 1.5,   
+//       pin: true,
+//       invalidateOnRefresh: true,
+//     },
+//   });
+
+//   tl.fromTo(
+//     "#product-div",
+//     {
+//       width: "100vw",
+//       height: "100vh",
+//       backdropFilter: "blur(20px)",
+//     },
+//     {
+//       width: "100px",
+//       height: "200px",
+//       backdropFilter: "blur(0px)",
+//       ease: "power2.inOut", 
+//     },
+//     0
+//   ).fromTo(
+//     "#image",
+//     { scale: 2 },
+//     { scale: 1, ease: "power2.inOut" },
+//     0
+//   );
+// }, { scope: containerRef }); 
+
+
 
     return (
+      <section ref={containerRef} className="h-auto"> 
       <div
-        ref={containerRef}
         className={cn(
-          "relative w-full h-full overflow-hidden select-none group",
+          "relative w-full h-[120vh] overflow-hidden select-none group",
           className
         )}
         onMouseEnter={() => setIsHovering(true)}
@@ -207,6 +247,7 @@ export const ImageComparisonSlider = React.forwardRef<
           </div>
         </div>
       </div>
+        </section>
     );
   }
 );

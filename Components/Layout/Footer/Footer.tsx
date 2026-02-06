@@ -46,77 +46,78 @@ function HoverFooter() {
   };
 
   return (
-    <footer className="relative w-full bg-[url('/images/texture_background.jpg')] bg-cover pt-28 overflow-hidden border-t border-white/10 font-montserrat!">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.06),transparent_55%)] pointer-events-none" />
-      <div className="relative overflow-hidden ">
+    <footer className="relative w-full bg-white  backdrop-blur-2xl overflow-hidden  font-montserrat! px-12">
+      {/* <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.06),transparent_55%)] pointer-events-none" /> */}
+      <div className="relative h-full z-20 ">
         {/* Newsletter */}
-        <div className="relative z-40  mx-auto px-2">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 pb-8 items-end">
+        <div className="relative z-40 mx-auto px-2">
+          <div className="flex flex-col sm:flex-row justify-between items-end">
             <div className="space-y-10 ">
-              <h3 className="text-4xl font-saolDisplay md:text-6xl xl:text-7xl text-white leading-[1.05] tracking-tight">
+              <h3 className="text-4xl  font-theseasons md:text-6xl xl:text-8xl text-[#2b3962] leading-[1.05] tracking-tight">
                 Join the <br />
-                <span className="italic font-saolDisplay font-light text-neutral-400">
+                <span className="  text-[#2b3962]">
                   Inner Circle
                 </span>
               </h3>
 
-              <p className="text-xl md:text-2xl text-neutral-400 max-w-xl tracking-wide font-montserrat leading-relaxed">
+              <p className="text-xl md:text-2xl text-[#2b3962] max-w-xl tracking-wide font-montserrat leading-relaxed">
                 Receive the blueprint for timeless beauty — ritual knowledge,
                 private releases, and seasonal formulations.
               </p>
             </div>
 
             {/* SUBSCRIBE */}
-            <form
-              onSubmit={handleSubscribe}
-              className="
+            <div className="flex flex-col gap-8">
+              <form
+                onSubmit={handleSubscribe}
+                className="
           group flex flex-col sm:flex-row items-stretch
-          border border-white/20 focus-within:border-white
+          border border-[#2b3962] focus-within:border-white
           transition-all duration-500 overflow-hidden
           backdrop-blur-sm
         "
-            >
-              <input
-                type="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your email"
-                className="
-            flex-1 bg-transparent px-8 py-7
-            text-xl text-white
+              >
+                <input
+                  type="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter your email"
+                  className="
+            flex-1 bg-transparent px-8 py-7 w-120
+            text-xl text-black
             placeholder:text-neutral-600
-            focus:outline-none tracking-wide
+            focus:outline-[#2b3962] tracking-wide
           "
-              />
+                />
 
-              <motion.button
-                type="submit"
-                whileHover={{
-                  backgroundColor: "#ffffff",
-                  color: "#000000",
-                  letterSpacing: "0.45em",
-                }}
-                transition={{ duration: 0.4, ease: "easeOut" }}
-                className="
-            bg-white/5 text-white px-14 py-7
+                <motion.button
+                  type="submit"
+                  whileHover={{
+                    backgroundColor: "#2b3962",
+                    color: "#ffffff",
+                    letterSpacing: "0.45em",
+                  }}
+                  transition={{ duration: 0.4, ease: "easeOut" }}
+                  className="
+            bg-[#2b3962] text-white px-14 py-7
             text-xs uppercase font-bold
             tracking-[0.35em]
             border-t sm:border-t-0 sm:border-l border-white/20
             transition-all
           "
-              >
-                Subscribe
-              </motion.button>
-            </form>
+                >
+                  Subscribe
+                </motion.button>
+              </form>
+            </div>
           </div>
 
           {/* ===================== FOOTER GRID ===================== */}
 
           <div className="w-full">
             <Footer
-              imageUrl="/images/Logo/Logo_Light.svg"
-              brandName="Awesome Corp"
+              brandName="Korea and Nepal"
               socialLinks={[
                 {
                   icon: <FaTwitter className="h-5 w-5" />,
@@ -138,25 +139,26 @@ function HoverFooter() {
                 { href: "/", label: "Home" },
                 { href: "/collection", label: "Collection" },
                 { href: "/about", label: "About" },
+                { href: "/journal", label: "Journal" },
               ]}
               legalLinks={[
                 { href: "/privacy", label: "Privacy" },
                 { href: "/terms", label: "Terms" },
               ]}
               copyright={{
-                text: "© 2024 Korea & Nepal",
-                license: "All rights reserved",
+                text: "© 2026 Korea & Nepal. ",
+                license: " All rights reserved",
               }}
             />
           </div>
         </div>
       </div>
 
-      <div className="lg:flex hidden  -mt-30 -mb-36 ">
+      <div className=" z-10 -mt-30 -mb-36 ">
         <TextHoverEffect text="KOREA & NEPAL" className="z-50 " />
       </div>
 
-      <FooterBackgroundGradient />
+      {/* <FooterBackgroundGradient /> */}
     </footer>
   );
 }
