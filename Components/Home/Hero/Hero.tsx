@@ -76,13 +76,13 @@ gsap.timeline()
   return (
     <section
       id="hero"
-      className="relative font-theseasons min-h-screen w-full h-auto overflow-hidden bg-white   text-black"
+      className="relative font-theseasons min-h-screen w-full h-auto overflow-hidden bg-white mx-auto   text-black"
     >
       
            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.06),transparent_55%)]  pointer-events-none" />
       <div
         id="hero-video"
-        className="absolute inset-0 z-10 w-full h-[120vh] overflow-hidden mx-auto shadow-2xl"
+        className="absolute inset-0 z-10 w-full h-full overflow-hidden mx-auto shadow-2xl"
       >
         <video
           src="/video/hero_video_2.mp4"
@@ -90,7 +90,7 @@ gsap.timeline()
           autoPlay
           muted
           loop
-          className="w-full h-auto object-cover"
+          className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-black/20 -z-20" />
       </div>
