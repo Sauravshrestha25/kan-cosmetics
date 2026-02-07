@@ -26,7 +26,7 @@ const AboutHero = () => {
 }, []); 
 
   return (
-    <section id="about" className="relative min-h-screen  overflow-hidden">
+    <section id="about" className="relative min-h-screen sm:px-8  overflow-hidden">
       <div className="absolute bg-white inset-0 -z-10 "></div>
       <div className="flex flex-col mx-auto ">
         <div className="photo-1 hidden md:flex justify-center pt-8 pl-4 lg:justify-start mb-10 lg:-mb-10 z-20">
@@ -60,7 +60,7 @@ const AboutHero = () => {
             </h1>
           </div>
 
-          <div className=" photo-2 hidden pr-8 lg:flex lg:col-span-2 justify-end self-center">
+          <div className=" photo-2 hidden  lg:flex lg:col-span-2 justify-end self-center">
             <AboutPhotocard
               imageUrl="/images/IMG_1501.PNG"
               width={340}

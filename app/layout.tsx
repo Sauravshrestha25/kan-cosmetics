@@ -5,6 +5,7 @@ import "./globals.css";
 import Navbar from "@/Components/Layout/Navbarv2/Navbar";
 import LenisProvider from "@/Components/LenisProvider";
 import Audio from "@/Components/Layout/Audio/Audio";
+import LipstickScene from "@/Components/Layout/LipstickLoader/LipstickAnimation";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -113,6 +114,7 @@ export default function RootLayout({
       <body
         className={` ${matter.variable} ${saolDisplay.variable} ${montserrat.variable} ${theseasons.variable}  antialiased`} suppressHydrationWarning
       >
+        {/* <LipstickScene /> */}
         <Audio/>
         <LenisProvider />
         <Navbar/>

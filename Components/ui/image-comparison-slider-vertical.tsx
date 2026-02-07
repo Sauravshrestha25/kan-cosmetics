@@ -98,6 +98,7 @@ export const ImageComparisonSlider = React.forwardRef<
 
     return (
       <div
+      id="comparison-container"
         ref={containerRef}
         className={cn(
           "relative w-full h-full overflow-hidden select-none group",

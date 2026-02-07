@@ -9,7 +9,6 @@ import { Squash as Hamburger } from "hamburger-react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { HoverSlider, TextStaggerHover } from "@/Components/ui/animated-slideshow";
-import Audio from "../Audio/Audio";
 
 const MENU_ITEMS = [
   { label: "Home", href: "/" },
@@ -82,10 +81,6 @@ const Navbar = () => {
             height={80}
             className="h-6 md:h-8 w-auto pointer-events-auto"
           />
-          {/* <div>
-              <Audio />
-          </div> */}
-         
 
           <button
             onClick={() => setOpen(!open)}

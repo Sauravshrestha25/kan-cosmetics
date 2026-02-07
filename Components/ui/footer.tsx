@@ -71,7 +71,7 @@ export function Footer({
               ))}
             </ul>
           </div>
-          <ul className="flex flex-row sm:list-none mt-6 md:mt-0 space-x-3">
+          <ul className="flex flex-row gap-2 pb-2  sm:list-none mt-6  md:mt-0 space-x-3">
             {socialLinks.map((link, i) => (
               <li key={i}>
                 <Button

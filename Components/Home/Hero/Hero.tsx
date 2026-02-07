@@ -4,6 +4,7 @@ import gsap from "gsap";
 import { ScrollTrigger, SplitText } from "gsap/all";
 import { useGSAP } from "@gsap/react";
 import PremiumButton from "@/Components/ui/ArrowBtn";
+import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
@@ -101,13 +102,13 @@ gsap.timeline()
         <div className="flex flex-col gap-6 items-center   tracking-widest w-full">
          
 
-          <p id="hero-motto" className=" text-[#2b3962] text-4xl sm:text-6xl  leading-tight flex flex-col items-center">
+          <p id="hero-motto" className=" text-[#2b3962] text-3xl sm:text-6xl pt-12 sm:pt-0  leading-tight flex flex-col items-center">
            High-performance makeup,<br/> crafted for skin that deserves care.
           </p>
 
-          <div id="continue-btn font-matter">
-            <PremiumButton text="Explore Shades" onClick={handleClick} className=" text-white" />
-          </div>
+          <div id="continue-btn" className="font-matter relative z-20 mt-8">
+  <PremiumButton text="Explore Shades" onClick={handleClick} className="text-white" />
+</div>
         </div>
       </div>
     </section>
