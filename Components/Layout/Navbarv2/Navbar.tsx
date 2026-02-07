@@ -8,14 +8,15 @@ import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
 import { Squash as Hamburger } from "hamburger-react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { HoverSlider, TextStaggerHover } from "@/Components/ui/animated-slideshow";
+import { HoverSlider, TextStaggerHover, HoverSliderImage } from "@/Components/ui/animated-slideshow";
+import { div } from "framer-motion/client";
 
 const MENU_ITEMS = [
-  { label: "Home", href: "/" },
-  { label: "Process", href: "/process" },
-  { label: "Products", href: "/products" },
-  { label: "Services", href: "/services" },
-  { label: "Contact", href: "/contact" },
+  { label: "Home", imageUrl:'/images/home.png', href: "/" },
+  { label: "About", imageUrl:'/images/about.png',href: "/about" },
+  { label: "Collections",imageUrl:'/images/collection.png', href: "/collections" },
+  { label: "Journal",imageUrl:'/images/journal.png', href: "/journal" },
+  { label: "Tips",imageUrl:'/images/tips.png', href: "/tips" },
 ];
 
 const Navbar = () => {
@@ -73,6 +74,7 @@ const Navbar = () => {
     <>
       {/* TOP NAV */}
       <nav className="fixed w-full z-110">
+          
         <div className="relative flex items-center justify-between px-4 py-4 md:px-12">
           <Image
             src="/images/Logo/Logo_Latest.svg"
@@ -100,50 +102,82 @@ const Navbar = () => {
       </nav>
 
       {/* OVERLAY */}
-      <div
-        ref={overlayRef}
-        className="fixed inset-0 z-90 bg-[#141c35]/70 backdrop-blur-lg will-change-transform"
-      >
-        <div className="flex flex-col h-full px-6 md:px-20 pt-32 pb-10">
-          <div className="flex flex-col justify-center gap-6">
-            {MENU_ITEMS.map((item, index) => (
-              <Link
-                key={item.label}
-                href={item.href}
-                onClick={() => setOpen(false)}
-                className="menu-item-link"
-              >
-                <HoverSlider>
-                <TextStaggerHover
-                  index={index}
-                  className="cursor-pointer text-5xl uppercase font-bold tracking-tighter text-white font-theseasons"
-                  text={item.label}
-                />
-                </HoverSlider>
-              </Link>
-            ))}
+   <HoverSlider>
+  <div
+    ref={overlayRef}
+    className="fixed inset-0 z-90 bg-[#141c35]/70 backdrop-blur-lg will-change-transform"
+  >
+    {/* Image Layer: absolute behind text */}
+    <div className="absolute inset-0 w-full h-full overflow-hidden">
+      {MENU_ITEMS.map((item, index) => (
+        <HoverSliderImage
+          key={index}
+          index={index}
+          imageUrl={item.imageUrl}
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+      ))}
+    </div>
 
-            <div className="flex gap-6 mt-12 text-white/70 text-xl menu-item-link">
-              <FaFacebookF />
-              <FaInstagram />
-              <FaTwitter />
-            </div>
+    {/* Menu Layer: relative to overlay */}
+    <div className="relative flex  h-full px-6 md:px-20 pt-32 pb-10 z-10">
+      <div className="flex flex-col justify-center gap-6">
+        {MENU_ITEMS.map((item, index) => (
+          <Link
+            key={item.label}
+            href={item.href}
+            className="menu-item-link relative"
+          >
+            <TextStaggerHover
+              index={index}
+              className="cursor-pointer text-5xl uppercase font-bold tracking-tighter text-white font-theseasons"
+              text={item.label}
+            />
+          </Link>
+        ))}
+        <div>
+          {MENU_ITEMS.map((slide,index) => (
+            <div key={index} className="">
+              <HoverSliderImage
+              index={index}
+              imageUrl={slide.imageUrl}
+              src={slide.imageUrl}
+              alt={slide.label}
+              className="size-full max-h-96 object-cover"
+              loading="eager"
+              decoding="async"
 
-            <div className="mt-6 text-white/50 text-sm tracking-widest font-light space-y-1 menu-item-link">
-              <Link href="mailto:contact@koreaandnepal.com">
-                contact@koreaandnepal.com
-              </Link>
-              <Link href="tel:+9779876543210">+977-9876543210</Link>
+              />
             </div>
-          </div>
+          ))}
         </div>
 
-        {/* GLOW */}
-        <div
-          ref={glowRef}
-          className="absolute bottom-0 left-0 w-full h-32 bg-blue-500/30 blur-[100px] opacity-0 pointer-events-none"
-        />
+        {/* Social & Contact */}
+        <div className="flex gap-6 mt-12 text-white/70 text-xl menu-item-link z-10">
+          <FaFacebookF />
+          <FaInstagram />
+          <FaTwitter />
+        </div>
+
+        <div className="mt-6 text-white/50 text-sm tracking-widest font-light space-y-1 menu-item-link z-10">
+          <Link href="mailto:contact@koreaandnepal.com">
+            contact@koreaandnepal.com
+          </Link>
+          <Link href="tel:+9779876543210">+977-9876543210</Link>
+        </div>
       </div>
+
+      {/* Glow */}
+      <div
+        ref={glowRef}
+        className="absolute bottom-0 left-0 w-full h-32 bg-blue-500/30 blur-[100px] opacity-0 pointer-events-none"
+      />
+    </div>
+  </div>
+</HoverSlider>
+
+
+      
     </>
   );
 };
