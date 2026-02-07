@@ -4,6 +4,7 @@ import {Montserrat} from "next/font/google"
 import "./globals.css";
 import Navbar from "@/Components/Layout/Navbarv2/Navbar";
 import LenisProvider from "@/Components/LenisProvider";
+import Audio from "@/Components/Layout/Audio/Audio";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -110,8 +111,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={` ${matter.variable} ${saolDisplay.variable} ${montserrat.variable} ${theseasons.variable}  antialiased`}
+        className={` ${matter.variable} ${saolDisplay.variable} ${montserrat.variable} ${theseasons.variable}  antialiased`} suppressHydrationWarning
       >
+        <Audio/>
         <LenisProvider />
         <Navbar/>
         {children}
