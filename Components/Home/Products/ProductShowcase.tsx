@@ -35,7 +35,7 @@ const products = [
     desc: "Deep Color. Long Lasting. Bright Red.",
   },
    {
-    imageUrl: "/images/IMG_1135.png",
+    imageUrl: "/images/IMG_1135.PNG",
     name: "K & A Concealer",
     desc: "Long Lasting. Smudge Free. Natural.",
   },
