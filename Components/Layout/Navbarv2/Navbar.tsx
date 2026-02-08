@@ -11,14 +11,14 @@ import {
   TextStaggerHover,
 } from "@/Components/ui/animated-slideshow";
 import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
-import { Squash as Hamburger } from "hamburger-react"; // Using Squash for a cleaner morph
+import { Squash as Hamburger } from "hamburger-react"; 
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
 const MENU_ITEMS = [
   { label: "Home", image: "/images/hero_photo.png", href:"/", info: "Welcome home" },
   { label: "About", image: "/images/about.png", href:"/", info: "About us" },
-  { label: "Collection", image: "/images/collection.png",href:"/", info: "Our Collection" },
+  { label: "Collections", image: "/images/collection.png",href:"/", info: "Our Collections" },
   { label: "Journal", image: "/images/journal.png",href:"/", info: "Our Journal" },
   { label: "Tips", image: "/images/tips.png",href:"/", info: "Our Tips" },
 ];

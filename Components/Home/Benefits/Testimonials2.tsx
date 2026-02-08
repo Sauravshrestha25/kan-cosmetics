@@ -4,43 +4,43 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { FaGreaterThan } from "react-icons/fa";
 import Testimonial from "../Testimonial/Testimonial";
-// import Testimonial from "@/components/Testimonial"; // 👈 import later
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const testimonials = [
   {
     id: 1,
     quote:
-      "My skin has never felt this confident. The quality is visible from the first use.",
+      "My skin has never felt this confident. From the very first use, I could see and feel the difference—smoother texture, a healthy glow, and a finish that looks effortlessly natural all day long.",
     author: "Sarah Chen",
     image: "/images/Testimonials/model2.jpg",
   },
   {
     id: 2,
     quote:
-      "Every product feels intentional, luxurious, and gentle. It truly elevated my routine.",
+      "Every product feels intentional, luxurious, and incredibly gentle on the skin. It has completely elevated my daily routine into something that feels calm, refined, and truly indulgent.",
     author: "Martha Grey",
     image: "/images/Testimonials/after.jpg",
   },
   {
     id: 3,
     quote:
-      "The finish is flawless and natural. It enhances beauty without overpowering it.",
+      "The finish is flawless yet natural, enhancing my features without ever feeling heavy or overdone. It’s the kind of makeup that makes you feel confident without announcing itself.",
     author: "Elena Voss",
     image: "/images/Testimonials/3.png",
   },
   {
     id: 4,
     quote:
-      "I love how lightweight yet long-lasting the makeup feels. It lasts all day effortlessly.",
+      "I love how lightweight the makeup feels while still being incredibly long-lasting. It stays fresh and comfortable throughout the day, even during long hours and busy moments.",
     author: "Ava Laurent",
     image: "/images/Testimonials/2.png",
   },
   {
     id: 5,
     quote:
-      "This brand understands modern beauty—clean, elegant, and confidence-boosting.",
+      "This brand truly understands modern beauty—clean formulations, elegant finishes, and a sense of confidence that feels authentic. It’s beauty that enhances, not overwhelms.",
     author: "Sabrina Vox",
-    image: "/images/Testimonials/1.png",
+    image: "/images/Testimonials/2.png",
   },
 ];
 
@@ -48,7 +48,6 @@ const Testimonials2 = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isMobile, setIsMobile] = useState<boolean | null>(null);
 
-  // ✅ Detect mobile safely
   useEffect(() => {
     const checkScreen = () => {
       setIsMobile(window.innerWidth < 768);
@@ -60,113 +59,107 @@ const Testimonials2 = () => {
     return () => window.removeEventListener("resize", checkScreen);
   }, []);
 
-  // ✅ Auto rotate testimonials (desktop only)
   useEffect(() => {
     if (isMobile) return;
 
     const timer = setTimeout(() => {
-      setActiveIndex((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1));
+      setActiveIndex((prev) =>
+        prev === testimonials.length - 1 ? 0 : prev + 1,
+      );
     }, 5000);
 
     return () => clearTimeout(timer);
   }, [activeIndex, isMobile]);
 
-  // 🚫 Avoid hydration mismatch
-  if (isMobile === null) return null;
+  // if (isMobile === null) return null;
 
-  // 📱 Mobile component
-  if (isMobile) {
-    return (
-      <div className="w-full">
-        <Testimonial />
-      </div>
-    );
-  }
+  // if (isMobile) {
+  //   return (
+  //     <div className="w-full">
+  //       <div className="flex flex-col items-center justify-center pt-12">
+  //         <h2 className="text-6xl font-theseasons leading-tight">Confidence</h2>
+  //         <p className="italic text-neutral-400 font-light text-2xl  ">
+  //           In their own words
+  //         </p>
+  //       </div>
+  //       <Testimonial />
+  //     </div>
+  //   );
+  // }
 
-  // 💻 Desktop component
   return (
-    <section className="min-h-screen w-full flex flex-col text-[#2b3962] bg-white overflow-hidden sm:py-8 px-12">
-      <div className="flex flex-col items-center justify-center sm:pt-8 mb-10">
+  <section className="min-h-screen w-full flex flex-col text-[#2b3962] bg-white overflow-hidden px-4 sm:px-12 py-10">
+  <div className="w-full flex flex-col md:flex-row-reverse items-center justify-between gap-10 lg:gap-20">
+    
+    {/* Quotes */}
+    <div className="flex flex-col justify-center max-w-4xl w-full text-center md:text-left">
+      
+      <div className="flex flex-col items-center md:items-start justify-center mb-8">
         <h2 className="text-4xl sm:text-5xl lg:text-6xl font-theseasons leading-tight">
           Confidence
         </h2>
-        <p className="italic text-neutral-400 font-light text-3xl sm:text-4xl lg:text-5xl">
+        <p className="italic text-neutral-400 font-light text-2xl sm:text-3xl lg:text-5xl">
           In their own words
         </p>
       </div>
 
-      <div className="w-full flex flex-row-reverse items-center justify-between gap-20">
-        {/* Quotes */}
-        <div className="space-y-2">
-          {testimonials.map((item, i) => (
-            <div
-              key={item.id}
-              onMouseEnter={() => setActiveIndex(i)}
-              className={`cursor-pointer transition-all px-4 py-2 text-[#141c35] ${
-                activeIndex === i
-                  ? "opacity-100"
-                  : "opacity-50 hover:opacity-80"
-              }`}
-            >
-              <h3 className="text-lg sm:text-2xl font-montserrat mb-3">
-                {item.quote}
-              </h3>
-
-              <p className="text-md font-montserrat flex items-center gap-2">
-                <span
-                  className={`h-0.5 transition-all ${
-                    activeIndex === i
-                      ? "w-8 bg-[#141c35]"
-                      : "w-4 bg-neutral-400"
-                  }`}
-                />
-                {item.author}
-              </p>
-            </div>
-          ))}
-        </div>
-
-        {/* Image */}
-        <div className="w-3/4 md:w-1/2 h-[80vh] relative bg-neutral-200">
-          <Image
-            key={activeIndex}
-            src={testimonials[activeIndex].image}
-            alt={testimonials[activeIndex].author}
-            fill
-            priority
-            className="object-cover transition-opacity duration-700"
-          />
-
-          <div className="absolute bottom-6 left-6 flex items-center gap-4 bg-black/20 backdrop-blur-md p-4 max-w-xs shadow-2xl">
-            <button
-              onClick={() =>
-                setActiveIndex((prev) =>
-                  prev === 0 ? testimonials.length - 1 : prev - 1
-                )
-              }
-              className="p-3 text-white border hover:bg-black transition"
-            >
-              <FaGreaterThan className="rotate-180 text-xs" />
-            </button>
-
-            <p className="flex-1 text-center text-sm sm:text-2xl text-white font-semibold">
-              {testimonials[activeIndex].author}
-            </p>
-
-            <button
-              onClick={() =>
-                setActiveIndex((prev) =>
-                  prev === testimonials.length - 1 ? 0 : prev + 1
-                )
-              }
-              className="p-3 text-white border hover:bg-black transition"
-            >
-              <FaGreaterThan className="text-xs" />
-            </button>
-          </div>
-        </div>
+      <div
+        key={activeIndex}
+        className="transition-all duration-700 ease-out"
+      >
+        <h3 className="text-lg sm:text-xl lg:text-2xl sm:border sm:p-4 font-montserrat mb-6 leading-relaxed text-[#141c35]">
+          {testimonials[activeIndex].quote}
+        </h3>
+{/* 
+        <p className="text-sm sm:text-base font-montserrat flex items-center justify-center md:justify-start gap-3 text-[#141c35]">
+          <span className="h-0.5 w-8 bg-[#141c35]" />
+          {testimonials[activeIndex].author}
+        </p> */}
       </div>
-    </section>
+    </div>
+
+    <div className="w-full md:w-1/2 h-[55vh] sm:h-[65vh] lg:h-[80vh] relative bg-neutral-200">
+      <Image
+        key={activeIndex}
+        src={testimonials[activeIndex].image}
+        alt={testimonials[activeIndex].author}
+        fill
+        priority
+        className="object-cover transition-opacity duration-700"
+      />
+
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 md:left-6 md:translate-x-0 flex items-center gap-4 bg-black/20 backdrop-blur-md p-3 sm:p-4 max-w-xs shadow-2xl">
+        
+        <button
+          onClick={() =>
+            setActiveIndex((prev) =>
+              prev === 0 ? testimonials.length - 1 : prev - 1
+            )
+          }
+          className="p-2  text-white border hover:bg-black transition"
+        >
+          <ChevronLeft className=" text-xs" />
+        </button>
+
+        <p className="flex-1 text-center text-sm sm:text-lg text-white font-semibold whitespace-nowrap">
+          {testimonials[activeIndex].author}
+        </p>
+
+        <button
+          onClick={() =>
+            setActiveIndex((prev) =>
+              prev === testimonials.length - 1 ? 0 : prev + 1
+            )
+          }
+          className="p-2  text-white border hover:bg-black transition"
+        >
+          <ChevronRight className="text-xs" />
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
   );
 };
 

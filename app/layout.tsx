@@ -112,7 +112,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={` ${matter.variable} ${saolDisplay.variable} ${montserrat.variable} ${theseasons.variable}  antialiased`} suppressHydrationWarning
+        className={` ${matter.variable} ${saolDisplay.variable} ${montserrat.variable} ${theseasons.variable}  antialiased ` } suppressHydrationWarning 
       >
         {/* <LipstickScene /> */}
         <Audio/>

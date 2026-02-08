@@ -1,8 +1,6 @@
 import Hero from "@/Components/Home/Hero/Hero";
 import About from "@/Components/Home/About/AboutHero";
 import ProductShowcase from "@/Components/Home/Products/ProductShowcase";
-import Benefits from '@/Components/Home/Benefits/Benefits'
-import Testimonial from "@/Components/Home/Testimonial/Testimonial";
 import Footer from "@/Components/Layout/Footer/Footer";
 import { ImageComparisonSlider } from "@/Components/Home/ImageCompare/image-comparison-slider-horizontal";
 import TextReveal from "@/Components/Home/TextReveal/TextReveal";
@@ -22,9 +20,7 @@ const page = () => {
               />
       <ProductShowcase />
       <Divider />
-      {/* <Benefits /> */}
       <Testimonials2/>
-      {/* <Testimonial /> */}
       <About />
       <Footer />
     </div>

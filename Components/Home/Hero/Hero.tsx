@@ -66,6 +66,7 @@ gsap.timeline()
         {
           yPercent: 0,
           width: "100vw", 
+          height: "120vh",
           scale: 1,
           borderRadius: "0px",
           ease: "none"
@@ -77,7 +78,7 @@ gsap.timeline()
   return (
     <section
       id="hero"
-      className="relative font-theseasons min-h-screen w-full h-auto overflow-hidden bg-white mx-auto   text-black"
+      className="relative font-theseasons min-h-screen w-full h-[120vh] overflow-hidden bg-white mx-auto   text-black"
     >
       
            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.06),transparent_55%)]  pointer-events-none" />

@@ -26,10 +26,10 @@ const AboutHero = () => {
 }, []); 
 
   return (
-    <section id="about" className="relative min-h-screen sm:px-8  overflow-hidden">
+    <section id="about" className="relative min-h-screen sm:px-12  overflow-hidden">
       <div className="absolute bg-white inset-0 -z-10 "></div>
       <div className="flex flex-col mx-auto ">
-        <div className="photo-1 hidden md:flex justify-center pt-8 pl-4 lg:justify-start mb-10 lg:-mb-10 z-20">
+        <div className="photo-1 hidden md:flex justify-center pt-8  lg:justify-start mb-10 lg:-mb-10 z-20">
           <AboutPhotocard
             imageUrl="/images/IMG_1090.PNG"
             width={460}
@@ -69,7 +69,7 @@ const AboutHero = () => {
           </div>
         </div>
 
-        <div className="photo-3 pl-4 grid grid-cols-1 lg:grid-cols-3 gap-12 mt-16 items-center">
+        <div className="photo-3  grid grid-cols-1 lg:grid-cols-3 gap-12 mt-16 items-center">
           <div className="flex justify-center lg:justify-start">
             <AboutPhotocard
               imageUrl="/images/IMG_1296.PNG"

@@ -58,7 +58,7 @@ export default function TestimonialsEditorial() {
   const current = testimonials[active]
 
   return (
-    <div className="w-full max-w-2xl mx-auto px-6 py-16">
+    <div className="w-full max-w-2xl mx-auto px-6 py-0 sm:py-16">
       {/* Large index number */}
       <div className="flex items-start gap-8">
         <span
@@ -69,7 +69,6 @@ export default function TestimonialsEditorial() {
         </span>
 
         <div className="flex-1 pt-6">
-          {/* Quote */}
           <blockquote
             className={`text-2xl md:text-3xl font-matter font-light leading-relaxed text-foreground tracking-wide transition-all duration-300 ${
               isTransitioning ? "opacity-0 translate-x-4" : "opacity-100 translate-x-0"
@@ -78,7 +77,6 @@ export default function TestimonialsEditorial() {
             {current.quote}
           </blockquote>
 
-          {/* Author info with hover reveal */}
           <div
             className={`mt-10 group cursor-default transition-all duration-300 delay-100 ${
               isTransitioning ? "opacity-0" : "opacity-100"
