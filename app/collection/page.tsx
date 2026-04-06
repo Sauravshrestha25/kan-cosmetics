@@ -76,8 +76,10 @@ export default function CollectionPage() {
 
       <div
         className={[
-          "fixed inset-0 z-[70] bg-[#10172b]/40 transition-opacity duration-300 lg:hidden",
-          filtersOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0",
+          "fixed inset-0 z-70 bg-[#10172b]/40 transition-opacity duration-300 lg:hidden",
+          filtersOpen
+            ? "pointer-events-auto opacity-100"
+            : "pointer-events-none opacity-0",
         ].join(" ")}
         onClick={() => setFiltersOpen(false)}
         aria-hidden={!filtersOpen}
@@ -85,7 +87,7 @@ export default function CollectionPage() {
 
       <aside
         className={[
-          "fixed inset-y-0 left-0 z-[71] flex w-[min(24rem,calc(100vw-2rem))] flex-col border-r border-[#d9d7d1] bg-white transition-transform duration-300 ease-out lg:hidden",
+          "fixed inset-y-0 left-0 z-71 flex w-[min(24rem,calc(100vw-2rem))] flex-col border-r border-[#d9d7d1] bg-white transition-transform duration-300 ease-out lg:hidden",
           filtersOpen ? "translate-x-0" : "-translate-x-full",
         ].join(" ")}
         aria-hidden={!filtersOpen}

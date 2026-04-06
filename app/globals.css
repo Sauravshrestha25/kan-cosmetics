@@ -195,26 +195,26 @@
   }
 
   .kan-section {
-    @apply relative overflow-hidden bg-(--kan-surface) py-(--kan-section-y);
+    @apply relative overflow-hidden bg-kan-surface py-(--kan-section-y);
   }
 
   .kan-heading {
-    @apply font-theseasons text-[clamp(2.25rem,4vw,4.5rem)] font-semibold tracking-[-0.05em] text-(--kan-heading);
+    @apply font-theseasons text-[clamp(2.25rem,4vw,4.5rem)] font-semibold tracking-[-0.05em] text-kan-heading;
   }
 
   .kan-eyebrow {
-    @apply font-matter text-xs font-medium uppercase tracking-[0.24em] text-(--kan-copy-muted);
+    @apply font-matter text-xs font-medium uppercase tracking-[0.24em] text-kan-copy-muted;
   }
 
   .kan-copy {
-    @apply font-matter text-[clamp(1rem,1.5vw,1.15rem)] leading-8 text-(--kan-copy);
+    @apply font-matter text-[clamp(1rem,1.5vw,1.15rem)] leading-8 text-kan-copy;
   }
 
   .kan-divider-label {
-    @apply font-matter text-xs uppercase tracking-[0.24em] text-(--kan-copy-muted);
+    @apply font-matter text-xs uppercase tracking-[0.24em] text-kan-copy-muted;
   }
 
   .kan-surface-card {
-    @apply border border-(--kan-line) bg-white shadow-[0_18px_50px_rgba(17,19,26,0.05)];
+    @apply border border-kan-line bg-white shadow-[0_18px_50px_rgba(17,19,26,0.05)];
   }
 }

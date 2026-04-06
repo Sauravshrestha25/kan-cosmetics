@@ -97,10 +97,7 @@ export function DividerLabel({
 }: DividerLabelProps) {
   return (
     <div
-      className={cn(
-        "flex items-center gap-4 text-(--kan-line-strong)",
-        className,
-      )}
+      className={cn("flex items-center gap-4 text-kan-line-strong", className)}
       {...props}
     >
       <span className="h-px w-14 bg-current" />
