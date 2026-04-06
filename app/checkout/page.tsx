@@ -216,6 +216,7 @@ export default function CheckoutPage() {
                             src={item.image}
                             alt={item.name}
                             fill
+                            sizes="5rem"
                             className="object-contain p-2"
                           />
                         </div>

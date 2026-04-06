@@ -103,7 +103,7 @@ const theseasons = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Korea & Nepal",
+  title: "KAN Cosmetics",
   description: "Korea & Nepal - Cosmetics",
 };
 

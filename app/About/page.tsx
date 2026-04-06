@@ -62,6 +62,7 @@ export default function AboutPage() {
               src="/images/model.jpg"
               alt="KAN beauty portrait"
               fill
+              sizes="(min-width: 1024px) 42vw, 100vw"
               className="object-cover"
               priority
             />
@@ -90,6 +91,7 @@ export default function AboutPage() {
               src="/images/happyfaces2.png"
               alt="Community portrait for KAN"
               fill
+              sizes="(min-width: 1024px) 36vw, 100vw"
               className="object-cover"
             />
           </div>

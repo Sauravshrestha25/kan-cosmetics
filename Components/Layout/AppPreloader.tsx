@@ -48,7 +48,9 @@ export default function AppPreloader({
     };
 
     if (isHomePage) {
-      window.addEventListener(HOME_READY_EVENT, handleHomeReady, { once: true });
+      window.addEventListener(HOME_READY_EVENT, handleHomeReady, {
+        once: true,
+      });
     } else {
       window.addEventListener("load", handleWindowLoad, { once: true });
     }
@@ -121,7 +123,7 @@ export default function AppPreloader({
         {children}
       </div>
 
-      <style jsx>{`
+      <style>{`
         @keyframes kanPreloaderFadeUp {
           0% {
             opacity: 0;

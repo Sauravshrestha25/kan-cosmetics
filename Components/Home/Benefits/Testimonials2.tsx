@@ -146,6 +146,7 @@ const Testimonials2 = () => {
                 src={testimonials[activeIndex].image}
                 alt={testimonials[activeIndex].author}
                 fill
+                sizes="(min-width: 1024px) 42vw, 100vw"
                 priority
                 className="object-cover transition-opacity duration-700"
               />

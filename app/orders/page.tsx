@@ -181,6 +181,7 @@ export default function OrdersPage() {
                                 src={item.image}
                                 alt={item.name}
                                 fill
+                                sizes="5.5rem"
                                 className="object-contain p-2"
                               />
                             </div>

@@ -97,6 +97,7 @@ export default function ProductDetail({ slug }: ProductDetailProps) {
                 src={product.images[selectedImage]}
                 alt={product.name}
                 fill
+                sizes="(min-width: 1024px) 42rem, 100vw"
                 className="object-contain p-12"
               />
               <button
@@ -125,6 +126,7 @@ export default function ProductDetail({ slug }: ProductDetailProps) {
                     src={image}
                     alt={`${product.name} ${index + 1}`}
                     fill
+                    sizes="(min-width: 1024px) 8rem, 22vw"
                     className="object-contain p-4"
                   />
                 </button>
@@ -231,6 +233,7 @@ export default function ProductDetail({ slug }: ProductDetailProps) {
                             src={product.image}
                             alt={product.name}
                             fill
+                            sizes="2.5rem"
                             className="object-contain p-1"
                           />
                         </span>
@@ -265,6 +268,7 @@ export default function ProductDetail({ slug }: ProductDetailProps) {
                             src={product.image}
                             alt={product.name}
                             fill
+                            sizes="2.5rem"
                             className="object-contain p-1"
                           />
                         </span>

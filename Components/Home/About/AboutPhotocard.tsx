@@ -6,7 +6,7 @@ const AboutPhotocard = ({ className, title, imageUrl, width, height }: { classNa
     <div className='font-saolDisplay'>
       <div className='flex flex-col gap-4 justify-center'>
         <div className='flex flex-col '>
-          <Image src={imageUrl} alt="KAN" className={className} width={width} height={height}></Image>
+          <Image src={imageUrl} alt="KAN" className={className} width={width} height={height} style={{ height: "auto" }}></Image>
           <p className='text-sm text-white'>{title}</p>
         </div>
 

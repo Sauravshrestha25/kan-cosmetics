@@ -55,6 +55,7 @@ const OurSolutions = () => {
                   src={solution.image}
                   alt={solution.alt}
                   fill
+                  sizes="(min-width: 1024px) 22rem, (min-width: 768px) 33vw, 100vw"
                   className="object-cover"
                 />
               </div>

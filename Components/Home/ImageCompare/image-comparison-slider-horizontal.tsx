@@ -242,6 +242,7 @@ export const ImageComparisonSlider = React.forwardRef<
                 alt="Product"
                 width={200}
                 height={200}
+                style={{ width: "auto", height: "auto" }}
               />
             </div>
           </div>

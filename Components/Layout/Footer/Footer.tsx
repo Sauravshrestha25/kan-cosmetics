@@ -44,19 +44,12 @@ const footerGroups = [
 
 const TikTokIcon = () => (
   <svg
-    viewBox="0 0 256 256"
-    fill="none"
+    viewBox="0 0 24 24"
+    fill="currentColor"
     xmlns="http://www.w3.org/2000/svg"
     className="h-4.5 w-4.5"
   >
-    <path
-      d="M171 53.2V175.1C171 175.1 151.5 168 139.4 168C111.9 168 90.6 189.2 90.6 216.7C90.6 244.3 111.9 265.5 139.4 265.5C166.9 265.5 188.1 244.3 188.1 216.7V162.3C198.4 167.9 211.1 171.3 224.8 171.3C223.3 156.5 216.7 144.1 206.6 135.6C196.1 126.8 183 122.5 169.2 122.5C168.7 122.5 168.2 122.5 167.7 122.5V53.2H171Z"
-      fill="currentColor"
-    />
-    <path
-      d="M107.2 86.8C117.7 86.8 127 83.2 133.8 76.4C140.5 69.7 144.1 60.4 144.1 49.9V28.6H127.1C126.6 38.5 122.4 47.8 115.1 54.6C107.7 61.4 97.5 64.2 87.5 63.1V84.3C94.5 85.1 101.2 86.8 107.2 86.8Z"
-      fill="currentColor"
-    />
+    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z" />
   </svg>
 );
 
@@ -176,7 +169,7 @@ const Footer = () => {
 
         <PageContainer className="flex flex-col gap-5 pb-5 text-sm text-kan-brand md:flex-row md:items-center md:justify-between">
           <p className="font-matter text-center md:text-left">
-            @ Copyright 2025 | All Rights reserved | KAN
+            © {new Date().getFullYear()} | All Rights Reserved | KAN
           </p>
 
           <div className="flex items-center justify-center gap-8 font-matter">
@@ -196,6 +189,7 @@ const Footer = () => {
                 alt="WebX Nepal"
                 width={50}
                 height={50}
+                className="h-auto w-auto"
               ></Image>
             </Link>
           </div>

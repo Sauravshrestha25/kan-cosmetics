@@ -37,6 +37,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             src={product.image}
             alt={product.name}
             fill
+            sizes="(min-width: 1024px) 22rem, (min-width: 768px) 33vw, 100vw"
             className="object-contain p-4 transition-transform duration-500 group-hover:scale-[1.03]"
           />
         </div>
@@ -92,6 +93,7 @@ export default function ProductCard({ product }: ProductCardProps) {
                     src={product.image}
                     alt={product.name}
                     fill
+                    sizes="2.5rem"
                     className="object-contain p-1"
                   />
                 </span>
