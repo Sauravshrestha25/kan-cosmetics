@@ -19,7 +19,7 @@ const values = [
   },
 ];
 
-export default function AboutPage() {
+export default function About() {
   return (
     <main className="bg-white pt-28 pb-20 font-saolDisplay">
       <div className="mx-auto max-w-375 px-4 sm:px-6 lg:px-10">
