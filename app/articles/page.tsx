@@ -8,7 +8,8 @@ import { PageContainer } from "@/Components/ui/design-system";
 import { articles, categories } from "./articles";
 
 export default function ArticlesPage() {
-  const [activeCategory, setActiveCategory] = useState<(typeof categories)[number]>("All");
+  const [activeCategory, setActiveCategory] =
+    useState<(typeof categories)[number]>("All");
 
   const filteredArticles = useMemo(() => {
     if (activeCategory === "All") {
@@ -37,7 +38,7 @@ export default function ArticlesPage() {
               type="button"
               onClick={() => setActiveCategory(category)}
               className={[
-                "border px-6 py-3 font-matter text-sm font-semibold transition-colors",
+                "border px-6 py-3 font-matter text-sm cursor-pointer font-semibold transition-colors",
                 activeCategory === category
                   ? "border-[#2b3962] bg-[#2b3962] text-white"
                   : "border-[#d9d7d1] bg-white text-[#141c35] hover:border-[#2b3962] hover:text-[#2b3962]",
