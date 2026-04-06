@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 
 const HOME_READY_EVENT = "kan-home-ready";
+const MAX_HOME_READY_WAIT_MS = 2500;
 
 declare global {
   interface Window {
@@ -11,7 +12,9 @@ declare global {
 }
 
 const waitForImages = async (images: HTMLImageElement[]) => {
-  const pendingImages = images.filter((image) => !image.complete);
+  const pendingImages = images.filter(
+    (image) => !image.complete && image.loading !== "lazy",
+  );
 
   if (!pendingImages.length) return;
 
@@ -35,6 +38,13 @@ const waitForImages = async (images: HTMLImageElement[]) => {
 export default function HomeReadySignal() {
   useEffect(() => {
     let cancelled = false;
+    let timeoutId: number | undefined;
+
+    const emitReady = () => {
+      if (cancelled || window.__kanHomeReady) return;
+      window.__kanHomeReady = true;
+      window.dispatchEvent(new Event(HOME_READY_EVENT));
+    };
 
     const markReady = async () => {
       const homeRoot = document.querySelector("[data-home-root]");
@@ -42,16 +52,20 @@ export default function HomeReadySignal() {
 
       await waitForImages(images);
 
-      if (cancelled) return;
-
-      window.__kanHomeReady = true;
-      window.dispatchEvent(new Event(HOME_READY_EVENT));
+      emitReady();
     };
+
+    timeoutId = window.setTimeout(() => {
+      emitReady();
+    }, MAX_HOME_READY_WAIT_MS);
 
     void markReady();
 
     return () => {
       cancelled = true;
+      if (timeoutId) {
+        window.clearTimeout(timeoutId);
+      }
     };
   }, []);
 

@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import Loader from "@/Components/ui/loader-15";
 
 const MIN_PRELOAD_MS = 1200;
+const MAX_PRELOAD_MS = 4000;
 const HOME_READY_EVENT = "kan-home-ready";
 
 declare global {
@@ -20,14 +21,34 @@ export default function AppPreloader({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
+
+  return (
+    <AppPreloaderContent key={pathname} isHomePage={pathname === "/"}>
+      {children}
+    </AppPreloaderContent>
+  );
+}
+
+function AppPreloaderContent({
+  children,
+  isHomePage,
+}: {
+  children: React.ReactNode;
+  isHomePage: boolean;
+}) {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
     const startedAt = Date.now();
-    const isHomePage = pathname === "/";
     let timeoutId: number | undefined;
+    const fallbackTimeoutId = window.setTimeout(() => {
+      finish();
+    }, MAX_PRELOAD_MS);
+    let finished = false;
 
     const finish = () => {
+      if (finished) return;
+      finished = true;
       const remaining = Math.max(MIN_PRELOAD_MS - (Date.now() - startedAt), 0);
       timeoutId = window.setTimeout(() => setReady(true), remaining);
     };
@@ -59,10 +80,13 @@ export default function AppPreloader({
       if (timeoutId) {
         window.clearTimeout(timeoutId);
       }
+      if (fallbackTimeoutId) {
+        window.clearTimeout(fallbackTimeoutId);
+      }
       window.removeEventListener(HOME_READY_EVENT, handleHomeReady);
       window.removeEventListener("load", handleWindowLoad);
     };
-  }, [pathname]);
+  }, [isHomePage]);
 
   return (
     <>
