@@ -10,6 +10,11 @@ import {
   toPoints,
 } from "./arUtils";
 
+type FacePrediction = {
+  scaledMesh?: [number, number, number?][];
+  keypoints?: { x: number; y: number; z?: number }[];
+};
+
 type UseArLipstickTryOnArgs = {
   isMobile: boolean;
   lipstickColorRef: React.MutableRefObject<string>;
@@ -28,7 +33,7 @@ export default function useArLipstickTryOn({
     estimateFaces: (
       input: HTMLVideoElement,
       config?: { flipHorizontal: boolean },
-    ) => Promise<unknown[]>;
+    ) => Promise<FacePrediction[]>;
   } | null>(null);
   const previousDisplayLandmarksRef = useRef<Record<number, [number, number]> | null>(
     null,
@@ -139,7 +144,7 @@ export default function useArLipstickTryOn({
           estimateFaces: (
             input: HTMLVideoElement,
             config?: { flipHorizontal: boolean },
-          ) => Promise<unknown[]>;
+          ) => Promise<FacePrediction[]>;
         };
         let runtimeUsed = "tfjs";
 
@@ -151,8 +156,6 @@ export default function useArLipstickTryOn({
               solutionPath: "https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh",
               refineLandmarks: true,
               maxFaces: 1,
-              minDetectionConfidence: 0.35,
-              minTrackingConfidence: 0.35,
             },
           );
           runtimeUsed = "mediapipe";
@@ -163,8 +166,6 @@ export default function useArLipstickTryOn({
               runtime: "tfjs",
               refineLandmarks: true,
               maxFaces: 1,
-              minDetectionConfidence: 0.35,
-              minTrackingConfidence: 0.35,
             },
           );
           runtimeUsed = "tfjs";
@@ -262,7 +263,8 @@ export default function useArLipstickTryOn({
             flipHorizontal: false,
           });
           if (predictions.length > 0) {
-            const landmarks = toPoints(predictions[0]);
+            const firstPrediction: FacePrediction | undefined = predictions[0];
+            const landmarks = firstPrediction ? toPoints(firstPrediction) : null;
             if (landmarks) {
               const displayMap = buildSmoothedDisplayLandmarks(
                 previousDisplayLandmarksRef,

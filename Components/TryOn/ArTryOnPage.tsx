@@ -2,18 +2,26 @@
 
 import { useEffect, useRef, useState } from "react";
 import ArTryOnUI from "./ArTryOnUI";
-import { PRESET_LIPSTICKS } from "./constants";
+import {
+  PRESET_LIPSTICKS,
+  type PresetLipstickHex,
+  type PresetLipstickId,
+} from "./constants";
 import useArLipstickTryOn from "./useArLipstickTryOn";
 
 export default function ArTryOnPage() {
-  const [lipstickColor, setLipstickColor] = useState(PRESET_LIPSTICKS[0].hex);
+  const [lipstickColor, setLipstickColor] = useState<PresetLipstickHex>(
+    PRESET_LIPSTICKS[0].hex,
+  );
   const [lipstickOpacity, setLipstickOpacity] = useState(0.4);
-  const [selectedShade, setSelectedShade] = useState(PRESET_LIPSTICKS[0].id);
+  const [selectedShade, setSelectedShade] = useState<PresetLipstickId>(
+    PRESET_LIPSTICKS[0].id,
+  );
   const [isMobile, setIsMobile] = useState(
     () => typeof window !== "undefined" && window.innerWidth < 768,
   );
 
-  const lipstickColorRef = useRef(PRESET_LIPSTICKS[0].hex);
+  const lipstickColorRef = useRef<PresetLipstickHex>(PRESET_LIPSTICKS[0].hex);
   const lipstickOpacityRef = useRef(0.4);
 
   useEffect(() => {

@@ -88,25 +88,27 @@ export function Footer({
             ))}
           </ul>
         </div>
-        <div>
-          
-        </div>
+        <div></div>
         <div className="flex flex-col sm:flex-row justify-between border-t pt-8 mt-2">
-
-      
-        <div className="  flex flex-col sm:flex-row gap-1 pb-12 sm:pb-0" >
-       
+          <div className="  flex flex-col sm:flex-row gap-1 pb-12 sm:pb-0">
             <div>{copyright.text}</div>
             {copyright.license && <div>{copyright.license}</div>}
           </div>
           <div>
-             <div className="flex gap-4 ">
-            <p>Designed & Developed by: </p>
-            <Link href="https://www.webxnepal.com" target="_blank"><Image src="/images/Logo/Logo_LightMode.jpeg" alt="WebX Nepal" width={60} height={0}></Image></Link>
-          </div>
-          </div>
+            <div className="flex gap-4 ">
+              <p>Designed & Developed by: </p>
+              <Link href="https://www.webxnepal.com" target="_blank">
+                <Image
+                  src="/images/Logo/Logo_LightMode.jpeg"
+                  alt="WebX Nepal"
+                  width={60}
+                  height={0}
+                ></Image>
+              </Link>
             </div>
-</div>
+          </div>
+        </div>
+      </div>
     </footer>
   );
 }

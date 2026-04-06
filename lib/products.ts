@@ -123,6 +123,8 @@ type ProductSeed = {
   desc: string;
   launchedAt: string;
   skinTypes?: SkinType[];
+  additionalInfo?: Product["additionalInfo"];
+  customerReviews?: Product["customerReviews"];
 };
 
 const createProduct = ({

@@ -26,5 +26,9 @@ export const PRESET_LIPSTICKS = [
   { id: 13, name: "Vamp Burgundy", hex: "#3a0a14" },
 ] as const;
 
+export type PresetLipstick = (typeof PRESET_LIPSTICKS)[number];
+export type PresetLipstickId = PresetLipstick["id"];
+export type PresetLipstickHex = PresetLipstick["hex"];
+
 export const MIRROR_DISPLAY = true;
 export const LIP_SMOOTHING_ALPHA = 0.45;

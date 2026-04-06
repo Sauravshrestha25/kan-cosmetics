@@ -1,1 +1,5 @@
-export { default } from "@/Components/ui/demo";
+import Loader from "./loader-15";
+
+export default function DemoOne() {
+  return <Loader />;
+}

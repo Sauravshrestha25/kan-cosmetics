@@ -2,7 +2,11 @@
 
 import type { RefObject } from "react";
 import { Camera, LoaderCircle, ScanFace, Sparkles } from "lucide-react";
-import { PRESET_LIPSTICKS } from "./constants";
+import {
+  PRESET_LIPSTICKS,
+  type PresetLipstick,
+  type PresetLipstickId,
+} from "./constants";
 
 type ArTryOnUIProps = {
   wrapperRef: RefObject<HTMLDivElement | null>;
@@ -15,9 +19,9 @@ type ArTryOnUIProps = {
   faceDetected: boolean;
   modelRuntime: string;
   isLoading: boolean;
-  selectedShade: number;
+  selectedShade: PresetLipstickId;
   lipstickOpacity: number;
-  onShadeClick: (shade: (typeof PRESET_LIPSTICKS)[number]) => void;
+  onShadeClick: (shade: PresetLipstick) => void;
   onOpacityChange: (value: number) => void;
 };
 
@@ -27,9 +31,18 @@ const statusItems = (
   faceDetected: boolean,
   modelRuntime: string,
 ) => [
-  { label: cameraReady ? "Camera ready" : "Waiting for camera", active: cameraReady },
-  { label: isModelLoaded ? "Model ready" : "Loading model", active: isModelLoaded },
-  { label: faceDetected ? "Face detected" : "No face detected", active: faceDetected },
+  {
+    label: cameraReady ? "Camera ready" : "Waiting for camera",
+    active: cameraReady,
+  },
+  {
+    label: isModelLoaded ? "Model ready" : "Loading model",
+    active: isModelLoaded,
+  },
+  {
+    label: faceDetected ? "Face detected" : "No face detected",
+    active: faceDetected,
+  },
   { label: `Runtime: ${modelRuntime}`, active: isModelLoaded },
 ];
 
@@ -50,7 +63,7 @@ export default function ArTryOnUI({
   onOpacityChange,
 }: ArTryOnUIProps) {
   return (
-    <div className="mx-auto max-w-[1500px] px-4 sm:px-6 lg:px-10">
+    <div className="mx-auto max-w-375 px-4 sm:px-6 lg:px-10">
       {error ? (
         <div className="mb-6 border border-[#f0c7c7] bg-[#fff5f5] px-4 py-3 font-matter text-sm text-[#b42318]">
           {error}
@@ -60,28 +73,31 @@ export default function ArTryOnUI({
       <div className="grid gap-10 lg:grid-cols-[minmax(0,1.18fr)_minmax(18rem,0.82fr)] lg:items-start">
         <div>
           <div className="mb-4 flex flex-wrap items-center gap-3">
-            {statusItems(cameraReady, isModelLoaded, faceDetected, modelRuntime).map(
-              (item) => (
-                <div
-                  key={item.label}
-                  className="inline-flex items-center gap-2 border border-[#e4e7ef] bg-white px-3 py-2 font-matter text-sm text-[#4f5c73]"
-                >
-                  <span
-                    className={[
-                      "h-2.5 w-2.5",
-                      item.active ? "bg-[#4ade80]" : "bg-[#b5bfce]",
-                    ].join(" ")}
-                  />
-                  {item.label}
-                </div>
-              ),
-            )}
+            {statusItems(
+              cameraReady,
+              isModelLoaded,
+              faceDetected,
+              modelRuntime,
+            ).map((item) => (
+              <div
+                key={item.label}
+                className="inline-flex items-center gap-2 border border-[#e4e7ef] bg-white px-3 py-2 font-matter text-sm text-[#4f5c73]"
+              >
+                <span
+                  className={[
+                    "h-2.5 w-2.5",
+                    item.active ? "bg-[#4ade80]" : "bg-[#b5bfce]",
+                  ].join(" ")}
+                />
+                {item.label}
+              </div>
+            ))}
           </div>
 
           <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_15rem]">
             <div
               ref={wrapperRef}
-              className="relative min-h-[29rem] overflow-hidden border border-[#dce1ea] bg-black md:min-h-[36rem]"
+              className="relative min-h-116 overflow-hidden border border-[#dce1ea] bg-black md:min-h-144"
             >
               <video
                 ref={videoRef}
@@ -112,12 +128,14 @@ export default function ArTryOnUI({
             {!isMobile ? (
               <div className="overflow-hidden border border-[#dce1ea] bg-[#f2ece2]">
                 <div
-                  className="h-full min-h-[29rem] bg-cover bg-center p-4 md:min-h-[36rem]"
+                  className="h-full min-h-116 bg-cover bg-center p-4 md:min-h-144"
                   style={{ backgroundImage: "url('/images/try-on-wood.png')" }}
                 >
                   <div
                     className="h-full w-full bg-cover bg-center"
-                    style={{ backgroundImage: "url('/images/try-on-model.jpeg')" }}
+                    style={{
+                      backgroundImage: "url('/images/try-on-model.jpeg')",
+                    }}
                   />
                 </div>
               </div>
@@ -184,7 +202,9 @@ export default function ArTryOnUI({
                 max={0.9}
                 step={0.05}
                 value={lipstickOpacity}
-                onChange={(event) => onOpacityChange(Number(event.target.value))}
+                onChange={(event) =>
+                  onOpacityChange(Number(event.target.value))
+                }
                 className="w-full accent-[#1d2c63]"
               />
               <div className="flex justify-between font-matter text-sm text-[#7a889d]">
