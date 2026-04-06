@@ -1,0 +1,119 @@
+"use client";
+
+import Image from "next/image";
+import { useEffect, useState } from "react";
+import Loader from "@/Components/ui/loader-15";
+
+const MIN_PRELOAD_MS = 1200;
+
+export default function AppPreloader({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    const startedAt = Date.now();
+
+    const finish = () => {
+      const remaining = Math.max(MIN_PRELOAD_MS - (Date.now() - startedAt), 0);
+      window.setTimeout(() => setReady(true), remaining);
+    };
+
+    if (document.readyState === "complete") {
+      finish();
+      return;
+    }
+
+    window.addEventListener("load", finish, { once: true });
+    return () => {
+      window.removeEventListener("load", finish);
+    };
+  }, []);
+
+  return (
+    <>
+      <div
+        className={[
+          "fixed inset-0 z-9999 flex items-center justify-center bg-linear-to-br from-white via-[#f7f9fc] to-[#eef2fb] transition-opacity duration-500",
+          ready ? "pointer-events-none opacity-0" : "opacity-100",
+        ].join(" ")}
+        aria-hidden={ready}
+      >
+        <div className="relative flex flex-col items-center gap-6">
+          <div className="pointer-events-none absolute -top-16 h-32 w-32 rounded-full bg-[#dfe7fb] blur-3xl" />
+
+          <div className="relative flex flex-col items-center gap-5">
+            <div className="overflow-hidden">
+              <Image
+                src="/images/Logo/Logo_Latest.svg"
+                alt="KAN Korea & Nepal"
+                width={280}
+                height={92}
+                priority
+                className="h-auto w-55 opacity-0 sm:w-65"
+                style={{
+                  animation: "kanPreloaderFadeUp 900ms ease-out forwards",
+                }}
+              />
+            </div>
+
+            <div
+              className="flex flex-col items-center gap-3 opacity-0"
+              style={{
+                animation: "kanPreloaderFade 900ms ease-out 180ms forwards",
+              }}
+            >
+              <p className="font-matter text-[11px] uppercase tracking-[0.34em] text-[#1d2c63]/70">
+                Korea & Nepal
+              </p>
+            </div>
+          </div>
+
+          <div
+            className="opacity-0"
+            style={{
+              animation: "kanPreloaderFade 900ms ease-out 320ms forwards",
+            }}
+          >
+            <Loader />
+          </div>
+        </div>
+      </div>
+
+      <div
+        className={[
+          "transition-opacity duration-300",
+          ready ? "opacity-100" : "pointer-events-none opacity-0",
+        ].join(" ")}
+      >
+        {children}
+      </div>
+
+      <style jsx>{`
+        @keyframes kanPreloaderFadeUp {
+          0% {
+            opacity: 0;
+            transform: translateY(18px);
+          }
+
+          100% {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes kanPreloaderFade {
+          0% {
+            opacity: 0;
+          }
+
+          100% {
+            opacity: 1;
+          }
+        }
+      `}</style>
+    </>
+  );
+}

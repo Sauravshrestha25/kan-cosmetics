@@ -6,11 +6,24 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-kan-brand: var(--kan-brand);
+  --color-kan-brand-strong: var(--kan-brand-strong);
+  --color-kan-brand-deep: var(--kan-brand-deep);
+  --color-kan-brand-accent: var(--kan-brand-accent);
+  --color-kan-heading: var(--kan-heading);
+  --color-kan-copy: var(--kan-copy);
+  --color-kan-copy-muted: var(--kan-copy-muted);
+  --color-kan-line: var(--kan-line);
+  --color-kan-line-strong: var(--kan-line-strong);
+  --color-kan-surface: var(--kan-surface);
+  --color-kan-surface-soft: var(--kan-surface-soft);
+  --color-kan-surface-tint: var(--kan-surface-tint);
+  --color-kan-surface-elevated: var(--kan-surface-elevated);
   --font-matter: var(--font-matter);
   --font-saolDisplay: var(--font-saolDisplay);
   --font-montserrat: var(--font-montserrat);
   --font-theseasons: var(--font-seasons);
-  --color-primary: var(--color-primary)
+  --color-primary: var(--color-primary);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -49,8 +62,56 @@
   --radius-4xl: calc(var(--radius) + 16px);
 }
 
+/* Custom slider styles */
+.slider-thumb::-webkit-slider-thumb {
+  appearance: none;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: white;
+  border: 2px solid #2b3962;
+  box-shadow: 0 6px 18px rgba(43, 57, 98, 0.16);
+  cursor: ew-resize;
+  transition: transform 0.2s ease;
+}
+
+.slider-thumb::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+}
+
+.slider-thumb::-moz-range-thumb {
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: white;
+  border: 2px solid #2b3962;
+  box-shadow: 0 6px 18px rgba(43, 57, 98, 0.16);
+  cursor: ew-resize;
+  transition: transform 0.2s ease;
+}
+
+.slider-thumb::-moz-range-thumb:hover {
+  transform: scale(1.1);
+}
+
 :root {
   --radius: 0.625rem;
+  --kan-page-max: 93.75rem;
+  --kan-section-y: clamp(4.5rem, 8vw, 7rem);
+  --kan-surface: #ffffff;
+  --kan-surface-soft: #f8f7f4;
+  --kan-surface-tint: #f7f9fc;
+  --kan-surface-elevated: #fbfcfe;
+  --kan-ink: #11131a;
+  --kan-heading: #141c35;
+  --kan-copy: #5f6f86;
+  --kan-copy-muted: #98a2b3;
+  --kan-line: #e7e9ef;
+  --kan-line-strong: #d9dfea;
+  --kan-brand: #1d2c63;
+  --kan-brand-strong: #15224d;
+  --kan-brand-deep: #233368;
+  --kan-brand-accent: #e58ba0;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --color-primary: #2b3962;
@@ -124,7 +185,36 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background font-matter text-foreground antialiased;
   }
 }
 
+@layer components {
+  .kan-page {
+    @apply mx-auto w-full max-w-(--kan-page-max) px-4 sm:px-6 lg:px-10;
+  }
+
+  .kan-section {
+    @apply relative overflow-hidden bg-(--kan-surface) py-(--kan-section-y);
+  }
+
+  .kan-heading {
+    @apply font-theseasons text-[clamp(2.25rem,4vw,4.5rem)] font-semibold tracking-[-0.05em] text-(--kan-heading);
+  }
+
+  .kan-eyebrow {
+    @apply font-matter text-xs font-medium uppercase tracking-[0.24em] text-(--kan-copy-muted);
+  }
+
+  .kan-copy {
+    @apply font-matter text-[clamp(1rem,1.5vw,1.15rem)] leading-8 text-(--kan-copy);
+  }
+
+  .kan-divider-label {
+    @apply font-matter text-xs uppercase tracking-[0.24em] text-(--kan-copy-muted);
+  }
+
+  .kan-surface-card {
+    @apply border border-(--kan-line) bg-white shadow-[0_18px_50px_rgba(17,19,26,0.05)];
+  }
+}

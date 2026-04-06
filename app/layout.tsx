@@ -1,16 +1,20 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local"
-import {Montserrat} from "next/font/google"
+import localFont from "next/font/local";
+import { Montserrat } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/Components/Layout/Navbarv2/Navbar";
+import Footer from "@/Components/Layout/Footer/Footer";
 import LenisProvider from "@/Components/LenisProvider";
 import Audio from "@/Components/Layout/Audio/Audio";
-import LipstickScene from "@/Components/Layout/LipstickLoader/LipstickAnimation";
+import ToastProvider from "@/Components/Layout/ToastProvider";
+import AppPreloader from "@/Components/Layout/AppPreloader";
+import StyledComponentsRegistry from "@/lib/styled-components-registry";
+// import LipstickScene from "@/Components/Layout/LipstickLoader/LipstickAnimation";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-montserrat", 
+  variable: "--font-montserrat",
 });
 
 const matter = localFont({
@@ -21,7 +25,7 @@ const matter = localFont({
       style: "normal",
     },
     {
-     path: "../public/fonts/Matter-Medium.woff2",
+      path: "../public/fonts/Matter-Medium.woff2",
       weight: "600",
       style: " normal",
     },
@@ -29,7 +33,7 @@ const matter = localFont({
       path: "../public/fonts/Matter-Regular.woff2",
       weight: "400",
       style: " normal",
-    }
+    },
   ],
   variable: "--font-matter",
   display: "block",
@@ -47,7 +51,7 @@ const saolDisplay = localFont({
       style: "normal",
     },
     {
-     path: "../public/fonts/SaolDisplay-Medium.woff2",
+      path: "../public/fonts/SaolDisplay-Medium.woff2",
       weight: "600",
       style: " normal",
     },
@@ -55,7 +59,7 @@ const saolDisplay = localFont({
       path: "../public/fonts/SaolDisplay-Regular.woff2",
       weight: "400",
       style: " normal",
-    }
+    },
   ],
   variable: "--font-saolDisplay",
   display: "block",
@@ -95,9 +99,8 @@ const theseasons = localFont({
     },
   ],
   variable: "--font-seasons",
-  display: "block"
+  display: "block",
 });
-
 
 export const metadata: Metadata = {
   title: "Korea & Nepal",
@@ -112,13 +115,20 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={` ${matter.variable} ${saolDisplay.variable} ${montserrat.variable} ${theseasons.variable}  antialiased ` } suppressHydrationWarning 
+        className={` ${matter.variable} ${saolDisplay.variable} ${montserrat.variable} ${theseasons.variable}  antialiased `}
+        suppressHydrationWarning
       >
-        {/* <LipstickScene /> */}
-        <Audio/>
-        <LenisProvider />
-        <Navbar/>
-        {children}
+        <StyledComponentsRegistry>
+          <AppPreloader>
+            {/* <LipstickScene /> */}
+            <Audio />
+            <LenisProvider />
+            <ToastProvider />
+            <Navbar />
+            {children}
+            <Footer />
+          </AppPreloader>
+        </StyledComponentsRegistry>
       </body>
     </html>
   );

@@ -37,13 +37,13 @@ export function Footer({
       <div className="px-2">
         <div className="md:flex md:items-start md:justify-between">
           {imageUrl && (
-            <a
+            <Link
               href="/"
               className="hidden sm:flex items-center gap-x-2"
               aria-label={brandName}
             >
               <Image src={imageUrl} width={120} height={200} alt="kan"></Image>
-            </a>
+            </Link>
           )}
           <div className="flex flex-col gap-4  sm:gap-12  items-start sm:items-end sm:flex-row">
             <ul className="flex flex-col gap-1 sm:flex-row  sm:items-end sm:gap-8 font-medium">

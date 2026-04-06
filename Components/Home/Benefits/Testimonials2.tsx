@@ -2,9 +2,13 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { FaGreaterThan } from "react-icons/fa";
-import Testimonial from "../Testimonial/Testimonial";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import {
+  DividerLabel,
+  PageContainer,
+  Section,
+  SectionHeading,
+} from "@/Components/ui/design-system";
 
 const testimonials = [
   {
@@ -88,78 +92,105 @@ const Testimonials2 = () => {
   // }
 
   return (
-  <section className="min-h-screen w-full flex flex-col text-[#2b3962] bg-white overflow-hidden px-4 sm:px-12 py-10">
-  <div className="w-full flex flex-col md:flex-row-reverse items-center justify-between gap-10 lg:gap-20">
-    
-    {/* Quotes */}
-    <div className="flex flex-col justify-center max-w-4xl w-full text-center md:text-left">
-      
-      <div className="flex flex-col items-center md:items-start justify-center mb-8">
-        <h2 className="text-4xl sm:text-5xl lg:text-6xl font-theseasons leading-tight">
-          Confidence
-        </h2>
-        <p className="italic text-neutral-400 font-light text-2xl sm:text-3xl lg:text-5xl">
-          In their own words
-        </p>
-      </div>
+    <Section className="min-h-screen text-[#2b3962]">
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-36 bg-linear-to-b from-[#f8f7f4] via-white to-transparent" />
+      <div className="pointer-events-none absolute left-[7%] top-20 h-28 w-28 rounded-full bg-[#f7ece8] blur-3xl" />
+      <div className="pointer-events-none absolute right-[8%] bottom-24 h-32 w-32 rounded-full bg-[#edf2fb] blur-3xl" />
 
-      <div
-        key={activeIndex}
-        className="transition-all duration-700 ease-out"
-      >
-        <h3 className="text-lg sm:text-xl lg:text-2xl sm:border sm:p-4 font-montserrat mb-6 leading-relaxed text-[#141c35]">
-          {testimonials[activeIndex].quote}
-        </h3>
-{/* 
-        <p className="text-sm sm:text-base font-montserrat flex items-center justify-center md:justify-start gap-3 text-[#141c35]">
-          <span className="h-0.5 w-8 bg-[#141c35]" />
-          {testimonials[activeIndex].author}
-        </p> */}
-      </div>
-    </div>
+      <PageContainer>
+        <div className="grid items-center gap-10 lg:grid-cols-[1.02fr_0.98fr] lg:gap-16">
+          <div className="order-2 flex flex-col justify-center lg:order-1">
+            <SectionHeading
+              align="center"
+              eyebrow="Community voices"
+              title={
+                <>
+                  Confidence
+                  <span className="mt-2 block font-theseasons text-[clamp(2rem,4vw,4rem)] font-light italic text-[#a6acb7]">
+                    In their own words
+                  </span>
+                </>
+              }
+              titleClassName="text-[clamp(3rem,5vw,5.4rem)] leading-[0.94]"
+              description="A closer look at how KAN fits into real routines, real skin, and real everyday confidence."
+              descriptionClassName="max-w-xl"
+            />
 
-    <div className="w-full md:w-1/2 h-[55vh] sm:h-[65vh] lg:h-[80vh] relative bg-neutral-200">
-      <Image
-        key={activeIndex}
-        src={testimonials[activeIndex].image}
-        alt={testimonials[activeIndex].author}
-        fill
-        priority
-        className="object-cover transition-opacity duration-700"
-      />
+            <div
+              key={activeIndex}
+              className="kan-surface-card mt-10 max-w-3xl border-[#e5e9f1] bg-white/90 p-6 transition-all duration-700 ease-out sm:p-8"
+            >
+              <p className="font-montserrat text-[1.05rem] leading-8 text-[#141c35] sm:text-[1.2rem] lg:text-[1.45rem] lg:leading-9">
+                “{testimonials[activeIndex].quote}”
+              </p>
 
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 md:left-6 md:translate-x-0 flex items-center gap-4 bg-black/20 backdrop-blur-md p-3 sm:p-4 max-w-xs shadow-2xl">
-        
-        <button
-          onClick={() =>
-            setActiveIndex((prev) =>
-              prev === 0 ? testimonials.length - 1 : prev - 1
-            )
-          }
-          className="p-2  text-white border hover:bg-black transition"
-        >
-          <ChevronLeft className=" text-xs" />
-        </button>
+              <div className="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
+                <div className="flex items-center gap-3">
+                  <span className="h-px w-10 bg-[#1d2c63]" />
+                  <p className="font-matter text-sm uppercase tracking-[0.18em] text-[#1d2c63]">
+                    {testimonials[activeIndex].author}
+                  </p>
+                </div>
+                <DividerLabel
+                  label={`${activeIndex + 1} / ${testimonials.length}`}
+                  className="gap-3"
+                />
+              </div>
+            </div>
+          </div>
 
-        <p className="flex-1 text-center text-sm sm:text-lg text-white font-semibold whitespace-nowrap">
-          {testimonials[activeIndex].author}
-        </p>
+          <div className="order-2 lg:order-2">
+            <div className="relative h-[60vh] bg-neutral-200 sm:h-[68vh] lg:h-[78vh]">
+              <Image
+                key={activeIndex}
+                src={testimonials[activeIndex].image}
+                alt={testimonials[activeIndex].author}
+                fill
+                priority
+                className="object-cover transition-opacity duration-700"
+              />
 
-        <button
-          onClick={() =>
-            setActiveIndex((prev) =>
-              prev === testimonials.length - 1 ? 0 : prev + 1
-            )
-          }
-          className="p-2  text-white border hover:bg-black transition"
-        >
-          <ChevronRight className="text-xs" />
-        </button>
-      </div>
-    </div>
-  </div>
-</section>
+              <div className="absolute inset-x-0 bottom-0 h-32 bg-linear-to-t from-[#11131a]/55 to-transparent" />
 
+              <div className="absolute bottom-5 left-5 right-5 flex items-center justify-between gap-4 border border-white/20 bg-white/10 px-4 py-4 backdrop-blur-md sm:bottom-6 sm:left-6 sm:right-auto sm:min-w-88">
+                <button
+                  onClick={() =>
+                    setActiveIndex((prev) =>
+                      prev === 0 ? testimonials.length - 1 : prev - 1,
+                    )
+                  }
+                  className="flex h-11 w-11 items-center justify-center border border-white/30 text-white transition hover:bg-black/20"
+                  aria-label="Previous testimonial"
+                >
+                  <ChevronLeft className="h-4 w-4" />
+                </button>
+
+                <div className="min-w-0 flex-1">
+                  <p className="font-matter text-xs uppercase tracking-[0.2em] text-white/70">
+                    Testimonial
+                  </p>
+                  <p className="truncate font-matter text-base font-semibold text-white sm:text-lg">
+                    {testimonials[activeIndex].author}
+                  </p>
+                </div>
+
+                <button
+                  onClick={() =>
+                    setActiveIndex((prev) =>
+                      prev === testimonials.length - 1 ? 0 : prev + 1,
+                    )
+                  }
+                  className="flex h-11 w-11 items-center justify-center border border-white/30 text-white transition hover:bg-black/20"
+                  aria-label="Next testimonial"
+                >
+                  <ChevronRight className="h-4 w-4" />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </PageContainer>
+    </Section>
   );
 };
 

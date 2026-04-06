@@ -4,29 +4,32 @@ import AboutPhotocard from "./AboutPhotocard";
 import PremiumButton from "@/Components/ui/ArrowBtn";
 import { motion } from "framer-motion";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/all";
+// import { ScrollTrigger } from "gsap/all";
 import { useGSAP } from "@gsap/react";
 
 const AboutHero = () => {
   useGSAP(() => {
-  const photos = [".photo-1", ".photo-2", ".photo-3"];
-  
-  photos.forEach((photo, i) => {
-    gsap.to(photo, {
-      scrollTrigger: {
-        trigger: "#about",
-        start: "center 60%", 
-        end: "bottom top",  
-        scrub: true,       
-      },
-      y: (i + 1) * -50, 
-      ease: "expo.out",
+    const photos = [".photo-1", ".photo-2", ".photo-3"];
+
+    photos.forEach((photo, i) => {
+      gsap.to(photo, {
+        scrollTrigger: {
+          trigger: "#about",
+          start: "center 60%",
+          end: "bottom top",
+          scrub: true,
+        },
+        y: (i + 1) * -50,
+        ease: "expo.out",
+      });
     });
-  });
-}, []); 
+  }, []);
 
   return (
-    <section id="about" className="relative min-h-screen sm:px-12  overflow-hidden">
+    <section
+      id="about"
+      className="relative min-h-screen sm:px-12  overflow-hidden"
+    >
       <div className="absolute bg-white inset-0 -z-10 "></div>
       <div className="flex flex-col mx-auto ">
         <div className="photo-1 hidden md:flex justify-center pt-8  lg:justify-start mb-10 lg:-mb-10 z-20">
@@ -37,9 +40,9 @@ const AboutHero = () => {
           />
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12  items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 items-center">
           <div className="col-span-2" />
-          <div className="flex flex-col items-center lg:items-center lg:col-span-8 text-center">
+          <div className="flex flex-col items-center text-center lg:col-span-8">
             <motion.span
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -48,15 +51,10 @@ const AboutHero = () => {
               ABOUT US
             </motion.span>
             <h1 className="font-theseasons text-4xl sm:text-6xl lg:text-6xl leading-[1.1] md:leading-[0.9] text-[#141c35] font-medium">
-              <span className=" ">
-                Exquisite
-              </span>{" "}
-              beauty <br className="hidden lg:block" />
+              <span className=" ">Exquisite</span> beauty{" "}
+              <br className="hidden lg:block" />
               starts with an <br className="hidden lg:block" />
-              <span className="  ">
-                exceptional
-              </span>{" "}
-              canvas.
+              <span className="  ">exceptional</span> canvas.
             </h1>
           </div>
 
@@ -80,6 +78,7 @@ const AboutHero = () => {
 
           <div className="flex items-center justify-center py-10 lg:py-0">
             <PremiumButton
+              href="/collection"
               text="Discover the Collection"
               className=" scale-110 md:scale-125"
             />
