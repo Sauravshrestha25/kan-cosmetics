@@ -114,7 +114,7 @@ export default function AboutPage() {
 
             <div className="mt-8 border-t border-[#d9d7d1] pt-6">
               <Link
-                href="/shop"
+                href="/collection"
                 className="inline-flex items-center font-matter text-sm font-semibold uppercase tracking-[0.08em] text-[#2b3962] transition-colors hover:text-[#d4a574]"
               >
                 Explore Collection
