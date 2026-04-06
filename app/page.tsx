@@ -3,6 +3,7 @@ import Tastetheflavor from "@/Components/Home/Tastetheflavor/Tastetheflavor";
 import OurSolutions from "@/Components/Home/OurSolutions/OurSolutions";
 import About from "@/Components/Home/About/AboutHero";
 import ProductShowcase from "@/Components/Home/Products/ProductShowcase";
+import HomeReadySignal from "@/Components/Home/HomeReadySignal";
 import { ImageComparisonSlider } from "@/Components/Home/ImageCompare/image-comparison-slider-horizontal";
 import TextReveal from "@/Components/Home/TextReveal/TextReveal";
 import Testimonials2 from "@/Components/Home/Benefits/Testimonials2";
@@ -10,7 +11,8 @@ import Testimonials2 from "@/Components/Home/Benefits/Testimonials2";
 
 const page = () => {
   return (
-    <div className="font-saolDisplay ">
+    <div className="font-saolDisplay" data-home-root>
+      <HomeReadySignal />
       <Hero />
       <Tastetheflavor />
       <OurSolutions />

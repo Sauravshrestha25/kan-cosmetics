@@ -53,8 +53,8 @@ export default function SignupPage() {
       <div className="pointer-events-none absolute right-[10%] top-20 h-32 w-32 rounded-full bg-[#f7ece8] blur-3xl" />
 
       <PageContainer className="max-w-[1100px]">
-        <div className="grid min-h-[42rem] overflow-hidden border border-[#e6eaf2] bg-white shadow-[0_30px_80px_rgba(16,23,43,0.06)] lg:grid-cols-[0.82fr_1fr]">
-          <aside className="relative hidden min-h-[42rem] bg-[#f7f9fc] lg:block">
+        <div className="grid min-h-168 overflow-hidden border border-[#e6eaf2] bg-white shadow-[0_30px_80px_rgba(16,23,43,0.06)] lg:grid-cols-[0.82fr_1fr]">
+          <aside className="relative hidden min-h-168 bg-[#f7f9fc] lg:block">
             <Image
               src="/images/model.jpg"
               alt="KAN beauty campaign"
@@ -78,7 +78,7 @@ export default function SignupPage() {
           </aside>
 
           <section className="flex h-full flex-col p-6 sm:p-8 lg:p-10">
-            <div className="mx-auto flex h-full w-full max-w-[31rem] flex-col">
+            <div className="mx-auto flex h-full w-full max-w-124 flex-col">
               <div className="grid grid-cols-2 items-end gap-8 border-b border-[#e5e7ef]">
                 <Link
                   href="/login"

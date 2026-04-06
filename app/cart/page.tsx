@@ -178,7 +178,7 @@ export default function CartPage() {
               </div>
 
               <div className="mt-12 flex flex-col gap-6 border-t border-[#efefef] pt-10 md:flex-row md:items-end md:justify-between">
-                <div className="w-full max-w-[26rem]">
+                <div className="w-full max-w-104">
                   <p className="font-matter text-sm text-[#525252]">
                     Have a coupon? Enter your code.
                   </p>
@@ -192,7 +192,7 @@ export default function CartPage() {
                     />
                     <button
                       type="button"
-                      className="h-12 min-w-[5.5rem] border border-[#d6d6d6] px-5 font-matter text-sm font-semibold text-[#5f5f5f] transition-colors hover:border-[#111] hover:text-[#111]"
+                      className="h-12 min-w-22 border border-[#d6d6d6] px-5 font-matter text-sm font-semibold text-[#5f5f5f] transition-colors hover:border-[#111] hover:text-[#111]"
                     >
                       APPLY
                     </button>
@@ -211,7 +211,7 @@ export default function CartPage() {
             </section>
 
             <aside className="border-l border-[#dbdbdb] pl-0 lg:pl-9">
-              <div className="max-w-[22rem]">
+              <div className="max-w-88">
                 <h2 className="font-matter text-[2rem] font-light tracking-[-0.04em] text-[#202020]">
                   CART TOTALS
                 </h2>

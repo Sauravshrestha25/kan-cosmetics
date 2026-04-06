@@ -1,36 +1,66 @@
 "use client";
 
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import Loader from "@/Components/ui/loader-15";
 
 const MIN_PRELOAD_MS = 1200;
+const HOME_READY_EVENT = "kan-home-ready";
+
+declare global {
+  interface Window {
+    __kanHomeReady?: boolean;
+  }
+}
 
 export default function AppPreloader({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const pathname = usePathname();
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
     const startedAt = Date.now();
+    const isHomePage = pathname === "/";
+    let timeoutId: number | undefined;
 
     const finish = () => {
       const remaining = Math.max(MIN_PRELOAD_MS - (Date.now() - startedAt), 0);
-      window.setTimeout(() => setReady(true), remaining);
+      timeoutId = window.setTimeout(() => setReady(true), remaining);
     };
 
-    if (document.readyState === "complete") {
+    if (isHomePage && window.__kanHomeReady) {
       finish();
-      return;
     }
 
-    window.addEventListener("load", finish, { once: true });
-    return () => {
-      window.removeEventListener("load", finish);
+    if (!isHomePage && document.readyState === "complete") {
+      finish();
+    }
+
+    const handleHomeReady = () => finish();
+    const handleWindowLoad = () => {
+      if (!isHomePage) {
+        finish();
+      }
     };
-  }, []);
+
+    if (isHomePage) {
+      window.addEventListener(HOME_READY_EVENT, handleHomeReady, { once: true });
+    } else {
+      window.addEventListener("load", handleWindowLoad, { once: true });
+    }
+
+    return () => {
+      if (timeoutId) {
+        window.clearTimeout(timeoutId);
+      }
+      window.removeEventListener(HOME_READY_EVENT, handleHomeReady);
+      window.removeEventListener("load", handleWindowLoad);
+    };
+  }, [pathname]);
 
   return (
     <>
