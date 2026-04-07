@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import PremiumButton from "@/Components/ui/ArrowBtn";
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -29,15 +30,22 @@ export default function ContactForm() {
   };
 
   return (
-    <div className="bg-white  p-8 shadow-sm">
-      <h2 className="text-3xl font-medium mb-8">Send us a Message</h2>
+    <div className="border border-[#ded8ce] bg-white p-6 sm:p-8">
+      <div className="text-center">
+        <h2 className="font-theseasons text-4xl leading-none text-[#141c35] sm:text-5xl">
+          Send a message
+        </h2>
+        <p className="mx-auto mt-4 max-w-xl font-matter text-sm leading-7 text-[#6c6c74] sm:text-base">
+          Tell us what you need and we will direct your message to the right team.
+        </p>
+      </div>
 
-      <form onSubmit={handleSubmit} className="space-y-6">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <form onSubmit={handleSubmit} className="mt-8 space-y-6">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div>
             <label
               htmlFor="firstName"
-              className="block text-sm font-medium text-gray-700 mb-2"
+              className="mb-2 block font-matter text-xs uppercase tracking-[0.16em] text-[#8f857d]"
             >
               First Name
             </label>
@@ -48,7 +56,7 @@ export default function ContactForm() {
               value={formData.firstName}
               onChange={handleChange}
               placeholder="John"
-              className="w-full px-4 py-3   border border-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-900"
+              className="w-full border border-[#ded8ce] px-4 py-3 font-matter text-[#141c35] outline-none transition-colors placeholder:text-[#9b948d] focus:border-[#1d2c63]"
               required
             />
           </div>
@@ -56,7 +64,7 @@ export default function ContactForm() {
           <div>
             <label
               htmlFor="lastName"
-              className="block text-sm font-medium text-gray-700 mb-2"
+              className="mb-2 block font-matter text-xs uppercase tracking-[0.16em] text-[#8f857d]"
             >
               Last Name
             </label>
@@ -67,7 +75,7 @@ export default function ContactForm() {
               value={formData.lastName}
               onChange={handleChange}
               placeholder="Doe"
-              className="w-full px-4 py-3   border border-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-900"
+              className="w-full border border-[#ded8ce] px-4 py-3 font-matter text-[#141c35] outline-none transition-colors placeholder:text-[#9b948d] focus:border-[#1d2c63]"
               required
             />
           </div>
@@ -76,7 +84,7 @@ export default function ContactForm() {
         <div>
           <label
             htmlFor="email"
-            className="block text-sm font-medium text-gray-700 mb-2"
+            className="mb-2 block font-matter text-xs uppercase tracking-[0.16em] text-[#8f857d]"
           >
             Email
           </label>
@@ -87,7 +95,7 @@ export default function ContactForm() {
             value={formData.email}
             onChange={handleChange}
             placeholder="john@example.com"
-            className="w-full px-4 py-3   border border-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-900"
+            className="w-full border border-[#ded8ce] px-4 py-3 font-matter text-[#141c35] outline-none transition-colors placeholder:text-[#9b948d] focus:border-[#1d2c63]"
             required
           />
         </div>
@@ -95,7 +103,7 @@ export default function ContactForm() {
         <div>
           <label
             htmlFor="phone"
-            className="block text-sm font-medium text-gray-700 mb-2"
+            className="mb-2 block font-matter text-xs uppercase tracking-[0.16em] text-[#8f857d]"
           >
             Phone (Optional)
           </label>
@@ -106,14 +114,14 @@ export default function ContactForm() {
             value={formData.phone}
             onChange={handleChange}
             placeholder="+1 (555) 000-0000"
-            className="w-full px-4 py-3   border border-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-900"
+            className="w-full border border-[#ded8ce] px-4 py-3 font-matter text-[#141c35] outline-none transition-colors placeholder:text-[#9b948d] focus:border-[#1d2c63]"
           />
         </div>
 
         <div>
           <label
             htmlFor="subject"
-            className="block text-sm font-medium text-gray-700 mb-2"
+            className="mb-2 block font-matter text-xs uppercase tracking-[0.16em] text-[#8f857d]"
           >
             Subject
           </label>
@@ -122,7 +130,7 @@ export default function ContactForm() {
             name="subject"
             value={formData.subject}
             onChange={handleChange}
-            className="w-full px-4 py-3   border border-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-900"
+            className="w-full border border-[#ded8ce] bg-white px-4 py-3 font-matter text-[#141c35] outline-none transition-colors focus:border-[#1d2c63]"
           >
             <option>General Inquiry</option>
             <option>Product Question</option>
@@ -135,7 +143,7 @@ export default function ContactForm() {
         <div>
           <label
             htmlFor="message"
-            className="block text-sm font-medium text-gray-700 mb-2"
+            className="mb-2 block font-matter text-xs uppercase tracking-[0.16em] text-[#8f857d]"
           >
             Message
           </label>
@@ -146,17 +154,19 @@ export default function ContactForm() {
             onChange={handleChange}
             placeholder="How can we help you?"
             rows={6}
-            className="w-full px-4 py-3  border border-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-900 resize-none"
+            className="w-full resize-none border border-[#ded8ce] px-4 py-3 font-matter text-[#141c35] outline-none transition-colors placeholder:text-[#9b948d] focus:border-[#1d2c63]"
             required
           />
         </div>
 
-        <button
-          type="submit"
-          className="w-full bg-gray-900 text-white py-4  font-medium hover:bg-gray-800 transition-colors"
-        >
-          Send Message
-        </button>
+        <div className="flex justify-center pt-2">
+          <PremiumButton
+            text="Send Message"
+            type="submit"
+            showDots={false}
+            className="min-w-56 px-6 py-3 text-xs tracking-[0.18em]! [--btn-bg:#1d2c63] [--btn-fill:#ffffff] [--btn-text:#ffffff] [--btn-hover-text:#1d2c63]"
+          />
+        </div>
       </form>
     </div>
   );

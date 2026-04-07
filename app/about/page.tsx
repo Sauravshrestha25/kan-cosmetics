@@ -1,153 +1,262 @@
 "use client";
 
+import { useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 import Image from "next/image";
-import Link from "next/link";
-import { ChevronLeft } from "lucide-react";
+import PremiumButton from "@/Components/ui/ArrowBtn";
 
-const values = [
+gsap.registerPlugin(ScrollTrigger);
+
+const valueCards = [
   {
-    title: "Skin-first",
-    text: "We create beauty that feels comfortable, wearable, and thoughtful from the very first swipe.",
+    title: "Texture First",
+    text: "Formulas are chosen for how they sit on skin, how they wear through the day, and how refined they look up close.",
   },
   {
-    title: "Refined",
-    text: "Every texture, finish, and shade is shaped to feel modern, minimal, and quietly luxurious.",
+    title: "Quiet Luxury",
+    text: "The brand language stays controlled: cleaner finishes, stronger essentials, and visual restraint instead of excess.",
   },
   {
-    title: "Rooted",
-    text: "KAN brings together Korean beauty precision and Nepalese warmth in a language that feels personal.",
+    title: "Everyday Wear",
+    text: "KAN is built for repeat use, real routines, and makeup that feels polished without becoming difficult to wear.",
   },
 ];
 
+const storyPoints = [
+  "Premium textures with practical wear",
+  "A softer, more modern beauty point of view",
+  "Products designed to feel elevated on real skin",
+];
+
+const galleryImages = [
+  "/images/model.jpg",
+  "/images/IMG_1090.PNG",
+  "/images/happyfaces2.png",
+];
+
 export default function About() {
+  const rootRef = useRef<HTMLDivElement | null>(null);
+
+  useGSAP(
+    () => {
+      gsap.set("[data-about-reveal]", { autoAlpha: 0, y: 24 });
+      gsap.set("[data-about-media]", { autoAlpha: 0, y: 18, scale: 0.985 });
+
+      ScrollTrigger.batch("[data-about-reveal]", {
+        start: "top 90%",
+        once: true,
+        onEnter: (elements) => {
+          gsap.to(elements, {
+            autoAlpha: 1,
+            y: 0,
+            duration: 0.7,
+            ease: "power2.out",
+            stagger: 0.08,
+            overwrite: true,
+            clearProps: "transform,opacity,visibility",
+          });
+        },
+      });
+
+      gsap.utils
+        .toArray<HTMLElement>("[data-about-media]")
+        .forEach((element) => {
+          gsap.to(element, {
+            autoAlpha: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.8,
+            ease: "power2.out",
+            overwrite: true,
+            clearProps: "transform,opacity,visibility",
+            scrollTrigger: {
+              trigger: element,
+              start: "top 88%",
+              once: true,
+            },
+          });
+        });
+
+      gsap.utils
+        .toArray<HTMLElement>("[data-about-parallax]")
+        .forEach((element) => {
+          gsap.fromTo(
+            element,
+            { yPercent: -6 },
+            {
+              yPercent: 6,
+              ease: "none",
+              scrollTrigger: {
+                trigger: element.parentElement ?? element,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: 1.2,
+              },
+            },
+          );
+        });
+    },
+    { scope: rootRef },
+  );
+
   return (
-    <main className="bg-white pt-28 pb-20 font-saolDisplay">
-      <div className="mx-auto max-w-375 px-4 sm:px-6 lg:px-10">
-        <Link
-          href="/"
-          className="inline-flex items-center gap-2 font-matter text-sm font-medium text-[#7a6f68] transition-colors hover:text-[#141c35]"
+    <main ref={rootRef} className="bg-white pt-19 pb-24 font-saolDisplay">
+      <section>
+        <div
+          className="overflow-hidden border-y border-[#ded8ce] bg-[#d8d0c6]"
+          data-about-media
         >
-          <ChevronLeft className="h-4 w-4" />
-          Back
-        </Link>
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            poster="/images/hero_photo.png"
+            className="h-[72vh] w-full object-cover"
+          >
+            <source src="/video/about_video.mp4" type="video/mp4" />
+          </video>
+        </div>
 
-        <h1 className="mt-8 font-theseasons text-[clamp(2.8rem,5.4vw,5rem)] font-bold tracking-[-0.06em] text-[#141c35]">
-          About Us
-        </h1>
-
-        <section className="mt-12 grid gap-10 lg:grid-cols-[1.05fr_1.1fr] lg:items-start">
-          <div className="max-w-160">
-            <p className="font-matter text-sm uppercase tracking-[0.22em] text-[#7a6f68]">
-              Korea &amp; Nepal
-            </p>
-            <p className="mt-6 font-matter text-[clamp(1.3rem,2.1vw,2rem)] leading-normal text-[#141c35]">
-              KAN was created to bring elevated beauty into everyday rituals. We
-              believe makeup should feel expressive, effortless, and deeply
-              personal.
-            </p>
-            <p className="mt-6 max-w-136 font-matter text-lg leading-[1.8] text-[#7a6f68]">
-              Our approach blends soft minimalism, premium textures, and a
-              modern Asian beauty sensibility. From complexion products to
-              statement color, each formula is designed to support real skin and
-              real routines with elegance.
-            </p>
-            <p className="mt-6 max-w-136 font-matter text-lg leading-[1.8] text-[#7a6f68]">
-              We build with intention: fewer distractions, better finishes, and
-              products that feel as good on your shelf as they do on your skin.
+        <div className="mx-auto mt-10 max-w-375 px-4 text-center sm:px-6 lg:px-10">
+          <div className="mx-auto max-w-5xl" data-about-reveal>
+            <h1 className="font-theseasons text-[clamp(3rem,6vw,6rem)] leading-[0.92] text-[#141c35]">
+              Beauty, made refined.
+            </h1>
+            <p className="mx-auto mt-6 max-w-2xl font-matter text-base leading-8 text-[#6c6c74] sm:text-lg">
+              KAN brings together elevated texture, modern color, and a calmer
+              point of view on daily beauty. The result is makeup that looks
+              polished, feels wearable, and earns its place in a real routine.
             </p>
           </div>
 
-          <div className="relative aspect-4/4.5 overflow-hidden bg-[#f8f7f4]">
-            <Image
-              src="/images/model.jpg"
-              alt="KAN beauty portrait"
-              fill
-              sizes="(min-width: 1024px) 42vw, 100vw"
-              className="object-cover"
-              priority
-            />
-          </div>
-        </section>
-
-        <section className="mt-16 grid gap-6 md:grid-cols-3">
-          {values.map((value) => (
-            <article
-              key={value.title}
-              className="border border-[#d9d7d1] bg-white px-6 py-8"
-            >
-              <h2 className="font-theseasons text-[1.6rem] font-bold tracking-[-0.04em] text-[#141c35]">
-                {value.title}
-              </h2>
-              <p className="mt-4 font-matter text-base leading-7 text-[#7a6f68]">
-                {value.text}
-              </p>
-            </article>
-          ))}
-        </section>
-
-        <section className="mt-16 grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-          <div className="relative aspect-16/10 overflow-hidden bg-[#f8f7f4]">
-            <Image
-              src="/images/happyfaces2.png"
-              alt="Community portrait for KAN"
-              fill
-              sizes="(min-width: 1024px) 36vw, 100vw"
-              className="object-cover"
-            />
-          </div>
-
-          <div className="flex flex-col justify-between border border-[#d9d7d1] bg-white px-6 py-8 sm:px-8 lg:px-10">
-            <div>
-              <p className="font-matter text-sm uppercase tracking-[0.22em] text-[#7a6f68]">
-                Our Community
-              </p>
-              <h2 className="mt-4 font-theseasons text-[clamp(2rem,3vw,3rem)] font-bold tracking-[-0.05em] text-[#141c35]">
-                Beauty that feels relatable, modern, and lived in.
-              </h2>
-              <p className="mt-6 font-matter text-lg leading-[1.8] text-[#7a6f68]">
-                We are inspired by the confidence of real people and the calm of
-                intentional design. KAN is built for everyday beauty moments:
-                skin that glows, textures that sit beautifully, and products
-                that feel quietly premium.
-              </p>
-            </div>
-
-            <div className="mt-8 border-t border-[#d9d7d1] pt-6">
-              <Link
-                href="/collection"
-                className="inline-flex items-center font-matter text-sm font-semibold uppercase tracking-[0.08em] text-[#2b3962] transition-colors hover:text-[#d4a574]"
+          <div className="mt-12 grid gap-5 md:grid-cols-3">
+            {valueCards.map((card) => (
+              <article
+                key={card.title}
+                className="border border-[#ded8ce] bg-white px-6 py-8 text-center"
+                data-about-reveal
               >
-                Explore Collection
-              </Link>
+                <h3 className="font-theseasons text-3xl leading-none text-[#141c35]">
+                  {card.title}
+                </h3>
+                <p className="mt-4 font-matter text-sm leading-7 text-[#6c6c74] sm:text-base">
+                  {card.text}
+                </p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-18 sm:py-24">
+        <div className="mx-auto max-w-375 px-4 sm:px-6 lg:px-10">
+          <div className="mx-auto max-w-6xl text-center">
+            <div data-about-reveal>
+              <h2 className="font-theseasons text-4xl leading-none text-[#141c35] sm:text-5xl lg:text-6xl">
+                The brand story stays visual.
+              </h2>
+              <p className="mx-auto mt-6 max-w-2xl font-matter text-base leading-8 text-[#6c6c74] sm:text-lg">
+                KAN is expressed through image, finish, and atmosphere just as
+                much as product. Every visual decision is meant to support a
+                calmer, more premium beauty experience.
+              </p>
+            </div>
+
+            <div className="mt-12 grid gap-5 lg:grid-cols-3">
+              {galleryImages.map((image) => (
+                <div
+                  key={image}
+                  className="overflow-hidden border border-[#ded8ce] bg-white"
+                  data-about-media
+                >
+                  <div className="relative aspect-5/7 overflow-hidden bg-[#ebe3d8]">
+                    <div className="absolute inset-0" data-about-parallax>
+                      <Image
+                        src={image}
+                        alt="KAN editorial imagery"
+                        fill
+                        sizes="(min-width: 1024px) 30vw, 100vw"
+                        quality={80}
+                        className="object-cover"
+                      />
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section className="mt-16 grid gap-6 lg:grid-cols-[0.92fr_1.08fr]">
-          <div className="border border-[#d9d7d1] bg-white px-6 py-8 sm:px-8 lg:px-10">
-            <p className="font-matter text-sm uppercase tracking-[0.22em] text-[#7a6f68]">
-              Our Vision
-            </p>
-            <h2 className="mt-4 font-theseasons text-[clamp(2rem,3vw,3rem)] font-bold tracking-[-0.05em] text-[#141c35]">
-              To make premium beauty feel clear, calm, and personal.
+      <section className="py-18 sm:py-24">
+        <div className="mx-auto max-w-375 px-4 sm:px-6 lg:px-10">
+          <div className="grid gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:items-center">
+            <div className="text-center lg:text-left" data-about-reveal>
+              <h2 className="font-theseasons text-4xl leading-none text-[#141c35] sm:text-5xl lg:text-6xl">
+                What defines the collection.
+              </h2>
+              <p className="mt-6 font-matter text-base leading-8 text-[#6c6c74] sm:text-lg">
+                KAN keeps beauty focused on the details that matter most:
+                smoother texture, clearer finish, balanced color, and products
+                that support repeat wear without losing their polish.
+              </p>
+
+              <div className="mt-10 grid gap-px overflow-hidden border border-[#dfd7ca] bg-[#dfd7ca]">
+                {storyPoints.map((point) => (
+                  <div
+                    key={point}
+                    className="bg-white px-6 py-5 text-center font-matter text-sm uppercase tracking-[0.18em] text-[#141c35] lg:text-left"
+                  >
+                    {point}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div
+              className="relative min-h-112 overflow-hidden border border-[#ded8ce] bg-[#ddd3c8]"
+              data-about-media
+            >
+              <div className="absolute inset-0" data-about-parallax>
+                <Image
+                  src="/images/potential image.jpg"
+                  alt="KAN brand image"
+                  fill
+                  sizes="(min-width: 1024px) 44vw, 100vw"
+                  quality={82}
+                  className="object-cover"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-18 sm:py-24">
+        <div className="mx-auto max-w-375 px-4 text-center sm:px-6 lg:px-10">
+          <div className="mx-auto max-w-4xl" data-about-reveal>
+            <h2 className="font-theseasons text-4xl leading-none text-[#141c35] sm:text-5xl lg:text-6xl">
+              Explore the collection with the same point of view.
             </h2>
-            <p className="mt-6 font-matter text-lg leading-[1.8] text-[#7a6f68]">
-              We focus on a slower, more deliberate beauty experience. That
-              means better essentials, stronger point of view, and visuals that
-              let the product speak without noise.
+            <p className="mx-auto mt-6 max-w-2xl font-matter text-base leading-8 text-[#6c6c74] sm:text-lg">
+              From complexion to color, each product is designed to feel
+              cleaner, more reliable, and more refined in daily use.
             </p>
+            <div className="mt-8 flex justify-center">
+              <PremiumButton
+                text="Shop Collection"
+                href="/collection"
+                showDots={false}
+                className="px-6 py-3 text-xs tracking-[0.18em]! [--btn-bg:#1d2c63] [--btn-fill:#ffffff] [--btn-text:#ffffff] [--btn-hover-text:#1d2c63]"
+              />
+            </div>
           </div>
-
-          <div className="relative aspect-16/10 overflow-hidden bg-[#f8f7f4]">
-            <Image
-              src="/images/potential image.jpg"
-              alt="KAN premium skincare concept"
-              fill
-              className="object-cover"
-            />
-          </div>
-        </section>
-      </div>
+        </div>
+      </section>
     </main>
   );
 }

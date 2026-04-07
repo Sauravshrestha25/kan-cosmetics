@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight, Minus, Plus } from "lucide-react";
+import { ChevronLeft, ChevronRight, Minus, Plus, X } from "lucide-react";
 import { Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
@@ -560,9 +560,9 @@ export default function ProductDetail({ slug }: ProductDetailProps) {
               <button
                 type="button"
                 onClick={() => setInquiryOpen(false)}
-                className="font-matter text-sm font-semibold text-[#66758f] transition-colors hover:text-[#141c35]"
+                className="font-matter cursor-pointer text-sm font-semibold text-[#66758f] transition-colors hover:text-[#141c35]"
               >
-                Close
+                <X />
               </button>
             </div>
 

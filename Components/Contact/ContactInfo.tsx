@@ -2,37 +2,44 @@ import { Mail, Phone, MapPin, Clock } from "lucide-react";
 
 export default function ContactInfo() {
   return (
-    <div className="bg-white  p-8 shadow-sm h-fit lg:sticky lg:top-8">
-      <h2 className="text-2xl font-medium mb-8">Contact Information</h2>
+    <div className="h-fit border border-[#ded8ce] bg-white p-6 sm:p-8 lg:sticky lg:top-28">
+      <div className="text-center">
+        <h2 className="font-theseasons text-4xl leading-none text-[#141c35] sm:text-5xl">
+          Contact information
+        </h2>
+        <p className="mx-auto mt-4 max-w-lg font-matter text-sm leading-7 text-[#6c6c74] sm:text-base">
+          Reach the team directly for support, product questions, and business inquiries.
+        </p>
+      </div>
 
-      <div className="space-y-6">
+      <div className="mt-8 space-y-5">
         <div className="flex items-start gap-4">
-          <div className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center shrink-0">
-            <Mail className="w-5 h-5 text-gray-700" />
+          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#f4efe8]">
+            <Mail className="h-5 w-5 text-[#1d2c63]" />
           </div>
           <div>
-            <h3 className="font-medium text-gray-900 mb-1">Email</h3>
-            <p className="text-gray-600">support@kancosmetics.com</p>
+            <h3 className="mb-1 font-matter text-sm uppercase tracking-[0.16em] text-[#8f857d]">Email</h3>
+            <p className="font-matter text-base text-[#141c35]">support@kancosmetics.com</p>
           </div>
         </div>
 
         <div className="flex items-start gap-4">
-          <div className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center shrink-0">
-            <Phone className="w-5 h-5 text-gray-700" />
+          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#f4efe8]">
+            <Phone className="h-5 w-5 text-[#1d2c63]" />
           </div>
           <div>
-            <h3 className="font-medium text-gray-900 mb-1">Phone</h3>
-            <p className="text-gray-600">+977 01-410458</p>
+            <h3 className="mb-1 font-matter text-sm uppercase tracking-[0.16em] text-[#8f857d]">Phone</h3>
+            <p className="font-matter text-base text-[#141c35]">+977 01-410458</p>
           </div>
         </div>
 
         <div className="flex items-start gap-4">
-          <div className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center shrink-0">
-            <MapPin className="w-5 h-5 text-gray-700" />
+          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#f4efe8]">
+            <MapPin className="h-5 w-5 text-[#1d2c63]" />
           </div>
           <div>
-            <h3 className="font-medium text-gray-900 mb-1">Address</h3>
-            <p className="text-gray-600">
+            <h3 className="mb-1 font-matter text-sm uppercase tracking-[0.16em] text-[#8f857d]">Address</h3>
+            <p className="font-matter text-base text-[#141c35]">
               Nepal,
               <br />
               Kathmandu-10
@@ -41,12 +48,12 @@ export default function ContactInfo() {
         </div>
 
         <div className="flex items-start gap-4">
-          <div className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center shrink-0">
-            <Clock className="w-5 h-5 text-gray-700" />
+          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#f4efe8]">
+            <Clock className="h-5 w-5 text-[#1d2c63]" />
           </div>
           <div>
-            <h3 className="font-medium text-gray-900 mb-1">Business Hours</h3>
-            <p className="text-gray-600">
+            <h3 className="mb-1 font-matter text-sm uppercase tracking-[0.16em] text-[#8f857d]">Business Hours</h3>
+            <p className="font-matter text-base text-[#141c35]">
               Mon - Fri: 9am - 6pm
               <br />
               Sat - Sun: 10am - 4pm
