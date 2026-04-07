@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { Facebook, Instagram } from "lucide-react";
-import { Button } from "@/Components/ui/button";
+import PremiumButton from "@/Components/ui/ArrowBtn";
 import { PageContainer, SectionHeading } from "@/Components/ui/design-system";
 
 const footerGroups = [
@@ -95,14 +95,12 @@ const Footer = () => {
             placeholder="Enter your email"
             className="h-14 flex-1 border border-kan-line-strong bg-white px-5 font-matter text-lg text-kan-heading outline-none transition-colors placeholder:text-kan-copy-muted focus:border-kan-brand"
           />
-          <Button
+          <PremiumButton
+            text="Subscribe"
             type="submit"
-            variant="kanPrimary"
-            size="kan"
-            className="h-14 rounded-none px-8 text-lg sm:min-w-37"
-          >
-            Subscribe
-          </Button>
+            showDots={false}
+            className="h-14 rounded-none px-8 text-sm tracking-[0.18em]! sm:min-w-37 [--btn-bg:#1d2c63] [--btn-fill:#ffffff] [--btn-text:#ffffff] [--btn-hover-text:#1d2c63]"
+          />
         </form>
       </PageContainer>
 
@@ -119,7 +117,7 @@ const Footer = () => {
                     <Link
                       key={link.label}
                       href={link.href}
-                      className="font-matter text-[1rem] text-kan-brand transition-colors hover:text-kan-brand-accent"
+                      className="font-matter text-[1rem] text-kan-brand transition-colors hover:text-kan-brand/80"
                     >
                       {link.label}
                     </Link>

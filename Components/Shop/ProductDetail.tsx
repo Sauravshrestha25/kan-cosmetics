@@ -7,6 +7,7 @@ import { Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import ProductCard from "./ProductCard";
+import PremiumButton from "@/Components/ui/ArrowBtn";
 import RatingStars from "./RatingStars";
 import {
   formatNpr,
@@ -89,6 +90,7 @@ export default function ProductDetail({ slug }: ProductDetailProps) {
                       : selectedImage - 1,
                   )
                 }
+                aria-label="Show previous product image"
                 className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white border border-[#d9d7d1] flex items-center justify-center hover:bg-[#2b3962] hover:text-white transition-colors z-10"
               >
                 <ChevronLeft className="w-5 h-5" />
@@ -104,6 +106,7 @@ export default function ProductDetail({ slug }: ProductDetailProps) {
                 onClick={() =>
                   setSelectedImage((selectedImage + 1) % product.images.length)
                 }
+                aria-label="Show next product image"
                 className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white border border-[#d9d7d1] flex items-center justify-center hover:bg-[#2b3962] hover:text-white transition-colors z-10"
               >
                 <ChevronRight className="w-5 h-5" />
@@ -116,6 +119,7 @@ export default function ProductDetail({ slug }: ProductDetailProps) {
                 <button
                   key={index}
                   onClick={() => setSelectedImage(index)}
+                  aria-label={`Show product image ${index + 1}`}
                   className={`relative aspect-square border-2 ${
                     selectedImage === index
                       ? "border-[#2b3962]"
@@ -195,6 +199,7 @@ export default function ProductDetail({ slug }: ProductDetailProps) {
                 <div className="inline-flex items-center border border-[#d9d7d1]">
                   <button
                     onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                    aria-label="Decrease quantity"
                     className="flex h-10 w-10 items-center justify-center transition-colors hover:bg-zinc-100"
                   >
                     <Minus className="w-4 h-4" />
@@ -204,6 +209,7 @@ export default function ProductDetail({ slug }: ProductDetailProps) {
                   </span>
                   <button
                     onClick={() => setQuantity(quantity + 1)}
+                    aria-label="Increase quantity"
                     className="flex h-10 w-10 items-center justify-center transition-colors hover:bg-zinc-100"
                   >
                     <Plus className="w-4 h-4" />
@@ -217,8 +223,8 @@ export default function ProductDetail({ slug }: ProductDetailProps) {
               </div>
 
               <div className="flex flex-wrap items-stretch gap-4">
-                <button
-                  type="button"
+                <PremiumButton
+                  text="Add To Cart"
                   onClick={() => {
                     const size = selectedSize || product.sizes[0];
                     addToCart(product, {
@@ -240,17 +246,18 @@ export default function ProductDetail({ slug }: ProductDetailProps) {
                       ),
                     });
                   }}
-                  className="min-w-50 flex-1 bg-[#2b3962] px-8 py-3 font-matter font-semibold text-white transition-colors hover:bg-[#1f2d4d]"
-                >
-                  <span className="inline-flex items-center justify-center gap-2">
-                    <span>Add To Cart</span>
-                    {cartQuantity > 0 ? (
-                      <span className="inline-flex min-h-5 min-w-5 items-center justify-center rounded-full bg-white px-1 text-[10px] font-bold text-[#1d2c63]">
-                        {cartQuantity}
-                      </span>
-                    ) : null}
-                  </span>
-                </button>
+                  showDots={false}
+                  endSlot={
+                    <span className="inline-flex items-center">
+                      {cartQuantity > 0 ? (
+                        <span className="inline-flex min-h-5 min-w-5 items-center justify-center rounded-full bg-white px-1 text-[10px] font-bold text-[#1d2c63] transition-colors duration-300 group-hover/premium-btn:bg-[#2b3962] group-hover/premium-btn:text-white">
+                          {cartQuantity}
+                        </span>
+                      ) : null}
+                    </span>
+                  }
+                  className="min-w-50 flex-1 justify-center whitespace-nowrap rounded-none border-[#2b3962] px-8 py-3 text-xs tracking-[0.16em]! [--btn-bg:#2b3962] [--btn-fill:#ffffff] [--btn-text:#ffffff] [--btn-hover-text:#2b3962]"
+                />
 
                 <button
                   type="button"
@@ -300,16 +307,28 @@ export default function ProductDetail({ slug }: ProductDetailProps) {
               <span className="font-matter font-semibold text-[#141c35]">
                 Share:
               </span>
-              <button className="w-9 h-9 border border-[#d9d7d1] flex items-center justify-center hover:bg-[#2b3962] hover:text-white hover:border-[#2b3962] transition-colors">
+              <button
+                aria-label="Share on Facebook"
+                className="w-11 h-11 border border-[#d9d7d1] flex items-center justify-center hover:bg-[#2b3962] hover:text-white hover:border-[#2b3962] transition-colors"
+              >
                 <Facebook className="w-4 h-4" />
               </button>
-              <button className="w-9 h-9 border border-[#d9d7d1] flex items-center justify-center hover:bg-[#2b3962] hover:text-white hover:border-[#2b3962] transition-colors">
+              <button
+                aria-label="Share on Twitter"
+                className="w-11 h-11 border border-[#d9d7d1] flex items-center justify-center hover:bg-[#2b3962] hover:text-white hover:border-[#2b3962] transition-colors"
+              >
                 <Twitter className="w-4 h-4" />
               </button>
-              <button className="w-9 h-9 border border-[#d9d7d1] flex items-center justify-center hover:bg-[#2b3962] hover:text-white hover:border-[#2b3962] transition-colors">
+              <button
+                aria-label="Share on Instagram"
+                className="w-11 h-11 border border-[#d9d7d1] flex items-center justify-center hover:bg-[#2b3962] hover:text-white hover:border-[#2b3962] transition-colors"
+              >
                 <Instagram className="w-4 h-4" />
               </button>
-              <button className="w-9 h-9 border border-[#d9d7d1] flex items-center justify-center hover:bg-[#2b3962] hover:text-white hover:border-[#2b3962] transition-colors">
+              <button
+                aria-label="Share on LinkedIn"
+                className="w-11 h-11 border border-[#d9d7d1] flex items-center justify-center hover:bg-[#2b3962] hover:text-white hover:border-[#2b3962] transition-colors"
+              >
                 <Linkedin className="w-4 h-4" />
               </button>
             </div>

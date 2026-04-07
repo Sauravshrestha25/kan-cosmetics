@@ -112,6 +112,47 @@ export const updatePassword = (email: string, password: string) => {
   return { ok: true as const, user: updatedUser };
 };
 
+export const updateUserProfile = (currentEmail: string, profile: {
+  fullName: string;
+  email: string;
+}) => {
+  const normalizedCurrentEmail = currentEmail.trim().toLowerCase();
+  const normalizedNextEmail = profile.email.trim().toLowerCase();
+  const nextFullName = profile.fullName.trim();
+  const users = getStoredUsers();
+  const userIndex = users.findIndex(
+    (entry) => entry.email.toLowerCase() === normalizedCurrentEmail,
+  );
+
+  if (userIndex === -1) {
+    return { ok: false as const, message: "We couldn't find that account." };
+  }
+
+  const emailTaken = users.some(
+    (entry, index) =>
+      index !== userIndex && entry.email.toLowerCase() === normalizedNextEmail,
+  );
+
+  if (emailTaken) {
+    return { ok: false as const, message: "That email is already in use." };
+  }
+
+  const updatedUser: AuthUser = {
+    ...users[userIndex],
+    fullName: nextFullName,
+    email: normalizedNextEmail,
+  };
+
+  const nextUsers = [...users];
+  nextUsers[userIndex] = updatedUser;
+
+  writeJson(USERS_KEY, nextUsers);
+  writeJson(SESSION_KEY, updatedUser);
+  emitAuthChange();
+
+  return { ok: true as const, user: updatedUser };
+};
+
 export const socialLogin = (provider: string) => {
   const normalizedProvider = provider.toLowerCase();
   const email = `${normalizedProvider}@kan-demo.com`;

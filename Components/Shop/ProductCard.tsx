@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { formatNpr, Product } from "@/lib/products";
-import { Button } from "@/Components/ui/button";
+import PremiumButton from "@/Components/ui/ArrowBtn";
 import RatingStars from "./RatingStars";
 import { addToCart, CART_EVENT, getProductCartQuantity } from "@/lib/cart";
 import { toast } from "sonner";
@@ -37,7 +37,8 @@ export default function ProductCard({ product }: ProductCardProps) {
             src={product.image}
             alt={product.name}
             fill
-            sizes="(min-width: 1024px) 22rem, (min-width: 768px) 33vw, 100vw"
+            sizes="(min-width: 1280px) 180px, (min-width: 1024px) 16vw, (min-width: 768px) 24vw, 50vw"
+            quality={70}
             className="object-contain p-4 transition-transform duration-500 group-hover:scale-[1.03]"
           />
         </div>
@@ -72,16 +73,14 @@ export default function ProductCard({ product }: ProductCardProps) {
       </Link>
 
       <div className="grid grid-cols-2 gap-3 border-t border-[#ece8e1] p-3">
-        <Link
+        <PremiumButton
+          text="View Product"
           href={`/collection/${product.slug}`}
-          className="inline-flex items-center justify-center border border-[#d9d7d1] px-4 py-3 font-matter text-sm font-semibold tracking-[0.02em] text-[#1d2c63] transition-colors hover:bg-[#f7f9fc]"
-        >
-          View Product
-        </Link>
-        <Button
-          type="button"
-          variant="kanPrimary"
-          size="kan"
+          showDots={false}
+          className="w-full justify-center whitespace-nowrap rounded-none border-[#d9d7d1] px-4 py-3 text-xs !tracking-[0.16em] [--btn-bg:#ffffff] [--btn-fill:#1d2c63] [--btn-text:#1d2c63] [--btn-hover-text:#ffffff]"
+        />
+        <PremiumButton
+          text="Add To Cart"
           onClick={() => {
             const size = product.sizes[0];
             addToCart(product, { size });
@@ -100,17 +99,18 @@ export default function ProductCard({ product }: ProductCardProps) {
               ),
             });
           }}
-          className="h-full rounded-none px-4 text-xs uppercase tracking-[0.16em]"
-        >
-          <span className="inline-flex items-center justify-center gap-2">
-            <span>Add To Cart</span>
-            {cartQuantity > 0 ? (
-              <span className="inline-flex min-h-5 min-w-5 items-center justify-center rounded-full bg-white px-1 text-[10px] font-bold text-[#1d2c63]">
-                {cartQuantity}
-              </span>
-            ) : null}
-          </span>
-        </Button>
+          showDots={false}
+          endSlot={
+            <span className="inline-flex items-center">
+              {cartQuantity > 0 ? (
+                <span className="inline-flex min-h-5 min-w-5 items-center justify-center rounded-full bg-white px-1 text-[10px] font-bold text-[#1d2c63] transition-colors duration-300 group-hover/premium-btn:bg-[#1d2c63] group-hover/premium-btn:text-white">
+                  {cartQuantity}
+                </span>
+              ) : null}
+            </span>
+          }
+          className="w-full justify-center whitespace-nowrap rounded-none border-[#1d2c63] px-4 py-3 text-xs !tracking-[0.16em] [--btn-bg:#1d2c63] [--btn-fill:#ffffff] [--btn-text:#ffffff] [--btn-hover-text:#1d2c63]"
+        />
       </div>
     </div>
   );

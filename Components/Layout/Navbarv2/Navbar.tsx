@@ -47,12 +47,15 @@ const accountLinks = [
 
 const Navbar = () => {
   const pathname = usePathname();
+  const isHomePage = pathname === "/";
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
+  const [isScrolled, setIsScrolled] = useState(false);
   const [sessionUser, setSessionUser] = useState<AuthUser | null>(null);
   const [cartCount, setCartCount] = useState(0);
   const [accountOpen, setAccountOpen] = useState(false);
   const accountMenuRef = useRef<HTMLDivElement | null>(null);
+  const isTransparentHome = isHomePage && !isScrolled && !mobileOpen;
 
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
@@ -93,6 +96,7 @@ const Navbar = () => {
 
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
+      setIsScrolled(currentScrollY > 12);
 
       if (currentScrollY <= 12) {
         setIsVisible(true);
@@ -106,6 +110,7 @@ const Navbar = () => {
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -146,51 +151,62 @@ const Navbar = () => {
     <>
       <nav
         className={[
-          "fixed inset-x-0 top-0 z-50 border-b border-slate-200/80 bg-white/95 backdrop-blur transition-transform duration-300 ease-out",
+          "fixed inset-x-0 top-0 z-50 transition-transform duration-300 ease-out",
+          isTransparentHome
+            ? "border-b border-transparent bg-transparent"
+            : "border-b border-slate-200/80 bg-white/95 backdrop-blur",
           isVisible || mobileOpen ? "translate-y-0" : "-translate-y-full",
         ].join(" ")}
       >
-        <PageContainer className="flex h-19 items-center justify-between">
-          <div className="flex items-center lg:gap-8 xl:gap-10">
+        <PageContainer className="relative flex h-19 items-center justify-between">
+          <div className="flex items-center">
             <Link
               href="/"
               className="shrink-0"
               aria-label="KAN Korea & Nepal home"
             >
               <Image
-                src="/images/Logo/Logo_Latest.svg"
+                src={
+                  isTransparentHome
+                    ? "/images/Logo/Logo_Light.svg"
+                    : "/images/Logo/Logo_Latest.svg"
+                }
                 alt="KAN Korea & Nepal"
                 width={180}
                 height={64}
-                className="h-10 w-auto md:h-12"
+                className="h-6 w-auto md:h-8"
                 priority
               />
             </Link>
+          </div>
 
-            <div className="hidden items-center lg:flex">
-              <div className="flex items-center gap-8 xl:gap-10">
-                {navLinks.map((item) => {
-                  const active = isActive(item.href);
+          <div className="absolute left-1/2 hidden -translate-x-1/2 items-center lg:flex">
+            <div className="flex items-center gap-8 xl:gap-10">
+              {navLinks.map((item) => {
+                const active = isActive(item.href);
 
-                  return (
-                    <Link
-                      key={item.label}
-                      href={item.href}
-                      className={[
-                        "font-matter text-[17px] tracking-[-0.02em] transition-colors",
-                        active
+                return (
+                  <Link
+                    key={item.label}
+                    href={item.href}
+                    className={[
+                      "font-matter text-[17px] tracking-[-0.02em] transition-colors",
+                      isTransparentHome
+                        ? active
+                          ? "font-semibold text-white"
+                          : "text-white hover:text-white/75"
+                        : active
                           ? "font-semibold text-kan-brand"
                           : "text-[#1f2e5d] hover:text-kan-brand-accent",
-                        item.accent && !active
-                          ? "bg-[linear-gradient(90deg,#111111_15%,#111111_15%,var(--kan-brand-accent)_100%)] bg-clip-text text-transparent"
-                          : "",
-                      ].join(" ")}
-                    >
-                      {item.label}
-                    </Link>
-                  );
-                })}
-              </div>
+                      item.accent && !active && !isTransparentHome
+                        ? "bg-[linear-gradient(90deg,#111111_15%,#111111_15%,var(--kan-brand-accent)_100%)] bg-clip-text text-transparent"
+                        : "",
+                    ].join(" ")}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
             </div>
           </div>
 
@@ -203,7 +219,12 @@ const Navbar = () => {
                 <Link
                   key={item.label}
                   href={item.href}
-                  className="relative flex items-center font-matter text-[17px] text-[#6d6aa8] transition-colors hover:text-kan-brand"
+                  className={[
+                    "relative flex items-center font-matter text-[17px] transition-colors",
+                    isTransparentHome
+                      ? "text-white hover:text-white/75"
+                      : "text-[#6d6aa8] hover:text-kan-brand",
+                  ].join(" ")}
                 >
                   <Icon className="h-4.5 w-4.5 stroke-[1.9]" />
                   {isCart && cartCount > 0 ? (
@@ -221,7 +242,12 @@ const Navbar = () => {
                   <button
                     type="button"
                     onClick={() => setAccountOpen((prev) => !prev)}
-                    className="inline-flex h-10 cursor-pointer items-center gap-2 border border-kan-brand bg-kan-brand px-3 font-matter text-[15px] font-semibold text-white transition-colors hover:bg-kan-brand-strong"
+                    className={[
+                      "inline-flex h-10 cursor-pointer items-center gap-2 px-3 font-matter text-[15px] font-semibold transition-colors",
+                      isTransparentHome
+                        ? "border border-white/60 bg-white/10 text-white hover:bg-white/20"
+                        : "border border-kan-brand bg-kan-brand text-white hover:bg-kan-brand-strong",
+                    ].join(" ")}
                     aria-label="Open account menu"
                     aria-expanded={accountOpen}
                     aria-haspopup="menu"
@@ -238,7 +264,7 @@ const Navbar = () => {
                   <div
                     className={[
                       "absolute right-0 top-[calc(100%+12px)] w-62 border border-[#dbe2ee] bg-white shadow-[0_22px_60px_rgba(16,23,43,0.12)] transition-all duration-200",
-                      
+
                       accountOpen
                         ? "pointer-events-auto translate-y-0 opacity-100"
                         : "pointer-events-none -translate-y-1 opacity-0",
@@ -297,7 +323,12 @@ const Navbar = () => {
                   asChild
                   variant="kanSecondary"
                   size="kan"
-                  className="h-10 w-10 rounded-none border-[#d7dfeb] px-0"
+                  className={[
+                    "h-10 w-10 rounded-none border-transparent bg-transparent px-0 shadow-none",
+                    isTransparentHome
+                      ? "text-white hover:bg-transparent hover:text-white/75"
+                      : "text-kan-brand hover:bg-transparent hover:text-kan-brand-strong",
+                  ].join(" ")}
                 >
                   <Link href="/login" aria-label="Login">
                     <User className="h-4.5 w-4.5 stroke-2 cursor-pointer" />
@@ -316,7 +347,10 @@ const Navbar = () => {
                 <Link
                   key={item.label}
                   href={item.href}
-                  className="relative inline-flex items-center justify-center p-2 text-kan-brand"
+                  className={[
+                    "relative inline-flex items-center justify-center p-2",
+                    isTransparentHome ? "text-white" : "text-kan-brand",
+                  ].join(" ")}
                   aria-label={item.label}
                 >
                   <Icon className="h-5 w-5 stroke-[1.8]" />

@@ -228,6 +228,7 @@ export const ImageComparisonSlider = React.forwardRef<
               isDragging && "scale-105"
             )}
             role="slider"
+            aria-label="Drag to compare before and after images"
             aria-valuenow={sliderPosition}
             aria-valuemin={0}
             aria-valuemax={100}

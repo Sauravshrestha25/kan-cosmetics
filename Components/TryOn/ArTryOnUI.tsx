@@ -125,21 +125,6 @@ export default function ArTryOnUI({
               ) : null}
             </div>
 
-            {!isMobile ? (
-              <div className="overflow-hidden border border-[#dce1ea] bg-[#f2ece2]">
-                <div
-                  className="h-full min-h-116 bg-cover bg-center p-4 md:min-h-144"
-                  style={{ backgroundImage: "url('/images/try-on-wood.png')" }}
-                >
-                  <div
-                    className="h-full w-full bg-cover bg-center"
-                    style={{
-                      backgroundImage: "url('/images/try-on-model.jpeg')",
-                    }}
-                  />
-                </div>
-              </div>
-            ) : null}
           </div>
         </div>
 

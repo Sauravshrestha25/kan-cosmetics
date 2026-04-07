@@ -25,6 +25,7 @@ interface ShopFiltersProps {
 
 export default function ShopFilters({ filters, onChange }: ShopFiltersProps) {
   const priceTrackRef = useRef<HTMLDivElement>(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const toggleFilter = <T extends string>(
     value: string,
@@ -50,10 +51,23 @@ export default function ShopFilters({ filters, onChange }: ShopFiltersProps) {
     onChange({ ...filters, priceRange: [MIN_PRICE, nextValue] });
   };
 
+  const handleFilterWheel = (event: React.WheelEvent<HTMLDivElement>) => {
+    const container = scrollContainerRef.current;
+
+    if (!container || container.scrollHeight <= container.clientHeight) return;
+
+    container.scrollTop += event.deltaY;
+    event.preventDefault();
+  };
+
   return (
     <aside className="w-full lg:w-72 shrink-0">
       <div className="lg:sticky lg:top-24">
-        <div className="border border-[#d9d7d1] bg-white p-6 lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto lg:overscroll-contain">
+        <div
+          ref={scrollContainerRef}
+          onWheel={handleFilterWheel}
+          className="border border-[#d9d7d1] bg-white p-6 lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto lg:overscroll-contain"
+        >
           <h2 className="font-matter font-bold text-[#141c35] text-lg mb-6">
             Filter Options
           </h2>

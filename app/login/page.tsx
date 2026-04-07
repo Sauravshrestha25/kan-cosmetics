@@ -2,65 +2,114 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Eye, Lock, Mail } from "lucide-react";
+import { Eye, EyeOff, Lock, Mail } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState, useTransition } from "react";
 import { getSessionUser, loginUser, socialLogin } from "@/lib/auth";
 import { Button } from "@/Components/ui/button";
-import {
-  DividerLabel,
-  PageContainer,
-  SectionHeading,
-} from "@/Components/ui/design-system";
+import { DividerLabel, PageContainer } from "@/Components/ui/design-system";
+
+const REMEMBER_EMAIL_KEY = "kan-auth-remembered-email";
+
+const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export default function LoginPage() {
   const router = useRouter();
+  const [isPending, startTransition] = useTransition();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [message, setMessage] = useState("");
-
   useEffect(() => {
     if (getSessionUser()) {
       router.replace("/account");
+      return;
+    }
+
+    const rememberedEmail = window.localStorage.getItem(REMEMBER_EMAIL_KEY);
+    const remembered = window.localStorage.getItem("kan-auth-remember-me");
+    if (remembered === "true") {
+      setRememberMe(true);
+    }
+
+    if (rememberedEmail) {
+      setEmail(rememberedEmail);
     }
   }, [router]);
 
+  const emailIsValid = useMemo(() => {
+    if (!email) return true;
+    return emailPattern.test(email.trim());
+  }, [email]);
+
+  const redirectAfterLogin = () => {
+    const shouldRedirectToCheckout =
+      sessionStorage.getItem("checkout-redirect") === "true";
+
+    if (shouldRedirectToCheckout) {
+      sessionStorage.removeItem("checkout-redirect");
+      startTransition(() => router.push("/checkout"));
+      return;
+    }
+
+    startTransition(() => router.push("/account"));
+  };
+
+  const persistRememberedEmail = (nextEmail: string) => {
+    if (rememberMe) {
+      window.localStorage.setItem("kan-auth-remember-me", "true");
+      window.localStorage.setItem(REMEMBER_EMAIL_KEY, nextEmail.trim());
+      return;
+    }
+
+    window.localStorage.removeItem("kan-auth-remember-me");
+    window.localStorage.removeItem(REMEMBER_EMAIL_KEY);
+  };
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const result = loginUser(email, password);
+    setMessage("");
+
+    const normalizedEmail = email.trim().toLowerCase();
+
+    if (!emailPattern.test(normalizedEmail)) {
+      setMessage("Enter a valid email address to continue.");
+      return;
+    }
+
+    if (!password) {
+      setMessage("Enter your password to continue.");
+      return;
+    }
+
+    const result = loginUser(normalizedEmail, password);
 
     if (!result.ok) {
       setMessage(result.message);
       return;
     }
 
-    if (rememberMe) {
-      window.localStorage.setItem("kan-auth-remember-me", "true");
-    } else {
-      window.localStorage.removeItem("kan-auth-remember-me");
-    }
+    persistRememberedEmail(normalizedEmail);
+    redirectAfterLogin();
+  };
 
-    // Check if user was trying to checkout
-    const shouldRedirectToCheckout =
-      sessionStorage.getItem("checkout-redirect");
-    if (shouldRedirectToCheckout) {
-      sessionStorage.removeItem("checkout-redirect");
-      router.push("/checkout");
-    } else {
-      router.push("/account");
-    }
+  const handleGoogleLogin = () => {
+    setMessage("");
+    socialLogin("Google");
+    persistRememberedEmail("google@kan-demo.com");
+    redirectAfterLogin();
   };
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-white pt-24 pb-16">
-      <div className="pointer-events-none absolute left-[8%] top-28 h-36 w-36 rounded-full bg-[#edf2fb] blur-3xl" />
-      <div className="pointer-events-none absolute right-[10%] top-20 h-32 w-32 rounded-full bg-[#f7ece8] blur-3xl" />
+    <main className="relative h-screen overflow-hidden bg-[#fcfaf7] pt-24">
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-56 bg-[radial-gradient(circle_at_top_left,_rgba(29,44,99,0.06),_transparent_42%),radial-gradient(circle_at_top_right,_rgba(216,178,153,0.12),_transparent_34%)]" />
+      <div className="pointer-events-none absolute left-[8%] top-28 h-32 w-32 rounded-full bg-[#edf2fb] blur-3xl" />
+      <div className="pointer-events-none absolute right-[10%] top-20 h-28 w-28 rounded-full bg-[#f7ece8] blur-3xl" />
 
-      <PageContainer className="max-w-[1100px]">
-        <div className="grid min-h-168 overflow-hidden border border-[#e6eaf2] bg-white shadow-[0_30px_80px_rgba(16,23,43,0.06)] lg:grid-cols-[0.82fr_1fr]">
-          <aside className="relative hidden min-h-168 bg-[#f7f9fc] lg:block">
+      <PageContainer className="flex h-full max-w-6xl items-center">
+        <div className="grid h-full max-h-[calc(100vh-8rem)] w-full overflow-hidden border border-[#e7e1d8] bg-white shadow-[0_20px_60px_rgba(16,23,43,0.07)] lg:grid-cols-[0.95fr_1.05fr]">
+          <aside className="relative hidden h-full overflow-hidden bg-[#eef2f8] lg:block">
             <Image
               src="/images/model.jpg"
               alt="KAN beauty campaign"
@@ -68,100 +117,123 @@ export default function LoginPage() {
               priority
               className="object-cover"
             />
-            <div className="absolute inset-0 bg-linear-to-t from-[#10172b]/70 via-[#10172b]/10 to-transparent" />
-            <div className="absolute inset-x-0 bottom-0 p-10">
-              <p className="font-matter text-xs uppercase tracking-[0.24em] text-white/75">
-                KAN Member Access
-              </p>
-              <h2 className="mt-4 max-w-sm font-theseasons text-[clamp(2rem,3vw,3rem)] font-semibold leading-[0.95] tracking-[-0.05em] text-white">
-                Return to your beauty ritual.
-              </h2>
-              <p className="mt-4 max-w-sm font-matter text-base leading-7 text-white/80">
-                Sign in to continue browsing collections, trying shades, and
-                moving through your account flow.
-              </p>
-            </div>
+            <div className="absolute inset-0 bg-linear-to-br from-[#0f1832]/88 via-[#18254a]/42 to-[#10172b]/10" />
+            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.06)_0%,rgba(255,255,255,0)_20%)]" />
           </aside>
 
-          <section className="flex h-full flex-col p-6 sm:p-8 lg:p-10">
-            <div className="mx-auto flex h-full w-full max-w-124 flex-col">
-              <div className="grid grid-cols-2 items-end gap-8 border-b border-[#e5e7ef]">
-                <div className="border-b-2 border-[#1a2340] pb-4 text-center font-matter text-[clamp(1.2rem,1.8vw,1.55rem)] font-semibold text-[#1a2340]">
-                  Login
+          <section className="relative flex h-full flex-col overflow-hidden bg-[linear-gradient(180deg,#fffefc_0%,#fff9f5_100%)] p-4 sm:p-5 lg:p-6 xl:p-7">
+            <div className="mx-auto flex h-full w-full max-w-120 flex-col overflow-hidden">
+              <div className="flex justify-end border-b border-[#e8e2d8] pb-4">
+                <div className="ml-auto grid grid-cols-2 gap-5 sm:gap-6">
+                  <div className="border-b-2 border-[#1a2340] pb-2.5 text-center font-matter text-base font-semibold text-[#1a2340]">
+                    Login
+                  </div>
+                  <Link
+                    href="/signup"
+                    className="pb-2.5 text-center font-matter text-base font-medium text-[#7a6f68] transition-colors hover:text-[#1a2340]"
+                  >
+                    Sign Up
+                  </Link>
                 </div>
-                <Link
-                  href="/signup"
-                  className="pb-4 text-center font-matter text-[clamp(1.2rem,1.8vw,1.55rem)] font-medium text-[#6b7385] transition-colors hover:text-[#1a2340]"
-                >
-                  Sign Up
-                </Link>
               </div>
 
-              <div className="flex flex-1 flex-col pt-8">
-                <SectionHeading
-                  title="Welcome Back"
-                  description="Enter your credentials to access your account."
-                  titleClassName="font-matter text-[clamp(2.25rem,4vw,3.25rem)]"
-                  descriptionClassName="text-base"
-                />
-
-                <form onSubmit={handleSubmit} className="mt-10 space-y-6">
-                  <div>
-                    <label className="block font-matter text-base font-semibold text-[#33415d]">
-                      Email Address
-                    </label>
-                    <div className="mt-3 flex h-14 items-center gap-3 border border-[#dce1ea] bg-[#fbfcfe] px-4 transition-colors focus-within:border-[#1d2c63] focus-within:bg-white">
-                      <Mail className="h-5 w-5 text-[#a8afbd]" />
-                      <input
-                        type="email"
-                        value={email}
-                        onChange={(event) => setEmail(event.target.value)}
-                        placeholder="john@example.com"
-                        className="h-full flex-1 bg-transparent font-matter text-base text-[#10172b] outline-none placeholder:text-[#a8afbd]"
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="block font-matter text-base font-semibold text-[#33415d]">
-                      Password
-                    </label>
-                    <div className="mt-3 flex h-14 items-center gap-3 border border-[#dce1ea] bg-[#fbfcfe] px-4 transition-colors focus-within:border-[#1d2c63] focus-within:bg-white">
-                      <Lock className="h-5 w-5 text-[#a8afbd]" />
-                      <input
-                        type={showPassword ? "text" : "password"}
-                        value={password}
-                        onChange={(event) => setPassword(event.target.value)}
-                        placeholder="••••••••"
-                        className="h-full flex-1 bg-transparent font-matter text-base text-[#10172b] outline-none placeholder:text-[#a8afbd]"
-                        required
-                      />
-                      <button
-                        type="button"
-                        onClick={() => setShowPassword((value) => !value)}
-                        className="cursor-pointer text-[#a8afbd] transition-colors hover:text-[#10172b]"
+              <div className="flex flex-1 flex-col justify-center overflow-y-auto py-4 lg:py-5">
+                <form onSubmit={handleSubmit} className="space-y-5">
+                  <div className="grid gap-3.5">
+                    <div>
+                      <label
+                        htmlFor="email"
+                        className="block font-matter text-[12px] font-semibold uppercase tracking-[0.1em] text-[#33415d]"
                       >
-                        <Eye className="h-5 w-5" />
-                      </button>
+                        Email Address
+                      </label>
+                      <div className="mt-2.5 flex h-12 items-center gap-3 border border-[#d9d2c7] bg-white px-3.5 transition-colors focus-within:border-[#1d2c63] focus-within:ring-2 focus-within:ring-[#1d2c63]/10">
+                        <Mail className="h-4.5 w-4.5 text-[#a08f81]" />
+                        <input
+                          id="email"
+                          type="email"
+                          autoComplete="email"
+                          inputMode="email"
+                          value={email}
+                          onChange={(event) => setEmail(event.target.value)}
+                          placeholder="john@example.com"
+                          aria-invalid={!emailIsValid}
+                          className="h-full flex-1 bg-transparent font-matter text-sm text-[#10172b] outline-none placeholder:text-[#b1a69b]"
+                          required
+                        />
+                      </div>
+                      {!emailIsValid ? (
+                        <p className="mt-1.5 font-matter text-xs text-[#b42318]">
+                          Enter a valid email format.
+                        </p>
+                      ) : null}
+                    </div>
+
+                    <div>
+                      <div className="flex items-center justify-between gap-4">
+                        <label
+                          htmlFor="password"
+                          className="block font-matter text-[12px] font-semibold uppercase tracking-[0.1em] text-[#33415d]"
+                        >
+                          Password
+                        </label>
+
+                        <Link
+                          href="/forgot-password"
+                          className="font-matter text-xs font-semibold text-[#1d2c63] transition-colors hover:text-[#10172b]"
+                        >
+                          Forgot password?
+                        </Link>
+                      </div>
+
+                      <div className="mt-2.5 flex h-12 items-center gap-3 border border-[#d9d2c7] bg-white px-3.5 transition-colors focus-within:border-[#1d2c63] focus-within:ring-2 focus-within:ring-[#1d2c63]/10">
+                        <Lock className="h-4.5 w-4.5 text-[#a08f81]" />
+                        <input
+                          id="password"
+                          type={showPassword ? "text" : "password"}
+                          autoComplete="current-password"
+                          value={password}
+                          onChange={(event) => setPassword(event.target.value)}
+                          placeholder="Enter your password"
+                          className="h-full flex-1 bg-transparent font-matter text-sm text-[#10172b] outline-none placeholder:text-[#b1a69b]"
+                          required
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setShowPassword((value) => !value)}
+                          className="inline-flex h-8 w-8 items-center justify-center text-[#7a6f68] transition-colors hover:text-[#10172b] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1d2c63]"
+                          aria-label={
+                            showPassword ? "Hide password" : "Show password"
+                          }
+                        >
+                          {showPassword ? (
+                            <EyeOff className="h-4.5 w-4.5" />
+                          ) : (
+                            <Eye className="h-4.5 w-4.5" />
+                          )}
+                        </button>
+                      </div>
                     </div>
                   </div>
 
-                  <div className="flex flex-col gap-4 font-matter text-sm text-[#33415d] sm:flex-row sm:items-center sm:justify-between">
-                    <label className="inline-flex items-center gap-3">
+                  <div className="flex items-center justify-between gap-4">
+                    <label className="inline-flex items-center gap-3 font-matter text-sm text-[#33415d]">
                       <input
                         type="checkbox"
                         checked={rememberMe}
                         onChange={(event) =>
                           setRememberMe(event.target.checked)
                         }
-                        className="h-4 w-4 accent-[#10172b]"
+                        className="h-3.5 w-3.5 rounded-none border-[#c8beb2] text-[#10172b] focus:ring-[#1d2c63]"
                       />
-                      <span>Remember me</span>
+                      <span className="text-xs sm:text-sm">
+                        Remember this email
+                      </span>
                     </label>
 
                     <Link
                       href="/forgot-password"
-                      className="font-semibold transition-colors hover:text-[#1d2c63]"
+                      className="font-matter text-xs font-semibold text-[#1d2c63] transition-colors hover:text-[#10172b]"
                     >
                       Forgot password?
                     </Link>
@@ -177,37 +249,28 @@ export default function LoginPage() {
                     type="submit"
                     variant="kanPrimary"
                     size="kan"
-                    className="h-14 w-full rounded-none text-base"
+                    disabled={isPending}
+                    className="h-12 w-full rounded-none text-sm"
                   >
-                    Login
+                    {isPending ? "Signing you in..." : "Sign In"}
                   </Button>
                 </form>
 
-                <div className="mt-8 pt-2">
+                <div className="mt-5 pt-1">
                   <DividerLabel
                     label="Or continue with"
-                    className="justify-center"
+                    className="justify-center text-[#b3a79a]"
                   />
                 </div>
 
-                <div className="mt-6">
+                <div className="mt-3">
                   <Button
                     type="button"
                     variant="kanSecondary"
                     size="kan"
-                    onClick={() => {
-                      socialLogin("Google");
-                      // Check if user was trying to checkout
-                      const shouldRedirectToCheckout =
-                        sessionStorage.getItem("checkout-redirect");
-                      if (shouldRedirectToCheckout) {
-                        sessionStorage.removeItem("checkout-redirect");
-                        router.push("/checkout");
-                      } else {
-                        router.push("/account");
-                      }
-                    }}
-                    className="h-14 w-full rounded-none text-base"
+                    disabled={isPending}
+                    onClick={handleGoogleLogin}
+                    className="h-12 w-full rounded-none border-[#d9d2c7] bg-white text-sm"
                   >
                     <span className="mr-3 inline-flex h-5 w-5 items-center justify-center">
                       <svg
