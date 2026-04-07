@@ -9,6 +9,7 @@ import Link from "next/link";
 import PremiumButton from "@/Components/ui/ArrowBtn";
 import { PageContainer } from "@/Components/ui/design-system";
 import { ImageComparisonSlider } from "@/Components/Home/ImageCompare/image-comparison-slider-horizontal";
+import Testimonials2 from "@/Components/Home/Benefits/Testimonials2";
 import ProductCard from "@/Components/Shop/ProductCard";
 import { getProductBySlug, type Product } from "@/lib/products";
 
@@ -59,39 +60,39 @@ const essentialsCategories = [
   },
 ];
 
-const routineSteps = [
-  {
-    index: "01",
-    title: "Prep the skin",
-    copy: "Start with primer or mist to improve texture, comfort, and wear before base makeup goes on.",
-  },
-  {
-    index: "02",
-    title: "Build the base",
-    copy: "Apply foundation or cushion coverage in light layers for a smooth, even complexion that still looks like skin.",
-  },
-  {
-    index: "03",
-    title: "Set and define",
-    copy: "Finish with color, powder, or setting spray to keep the look balanced and wearable throughout the day.",
-  },
-];
+// const routineSteps = [
+//   {
+//     index: "01",
+//     title: "Prep the skin",
+//     copy: "Start with primer or mist to improve texture, comfort, and wear before base makeup goes on.",
+//   },
+//   {
+//     index: "02",
+//     title: "Build the base",
+//     copy: "Apply foundation or cushion coverage in light layers for a smooth, even complexion that still looks like skin.",
+//   },
+//   {
+//     index: "03",
+//     title: "Set and define",
+//     copy: "Finish with color, powder, or setting spray to keep the look balanced and wearable throughout the day.",
+//   },
+// ];
 
 const journalCards = [
   {
-    title: "Shop complexion with more control",
-    copy: "Choose base products that even tone, sit smoothly, and stay polished without looking heavy.",
-    href: "/collection/foundation",
+    title: "How to choose a smoother base",
+    copy: "A practical read on picking complexion products that even tone without making the skin look heavy.",
+    href: "/articles",
   },
   {
-    title: "Find a lip product that suits the finish",
-    copy: "Compare classic lipstick, liquid formulas, and adaptive color to match the look you want to wear most.",
-    href: "/collection/lipstick",
+    title: "Finding the right lip finish",
+    copy: "A guide to deciding between lipstick, liquid color, and softer finishes based on how you like to wear makeup.",
+    href: "/articles",
   },
   {
-    title: "Round out the routine with finishing essentials",
-    copy: "Primer, powder, and setting spray are often what make makeup wear better from morning to evening.",
-    href: "/collection",
+    title: "The finishing steps that matter",
+    copy: "A closer look at primers, powders, and setting products that improve comfort, hold, and overall finish.",
+    href: "/articles",
   },
 ];
 
@@ -151,12 +152,8 @@ function FeatureSection({
           </div>
 
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {products.map((product, index) => (
-              <div
-                key={product.id}
-                data-home-reveal
-                style={{ transitionDelay: `${index * 60}ms` }}
-              >
+            {products.map((product) => (
+              <div key={product.id} data-home-reveal>
                 <ProductCard product={product} />
               </div>
             ))}
@@ -181,42 +178,42 @@ export default function HomepageEditorial() {
 
   useGSAP(
     () => {
-      const reveals = gsap.utils.toArray<HTMLElement>("[data-home-reveal]");
       const mediaBlocks = gsap.utils.toArray<HTMLElement>("[data-home-media]");
 
-      reveals.forEach((element) => {
-        gsap.fromTo(
-          element,
-          { autoAlpha: 0, y: 42 },
-          {
+      gsap.set("[data-home-reveal]", { autoAlpha: 0, y: 22 });
+      gsap.set("[data-home-media]", { autoAlpha: 0, y: 18, scale: 0.985 });
+
+      ScrollTrigger.batch("[data-home-reveal]", {
+        start: "top 90%",
+        once: true,
+        onEnter: (elements) => {
+          gsap.to(elements, {
             autoAlpha: 1,
             y: 0,
-            duration: 0.9,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: element,
-              start: "top 85%",
-            },
-          },
-        );
+            duration: 0.65,
+            ease: "power2.out",
+            stagger: 0.08,
+            overwrite: true,
+            clearProps: "transform,opacity,visibility",
+          });
+        },
       });
 
       mediaBlocks.forEach((element) => {
-        gsap.fromTo(
-          element,
-          { autoAlpha: 0.5, scale: 0.94, y: 24 },
-          {
-            autoAlpha: 1,
-            scale: 1,
-            y: 0,
-            duration: 1.1,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: element,
-              start: "top 82%",
-            },
+        gsap.to(element, {
+          autoAlpha: 1,
+          scale: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power2.out",
+          overwrite: true,
+          clearProps: "transform,opacity,visibility",
+          scrollTrigger: {
+            trigger: element,
+            start: "top 88%",
+            once: true,
           },
-        );
+        });
       });
 
       const parallaxBlocks = gsap.utils.toArray<HTMLElement>(
@@ -263,12 +260,11 @@ export default function HomepageEditorial() {
           </div>
 
           <div className="grid gap-5 lg:grid-cols-3">
-            {homepageThreeImageFrames.map((image, index) => (
+            {homepageThreeImageFrames.map((image) => (
               <div
                 key={image}
                 className="overflow-hidden border border-[#ded8ce] bg-white"
                 data-home-reveal
-                style={{ transitionDelay: `${index * 60}ms` }}
               >
                 <div className="relative aspect-5/7 overflow-hidden bg-[#e8dfd5]">
                   <div className="absolute inset-0" data-home-parallax>
@@ -303,13 +299,12 @@ export default function HomepageEditorial() {
           </div>
 
           <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
-            {essentialsCategories.map((category, index) => (
+            {essentialsCategories.map((category) => (
               <Link
                 key={category.title}
                 href={category.href}
                 className="group block overflow-hidden border border-[#ded8ce] bg-white transition-colors duration-300 hover:border-[#1d2c63] hover:shadow-[0_18px_40px_rgba(20,28,53,0.08)]"
                 data-home-reveal
-                style={{ transitionDelay: `${index * 50}ms` }}
               >
                 <div className="relative aspect-square overflow-hidden border-b border-[#ece8e1] bg-white">
                   <Image
@@ -451,19 +446,21 @@ export default function HomepageEditorial() {
           <div className="mb-10 flex flex-col items-center gap-5 text-center">
             <div data-home-reveal>
               <h2 className="max-w-2xl font-theseasons text-4xl leading-none sm:text-5xl lg:text-6xl">
-                Helpful places to start shopping.
+                Read before you build the routine.
               </h2>
+              <p className="mx-auto mt-4 max-w-2xl font-matter text-base leading-8 text-[#6c6c74] sm:text-lg">
+                A few useful reads to help you understand finish, formula, and product choice before you shop.
+              </p>
             </div>
           </div>
 
           <div className="grid gap-5 lg:grid-cols-3">
-            {journalCards.map((card, index) => (
+            {journalCards.map((card) => (
               <Link
                 key={card.title}
                 href={card.href}
                 className="group flex min-h-68 flex-col justify-between border border-[#ded8ce] bg-white p-6 transition-colors duration-300 hover:border-[#1d2c63] hover:bg-[#fcfaf7]"
                 data-home-reveal
-                style={{ transitionDelay: `${index * 50}ms` }}
               >
                 <div>
                   <h3 className="max-w-xs font-theseasons text-3xl leading-none text-[#141c35]">
@@ -474,13 +471,15 @@ export default function HomepageEditorial() {
                   </p>
                 </div>
                 <span className="mt-8 font-matter text-xs uppercase tracking-[0.18em] text-[#1d2c63] transition-transform duration-300 group-hover:translate-x-1">
-                  Read More
+                  Read Article
                 </span>
               </Link>
             ))}
           </div>
         </PageContainer>
       </section>
+
+      <Testimonials2 />
     </div>
   );
 }

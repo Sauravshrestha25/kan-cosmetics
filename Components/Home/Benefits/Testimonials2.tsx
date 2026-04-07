@@ -92,17 +92,13 @@ const Testimonials2 = () => {
   // }
 
   return (
-    <Section className="min-h-screen text-[#2b3962]">
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-36 bg-linear-to-b from-[#f8f7f4] via-white to-transparent" />
-      <div className="pointer-events-none absolute left-[7%] top-20 h-28 w-28 rounded-full bg-[#f7ece8] blur-3xl" />
-      <div className="pointer-events-none absolute right-[8%] bottom-24 h-32 w-32 rounded-full bg-[#edf2fb] blur-3xl" />
-
+    <Section className="min-h-screen bg-white text-[#2b3962]">
       <PageContainer>
         <div className="grid items-center gap-10 lg:grid-cols-[1.02fr_0.98fr] lg:gap-16">
           <div className="order-2 flex flex-col justify-center lg:order-1">
             <SectionHeading
               align="center"
-              eyebrow="Community voices"
+              eyebrow=""
               title={
                 <>
                   Confidence
