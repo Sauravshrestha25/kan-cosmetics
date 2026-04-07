@@ -77,7 +77,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           text="View Product"
           href={`/collection/${product.slug}`}
           showDots={false}
-          className="w-full justify-center whitespace-nowrap rounded-none border-[#d9d7d1] px-4 py-3 text-xs !tracking-[0.16em] [--btn-bg:#ffffff] [--btn-fill:#1d2c63] [--btn-text:#1d2c63] [--btn-hover-text:#ffffff]"
+          className="w-full justify-center whitespace-nowrap rounded-none border-[#d9d7d1] px-4 py-3 text-xs tracking-[0.16em]! [--btn-bg:#ffffff] [--btn-fill:#1d2c63] [--btn-text:#1d2c63] [--btn-hover-text:#ffffff]"
         />
         <PremiumButton
           text="Add To Cart"
@@ -100,16 +100,17 @@ export default function ProductCard({ product }: ProductCardProps) {
             });
           }}
           showDots={false}
+          endSlotClassName="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2"
           endSlot={
-            <span className="inline-flex items-center">
+            <span className="inline-flex h-5 w-5 items-center justify-center">
               {cartQuantity > 0 ? (
-                <span className="inline-flex min-h-5 min-w-5 items-center justify-center rounded-full bg-white px-1 text-[10px] font-bold text-[#1d2c63] transition-colors duration-300 group-hover/premium-btn:bg-[#1d2c63] group-hover/premium-btn:text-white">
+                <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-white text-[10px] font-bold text-[#1d2c63] transition-colors duration-300 group-hover/premium-btn:bg-[#1d2c63] group-hover/premium-btn:text-white">
                   {cartQuantity}
                 </span>
               ) : null}
             </span>
           }
-          className="w-full justify-center whitespace-nowrap rounded-none border-[#1d2c63] px-4 py-3 text-xs !tracking-[0.16em] [--btn-bg:#1d2c63] [--btn-fill:#ffffff] [--btn-text:#ffffff] [--btn-hover-text:#1d2c63]"
+          className="w-full justify-center whitespace-nowrap rounded-none border-[#1d2c63] px-4 py-3 text-xs tracking-[0.16em]! [--btn-bg:#1d2c63] [--btn-fill:#ffffff] [--btn-text:#ffffff] [--btn-hover-text:#1d2c63]"
         />
       </div>
     </div>

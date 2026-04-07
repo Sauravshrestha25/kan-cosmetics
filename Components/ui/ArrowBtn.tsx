@@ -13,6 +13,7 @@ interface PremiumButtonProps {
   style?: CSSProperties;
   showDots?: boolean;
   endSlot?: React.ReactNode;
+  endSlotClassName?: string;
 }
 
 export default function PremiumButton({
@@ -24,6 +25,7 @@ export default function PremiumButton({
   style,
   showDots = true,
   endSlot,
+  endSlotClassName,
 }: PremiumButtonProps) {
   const buttonStyle = {
     "--btn-bg": "#2b3962",
@@ -37,22 +39,26 @@ export default function PremiumButton({
     <motion.span
       whileHover="hover"
       style={buttonStyle}
-      className={`${className} cursor-pointer group/premium-btn relative inline-flex items-center justify-center gap-4 overflow-hidden border border-gold-500 bg-[var(--btn-bg)] px-8 py-3 text-sm tracking-widest uppercase text-[var(--btn-text)] transition-colors duration-300`}
+      className={`${className} cursor-pointer group/premium-btn relative inline-flex items-center justify-center gap-4 overflow-hidden border border-gold-500 bg-(--btn-bg) px-8 py-3 text-(--btn-text) text-sm tracking-widest uppercase transition-colors duration-300`}
     >
-      <span className="absolute inset-0 origin-bottom scale-y-0 bg-[var(--btn-fill)] transition-transform duration-300 ease-out group-hover/premium-btn:scale-y-100" />
+      <span className="absolute inset-0 origin-bottom scale-y-0 bg-(--btn-fill) transition-transform duration-300 ease-out group-hover/premium-btn:scale-y-100" />
 
       {showDots ? (
-        <span className="relative z-10 h-1 w-1 rounded-full bg-current transition-transform duration-300 group-hover/premium-btn:scale-150 group-hover/premium-btn:text-[var(--btn-hover-text)]" />
+        <span className="relative z-10 h-1 w-1 rounded-full bg-current transition-transform duration-300 group-hover/premium-btn:scale-150 group-hover/premium-btn:text-(--btn-hover-text)" />
       ) : null}
 
-      <span className="relative z-10 font-matter font-medium transition-colors duration-300 group-hover/premium-btn:text-[var(--btn-hover-text)]">
+      <span className="relative z-10 font-matter font-medium transition-colors duration-300 group-hover/premium-btn:text-(--btn-hover-text)">
         {text}
       </span>
 
-      {endSlot ? <span className="relative z-10">{endSlot}</span> : null}
+      {endSlot ? (
+        <span className={`relative z-10 ${endSlotClassName ?? ""}`}>
+          {endSlot}
+        </span>
+      ) : null}
 
       {showDots ? (
-        <span className="relative z-10 h-1 w-1 rounded-full bg-current transition-transform duration-300 group-hover/premium-btn:scale-150 group-hover/premium-btn:text-[var(--btn-hover-text)]" />
+        <span className="relative z-10 h-1 w-1 rounded-full bg-current transition-transform duration-300 group-hover/premium-btn:scale-150 group-hover/premium-btn:text-(--btn-hover-text)" />
       ) : null}
     </motion.span>
   );
