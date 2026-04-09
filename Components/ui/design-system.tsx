@@ -10,6 +10,7 @@ export const kanColorVars = {
   brandStrong: "var(--kan-brand-strong)",
   brandDeep: "var(--kan-brand-deep)",
   accent: "var(--kan-brand-accent)",
+  navbar: "var(--kan-navbar-bg)",
   heading: "var(--kan-heading)",
   copy: "var(--kan-copy)",
   copyMuted: "var(--kan-copy-muted)",

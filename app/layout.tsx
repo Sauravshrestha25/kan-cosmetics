@@ -115,7 +115,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={` ${matter.variable} ${saolDisplay.variable} ${montserrat.variable} ${theseasons.variable}  antialiased `}
+        className={`min-h-screen bg-[#fff5f0] ${matter.variable} ${saolDisplay.variable} ${montserrat.variable} ${theseasons.variable} antialiased`}
         suppressHydrationWarning
       >
         <StyledComponentsRegistry>

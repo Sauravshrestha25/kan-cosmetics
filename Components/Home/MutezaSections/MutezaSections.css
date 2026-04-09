@@ -1,0 +1,774 @@
+/* ══════════════════════════════════════════════════
+   Muteza Clone — Exact Layout Styles
+   ══════════════════════════════════════════════════ */
+
+/* ── Global section bg ── */
+.mz-root {
+  background: #faf5f0;
+  color: #1a1a1a;
+}
+
+/* ─────────────────────────────────────────────────
+   Section 1: WHERE SCIENCE MEETS NATURE
+   ───────────────────────────────────────────────── */
+.mz-science {
+  position: relative;
+  overflow: hidden;
+  padding: 5.5rem 0 7rem;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+.mz-science__inner {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.86fr) minmax(520px, 1.5fr) minmax(260px, 0.72fr);
+  column-gap: 1.5rem;
+  align-items: center;
+  width: 100%;
+  max-width: 1680px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.mz-science__copy {
+  position: relative;
+  z-index: 2;
+}
+
+.mz-science__copy--left {
+  justify-self: start;
+}
+
+.mz-science__copy--right {
+  justify-self: end;
+}
+
+.mz-science__heading {
+  font-family: var(--font-seasons), "Playfair Display", serif;
+  font-size: clamp(3.8rem, 6.7vw, 7.4rem);
+  font-weight: 600;
+  line-height: 0.82;
+  text-transform: uppercase;
+  color: #1a1a1a;
+  letter-spacing: -0.055em;
+  max-width: 5.2em;
+}
+
+.mz-science__heading span {
+  display: block;
+}
+
+.mz-science__heading span:nth-child(2) {
+  padding-left: 0.48em;
+}
+
+.mz-science__art {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 860px;
+  isolation: isolate;
+}
+
+.mz-science__tilted-bg {
+  position: absolute;
+  width: min(68%, 600px);
+  height: min(84%, 820px);
+  background: #896f3d;
+  transform: rotate(7deg);
+  border-radius: 0;
+  z-index: 0;
+  top: 2%;
+  left: 18%;
+  box-shadow: 0 18px 30px rgba(236, 166, 182, 0.08);
+}
+
+.mz-science__product-img {
+  position: relative;
+  z-index: 2;
+  width: clamp(220px, 20vw, 320px);
+  margin-top: 2.25rem;
+  margin-left: 1rem;
+  filter: drop-shadow(0 28px 42px rgba(26, 38, 18, 0.22));
+}
+
+.mz-science__float {
+  position: absolute;
+  z-index: 3;
+  pointer-events: none;
+  will-change: transform;
+  overflow: visible;
+}
+
+.mz-science__float--1 {
+  top: 8%;
+  left: 18%;
+  width: clamp(150px, 13vw, 220px);
+  height: clamp(150px, 13vw, 220px);
+  transform: rotate(-14deg);
+}
+
+.mz-science__float--2 {
+  top: 2%;
+  right: 18%;
+  width: clamp(150px, 13vw, 230px);
+  height: clamp(240px, 20vw, 340px);
+  transform: rotate(10deg);
+}
+
+.mz-science__float--3 {
+  bottom: 10%;
+  left: 22%;
+  width: clamp(120px, 10vw, 180px);
+  height: clamp(120px, 10vw, 180px);
+  transform: rotate(-8deg);
+}
+
+.mz-science__float--4 {
+  bottom: 16%;
+  right: 20%;
+  width: clamp(120px, 10vw, 180px);
+  height: clamp(180px, 15vw, 280px);
+  transform: rotate(14deg);
+}
+
+.mz-science__description {
+  font-family: var(--font-matter), sans-serif;
+  font-size: clamp(0.95rem, 1.05vw, 1.05rem);
+  line-height: 1.75;
+  color: #555;
+  max-width: 24rem;
+  margin-left: auto;
+}
+
+/* ─────────────────────────────────────────────────
+   Section 2: HOW THIS WORKS
+   ───────────────────────────────────────────────── */
+.mz-howworks {
+  position: relative;
+  overflow: hidden;
+  background: #faf5f0;
+  padding: 0;
+}
+
+.mz-howworks__header {
+  text-align: center;
+  padding: 5rem 3rem 3rem;
+}
+
+.mz-howworks__subtitle {
+  font-family: var(--font-matter), sans-serif;
+  font-size: 0.72rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: #b0a597;
+  margin-bottom: 1rem;
+}
+
+.mz-howworks__title {
+  font-family: var(--font-seasons), "Playfair Display", serif;
+  font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1;
+  color: #1a1a1a;
+  margin-bottom: 1rem;
+}
+
+.mz-howworks__desc {
+  font-family: var(--font-matter), sans-serif;
+  font-size: clamp(0.92rem, 1.15vw, 1.05rem);
+  line-height: 1.7;
+  color: #777;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.mz-howworks__body {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 0;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem 3rem 5rem;
+}
+
+.mz-howworks__portrait {
+  position: relative;
+  overflow: hidden;
+  min-height: 500px;
+}
+
+.mz-howworks__portrait img {
+  object-fit: cover;
+}
+
+.mz-howworks__steps {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 3rem;
+}
+
+.mz-howworks__step {
+  border-top: 1px solid #ddd5cc;
+  padding: 2.5rem 0;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.mz-howworks__step:last-child {
+  border-bottom: 1px solid #ddd5cc;
+}
+
+.mz-howworks__step-num {
+  font-family: var(--font-seasons), "Playfair Display", serif;
+  font-size: clamp(1.1rem, 1.5vw, 1.4rem);
+  font-style: italic;
+  color: #1a1a1a;
+  line-height: 1;
+  padding-top: 0.2rem;
+}
+
+.mz-howworks__step-title {
+  font-family: var(--font-seasons), "Playfair Display", serif;
+  font-size: clamp(1.5rem, 2.8vw, 2.5rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #1a1a1a;
+  line-height: 1.05;
+  letter-spacing: 0.01em;
+}
+
+.mz-howworks__step-desc {
+  font-family: var(--font-matter), sans-serif;
+  font-size: clamp(0.85rem, 1vw, 0.95rem);
+  line-height: 1.65;
+  color: #777;
+  max-width: 280px;
+  padding-top: 0.3rem;
+}
+
+/* ─────────────────────────────────────────────────
+   Section 3: Feature Badges (dark bg, rectangular portrait)
+   ───────────────────────────────────────────────── */
+.mz-badges {
+  position: relative;
+  overflow: hidden;
+  background: #faf5f0;
+  padding: 6rem 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mz-badges__inner {
+  position: relative;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 700px;
+}
+
+.mz-badges__portrait {
+  position: relative;
+  z-index: 1;
+  width: clamp(300px, 35vw, 500px);
+  height: clamp(450px, 55vw, 720px);
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.mz-badges__portrait img {
+  object-fit: cover;
+  object-position: center top;
+}
+
+.mz-badges__badge {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  z-index: 2;
+}
+
+.mz-badges__icon {
+  width: clamp(3rem, 4.5vw, 4rem);
+  height: clamp(3rem, 4.5vw, 4rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mz-badges__icon svg {
+  width: 100%;
+  height: 100%;
+  color: #1a1a1a;
+  stroke-width: 1;
+}
+
+.mz-badges__label {
+  font-family: var(--font-matter), sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #1a1a1a;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.mz-badges__badge--tl {
+  top: 10%;
+  left: 8%;
+}
+
+.mz-badges__badge--tr {
+  top: 10%;
+  right: 8%;
+}
+
+.mz-badges__badge--bl {
+  bottom: 14%;
+  left: 8%;
+}
+
+.mz-badges__badge--br {
+  bottom: 14%;
+  right: 8%;
+}
+
+/* ─────────────────────────────────────────────────
+   Section 4: Value Cards (3 tall cards)
+   ───────────────────────────────────────────────── */
+.mz-values {
+  position: relative;
+  overflow: hidden;
+  background: #faf5f0;
+  padding: 5rem 0 6rem;
+}
+
+.mz-values__cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 3rem;
+}
+
+.mz-values__card {
+  background: #f0ece4;
+  padding: 3rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  min-height: 500px;
+}
+
+.mz-values__card:nth-child(2) {
+  background: #ede8df;
+}
+
+.mz-values__card:nth-child(3) {
+  background: #eae5dc;
+}
+
+.mz-values__card-title {
+  font-family: var(--font-seasons), "Playfair Display", serif;
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #1a1a1a;
+  line-height: 1.1;
+  margin-bottom: 1.25rem;
+  letter-spacing: 0.01em;
+}
+
+.mz-values__card-desc {
+  font-family: var(--font-matter), sans-serif;
+  font-size: clamp(0.85rem, 1vw, 0.95rem);
+  line-height: 1.7;
+  color: #777;
+  max-width: 280px;
+  margin-bottom: 2rem;
+}
+
+.mz-values__card-img {
+  margin-top: auto;
+  width: clamp(120px, 18vw, 220px);
+  height: clamp(120px, 18vw, 220px);
+  position: relative;
+}
+
+/* ─────────────────────────────────────────────────
+   Section 5: Reviews (staggered masonry)
+   ───────────────────────────────────────────────── */
+.mz-reviews {
+  position: relative;
+  overflow: hidden;
+  background: #faf5f0;
+  padding: 6rem 0;
+}
+
+.mz-reviews__header {
+  max-width: 1400px;
+  margin: 0 auto 3rem;
+  padding: 0 3rem;
+}
+
+.mz-reviews__title {
+  font-family: var(--font-seasons), "Playfair Display", serif;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #1a1a1a;
+  line-height: 1;
+}
+
+.mz-reviews__grid {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 3rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+}
+
+.mz-reviews__col {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Stagger: middle column offset */
+.mz-reviews__col:nth-child(2) {
+  padding-top: 3rem;
+}
+
+.mz-reviews__col:nth-child(3) {
+  padding-top: 1.5rem;
+}
+
+.mz-reviews__card {
+  padding: 2rem 1.5rem;
+  border-bottom: 1px solid transparent;
+}
+
+.mz-reviews__card-img {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  margin-bottom: 1.25rem;
+}
+
+.mz-reviews__card-img img {
+  object-fit: cover;
+}
+
+.mz-reviews__stars {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 1rem;
+}
+
+.mz-reviews__star {
+  width: 1.1rem;
+  height: 1.1rem;
+  color: #e8a87c;
+}
+
+.mz-reviews__quote {
+  font-family: var(--font-matter), sans-serif;
+  font-size: clamp(0.9rem, 1.1vw, 1rem);
+  line-height: 1.7;
+  color: #333;
+  margin-bottom: 0.75rem;
+}
+
+.mz-reviews__author {
+  font-family: var(--font-matter), sans-serif;
+  font-size: 0.85rem;
+  color: #999;
+}
+
+/* ─────────────────────────────────────────────────
+   Section 6: CTA — Ready to Transform
+   ───────────────────────────────────────────────── */
+.mz-cta {
+  position: relative;
+  overflow: hidden;
+  background: #faf5f0;
+}
+
+.mz-cta__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 90vh;
+}
+
+.mz-cta__image {
+  position: relative;
+  overflow: hidden;
+  min-height: 500px;
+}
+
+.mz-cta__image img {
+  object-fit: cover;
+  object-position: center top;
+}
+
+.mz-cta__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 5rem 4rem;
+}
+
+.mz-cta__heading {
+  font-family: var(--font-seasons), "Playfair Display", serif;
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #1a1a1a;
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+  margin-bottom: 2.5rem;
+}
+
+.mz-cta__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-matter), sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: #fff;
+  background: #e8a87c;
+  padding: 1rem 2.5rem;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.3s ease, transform 0.3s ease;
+  max-width: fit-content;
+}
+
+.mz-cta__btn:hover {
+  background: #d4956b;
+  transform: translateY(-2px);
+}
+
+.mz-cta__divider {
+  width: 100%;
+  max-width: 480px;
+  height: 1px;
+  background: #ddd5cc;
+  margin-bottom: 2.5rem;
+}
+
+/* ─────────────────────────────────────────────────
+   Responsive
+   ───────────────────────────────────────────────── */
+@media (max-width: 1023px) {
+  .mz-science__inner {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    text-align: center;
+  }
+
+  .mz-science__copy--left,
+  .mz-science__copy--right {
+    justify-self: center;
+  }
+
+  .mz-science__heading span:nth-child(2) {
+    padding-left: 0;
+  }
+
+  .mz-science__description {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .mz-science__art {
+    min-height: 620px;
+  }
+
+  .mz-science__tilted-bg {
+    width: min(72%, 560px);
+    height: min(84%, 680px);
+    left: 50%;
+    transform: translateX(-50%) rotate(7deg);
+  }
+
+  .mz-science__product-img {
+    margin-left: 0;
+  }
+
+  .mz-science__float--1 {
+    left: 10%;
+  }
+
+  .mz-science__float--2 {
+    right: 8%;
+  }
+
+  .mz-science__float--3 {
+    left: 14%;
+  }
+
+  .mz-science__float--4 {
+    right: 14%;
+  }
+
+  .mz-howworks__body {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .mz-howworks__steps {
+    padding-left: 0;
+  }
+
+  .mz-howworks__portrait {
+    min-height: 350px;
+  }
+
+  .mz-badges__inner {
+    flex-direction: column;
+    gap: 3rem;
+    min-height: auto;
+  }
+
+  .mz-badges__badge {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+  }
+
+  .mz-badges__mobile-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+
+  .mz-values__cards {
+    grid-template-columns: 1fr;
+  }
+
+  .mz-values__card {
+    min-height: 350px;
+  }
+
+  .mz-reviews__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mz-reviews__col:nth-child(2),
+  .mz-reviews__col:nth-child(3) {
+    padding-top: 0;
+  }
+
+  .mz-cta__inner {
+    grid-template-columns: 1fr;
+  }
+
+  .mz-cta__image {
+    min-height: 350px;
+  }
+
+  .mz-cta__content {
+    padding: 3rem 2rem;
+  }
+
+  .mz-howworks__step {
+    grid-template-columns: auto 1fr;
+    gap: 1rem;
+  }
+
+  .mz-howworks__step-desc {
+    grid-column: 1 / -1;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 639px) {
+  .mz-science__inner,
+  .mz-howworks__body,
+  .mz-values__cards,
+  .mz-reviews__grid {
+    padding: 0 1.5rem;
+  }
+
+  .mz-howworks__header,
+  .mz-reviews__header {
+    padding: 0 1.5rem;
+  }
+
+  .mz-science {
+    padding: 3.5rem 0 4rem;
+    min-height: auto;
+  }
+
+  .mz-science__heading {
+    font-size: clamp(2.8rem, 14vw, 4.2rem);
+    line-height: 0.88;
+  }
+
+  .mz-science__art {
+    min-height: 420px;
+  }
+
+  .mz-science__tilted-bg {
+    width: 78%;
+    height: 88%;
+  }
+
+  .mz-science__product-img {
+    width: clamp(170px, 56vw, 250px);
+  }
+
+  .mz-science__float--1 {
+    width: 110px;
+    height: 110px;
+  }
+
+  .mz-science__float--2 {
+    width: 110px;
+    height: 170px;
+  }
+
+  .mz-science__float--3 {
+    width: 96px;
+    height: 96px;
+  }
+
+  .mz-science__float--4 {
+    width: 92px;
+    height: 140px;
+  }
+
+  .mz-badges {
+    min-height: auto;
+    padding: 4rem 0;
+  }
+
+  .mz-cta__heading {
+    font-size: clamp(2.2rem, 8vw, 3rem);
+  }
+}

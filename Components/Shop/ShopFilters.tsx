@@ -140,7 +140,7 @@ export default function ShopFilters({ filters, onChange }: ShopFiltersProps) {
               Price
             </h3>
             <div className="space-y-4">
-              <div className="flex items-center gap-2 text-sm text-[#7a6f68]">
+              <div className="flex font-matter items-center gap-2 text-sm text-[#7a6f68]">
                 <span>{formatNpr(filters.priceRange[0])}</span>
                 <span>-</span>
                 <span>{formatNpr(filters.priceRange[1])}</span>
@@ -179,15 +179,6 @@ export default function ShopFilters({ filters, onChange }: ShopFiltersProps) {
               Review
             </h3>
             <div className="space-y-4">
-              <div className="flex items-center gap-2 text-sm text-[#7a6f68]">
-                <span>Minimum rating:</span>
-                <div className="flex items-center gap-1">
-                  <RatingStars rating={filters.rating || 1} size="sm" />
-                  <span>
-                    {filters.rating || 1} star{filters.rating !== 1 ? "s" : ""}
-                  </span>
-                </div>
-              </div>
               <div className="relative h-8 cursor-ew-resize group">
                 <div className="absolute top-1/2 h-1 w-full -translate-y-1/2 bg-[#d9d7d1]" />
                 <div

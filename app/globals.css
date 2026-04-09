@@ -10,6 +10,7 @@
   --color-kan-brand-strong: var(--kan-brand-strong);
   --color-kan-brand-deep: var(--kan-brand-deep);
   --color-kan-brand-accent: var(--kan-brand-accent);
+  --color-kan-navbar: var(--kan-navbar-bg);
   --color-kan-heading: var(--kan-heading);
   --color-kan-copy: var(--kan-copy);
   --color-kan-copy-muted: var(--kan-copy-muted);
@@ -112,6 +113,7 @@
   --kan-brand-strong: #15224d;
   --kan-brand-deep: #233368;
   --kan-brand-accent: #e58ba0;
+  --kan-navbar-bg: #ffffff;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --color-primary: #2b3962;

@@ -61,8 +61,8 @@ export default function CollectionPage() {
           </button>
         </div>
 
-        <div className="flex flex-col gap-8 lg:flex-row">
-          <div className="hidden lg:block lg:self-start">
+        <div className="flex flex-col gap-8 lg:flex-row lg:items-start">
+          <div className="hidden lg:sticky lg:top-24 lg:block lg:self-start">
             <ShopFilters filters={filters} onChange={setFilters} />
           </div>
           <ProductGrid

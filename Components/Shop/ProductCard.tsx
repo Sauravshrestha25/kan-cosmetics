@@ -2,52 +2,57 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import { formatNpr, Product } from "@/lib/products";
 import PremiumButton from "@/Components/ui/ArrowBtn";
 import RatingStars from "./RatingStars";
-import { addToCart, CART_EVENT, getProductCartQuantity } from "@/lib/cart";
+import { addToCart } from "@/lib/cart";
 import { toast } from "sonner";
 
 interface ProductCardProps {
   product: Product;
+  compact?: boolean;
 }
 
-export default function ProductCard({ product }: ProductCardProps) {
-  const [cartQuantity, setCartQuantity] = useState(0);
-
-  useEffect(() => {
-    const syncCart = () => {
-      setCartQuantity(getProductCartQuantity(product.id));
-    };
-
-    syncCart();
-    window.addEventListener(CART_EVENT, syncCart);
-
-    return () => {
-      window.removeEventListener(CART_EVENT, syncCart);
-    };
-  }, [product.id]);
+export default function ProductCard({ product, compact = false }: ProductCardProps) {
+  const imageContainerClassName = compact
+    ? "relative aspect-[0.76/1] border-b border-[#ece8e1] p-0"
+    : "relative aspect-square border-b border-[#ece8e1] p-6";
+  const bodyClassName = compact ? "p-3 text-left" : "p-5";
+  const titleClassName = compact
+    ? "mb-1 font-matter text-[0.92rem] font-semibold tracking-[-0.03em] text-[#141c35] line-clamp-1"
+    : "mb-3 font-matter text-lg font-semibold tracking-[-0.03em] text-[#141c35] line-clamp-1";
+  const priceClassName = compact
+    ? "mt-0.5 block font-matter text-[0.9rem] font-bold text-[#141c35]"
+    : "mt-1 block font-matter text-xl font-bold text-[#141c35]";
+  const actionsClassName = compact
+    ? "grid grid-cols-2 gap-1.5 border-t border-[#ece8e1] p-1.5"
+    : "grid grid-cols-2 gap-3 border-t border-[#ece8e1] p-3";
+  const buttonClassName = compact
+    ? "w-full justify-center whitespace-nowrap rounded-none border-[#d9d7d1] px-2 py-1.5 text-[9px] tracking-[0.12em]!"
+    : "w-full justify-center whitespace-nowrap rounded-none border-[#d9d7d1] px-4 py-3 text-xs tracking-[0.16em]!";
+  const imageClassName = compact
+    ? "object-contain p-0 transition-transform duration-500 group-hover:scale-[1.03]"
+    : "object-contain p-4 transition-transform duration-500 group-hover:scale-[1.03]";
 
   return (
     <div className="group relative border border-[#d9d7d1] bg-white transition-shadow duration-300 hover:shadow-[0_22px_50px_rgba(20,28,53,0.08)]">
       <Link href={`/collection/${product.slug}`} className="block">
-        <div className="relative aspect-square border-b border-[#ece8e1] p-6">
+        <div className={imageContainerClassName}>
           <Image
             src={product.image}
             alt={product.name}
             fill
             sizes="(min-width: 1280px) 180px, (min-width: 1024px) 16vw, (min-width: 768px) 24vw, 50vw"
             quality={70}
-            className="object-contain p-4 transition-transform duration-500 group-hover:scale-[1.03]"
+            className={imageClassName}
           />
         </div>
 
-        <div className="p-5">
-          <p className="mb-2 font-matter text-[0.72rem] uppercase tracking-[0.18em] text-[#8d827c]">
+        <div className={bodyClassName}>
+          <p className="mb-1 font-matter text-[0.64rem] uppercase tracking-[0.16em] text-[#8d827c] text-left">
             {product.category}
           </p>
-          <h3 className="mb-3 font-matter text-lg font-semibold tracking-[-0.03em] text-[#141c35] line-clamp-1">
+          <h3 className={titleClassName}>
             {product.name}
           </h3>
 
@@ -57,12 +62,12 @@ export default function ProductCard({ product }: ProductCardProps) {
             size="sm"
           />
 
-          <div className="mt-4 flex items-end justify-between gap-4">
+          <div className="mt-2.5 flex items-end justify-between gap-2 text-left">
             <div>
-              <p className="font-matter text-[0.68rem] uppercase tracking-[0.2em] text-[#98a2b3]">
+              <p className="font-matter text-[0.62rem] uppercase tracking-[0.16em] text-[#98a2b3]">
                 Price
               </p>
-              <span className="mt-1 block font-matter text-xl font-bold text-[#141c35]">
+              <span className={priceClassName}>
                 {formatNpr(product.price)}
               </span>
             </div>
@@ -72,12 +77,20 @@ export default function ProductCard({ product }: ProductCardProps) {
         </div>
       </Link>
 
-      <div className="grid grid-cols-2 gap-3 border-t border-[#ece8e1] p-3">
+      <div className={actionsClassName}>
         <PremiumButton
           text="View Product"
           href={`/collection/${product.slug}`}
           showDots={false}
-          className="w-full justify-center whitespace-nowrap rounded-none border-[#d9d7d1] px-4 py-3 text-xs tracking-[0.16em]! [--btn-bg:#ffffff] [--btn-fill:#1d2c63] [--btn-text:#1d2c63] [--btn-hover-text:#ffffff]"
+          className={buttonClassName}
+          style={
+            {
+              "--btn-bg": "#ffffff",
+              "--btn-fill": "#f8becd",
+              "--btn-text": "#1d2c63",
+              "--btn-hover-text": "#1d2c63",
+            } as React.CSSProperties
+          }
         />
         <PremiumButton
           text="Add To Cart"
@@ -100,17 +113,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             });
           }}
           showDots={false}
-          endSlotClassName="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2"
-          endSlot={
-            <span className="inline-flex h-5 w-5 items-center justify-center">
-              {cartQuantity > 0 ? (
-                <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-white text-[10px] font-bold text-[#1d2c63] transition-colors duration-300 group-hover/premium-btn:bg-[#1d2c63] group-hover/premium-btn:text-white">
-                  {cartQuantity}
-                </span>
-              ) : null}
-            </span>
-          }
-          className="w-full justify-center whitespace-nowrap rounded-none border-[#1d2c63] px-4 py-3 text-xs tracking-[0.16em]! [--btn-bg:#1d2c63] [--btn-fill:#ffffff] [--btn-text:#ffffff] [--btn-hover-text:#1d2c63]"
+          className={`${buttonClassName} [--btn-bg:#ffffff] [--btn-fill:#f8becd] [--btn-text:#1d2c63] [--btn-hover-text:#1d2c63]`}
         />
       </div>
     </div>

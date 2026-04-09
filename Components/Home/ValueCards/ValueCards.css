@@ -1,0 +1,70 @@
+.mz-values {
+  position: relative;
+  overflow: hidden;
+  background: #f4f4f5;
+  padding: 5rem 0 6rem;
+}
+
+.mz-values__cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 3rem;
+}
+
+.mz-values__card {
+  background: #ffffff;
+  padding: 3rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  min-height: 500px;
+}
+
+.mz-values__card:nth-child(2) {
+  background: #ffffff;
+}
+
+.mz-values__card:nth-child(3) {
+  background: #ffffff;
+}
+
+.mz-values__card-title {
+  font-family: var(--font-seasons), "Playfair Display", serif;
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #1a1a1a;
+  line-height: 1.1;
+  margin-bottom: 1.25rem;
+  letter-spacing: 0.01em;
+}
+
+.mz-values__card-desc {
+  font-family: var(--font-matter), sans-serif;
+  font-size: clamp(0.85rem, 1vw, 0.95rem);
+  line-height: 1.7;
+  color: #777;
+  max-width: 280px;
+  margin-bottom: 2rem;
+}
+
+.mz-values__card-img {
+  margin-top: auto;
+  width: clamp(120px, 18vw, 220px);
+  height: clamp(120px, 18vw, 220px);
+  position: relative;
+}
+
+@media (max-width: 1023px) {
+  .mz-values__cards {
+    grid-template-columns: 1fr;
+  }
+
+  .mz-values__card {
+    min-height: 350px;
+  }
+}

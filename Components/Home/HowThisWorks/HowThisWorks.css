@@ -1,0 +1,137 @@
+.mz-howworks {
+  position: relative;
+  overflow: hidden;
+  background: #f4f4f5;
+  padding: 0;
+}
+
+.mz-howworks__header {
+  text-align: center;
+  padding: 5rem 3rem 3rem;
+}
+
+.mz-howworks__subtitle {
+  font-family: var(--font-matter), sans-serif;
+  font-size: 0.72rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: #b0a597;
+  margin-bottom: 1rem;
+}
+
+.mz-howworks__title {
+  font-family: var(--font-seasons), "Playfair Display", serif;
+  font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1;
+  color: #1a1a1a;
+  margin-bottom: 1rem;
+}
+
+.mz-howworks__desc {
+  font-family: var(--font-matter), sans-serif;
+  font-size: clamp(0.92rem, 1.15vw, 1.05rem);
+  line-height: 1.7;
+  color: #777;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.mz-howworks__body {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 0;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem 3rem 5rem;
+}
+
+.mz-howworks__portrait {
+  position: relative;
+  overflow: hidden;
+  min-height: 500px;
+}
+
+.mz-howworks__portrait img {
+  object-fit: cover;
+}
+
+.mz-howworks__steps {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 3rem;
+}
+
+.mz-howworks__step {
+  border-top: 1px solid #ddd5cc;
+  padding: 2.5rem 0;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.mz-howworks__step:last-child {
+  border-bottom: 1px solid #ddd5cc;
+}
+
+.mz-howworks__step-num {
+  font-family: var(--font-seasons), "Playfair Display", serif;
+  font-size: clamp(1.1rem, 1.5vw, 1.4rem);
+  font-style: italic;
+  color: #1a1a1a;
+  line-height: 1;
+  padding-top: 0.2rem;
+}
+
+.mz-howworks__step-title {
+  font-family: var(--font-seasons), "Playfair Display", serif;
+  font-size: clamp(1.5rem, 2.8vw, 2.5rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #1a1a1a;
+  line-height: 1.05;
+  letter-spacing: 0.01em;
+}
+
+.mz-howworks__step-desc {
+  font-family: var(--font-matter), sans-serif;
+  font-size: clamp(0.85rem, 1vw, 0.95rem);
+  line-height: 1.65;
+  color: #777;
+  max-width: 280px;
+  padding-top: 0.3rem;
+}
+
+@media (max-width: 1023px) {
+  .mz-howworks__body {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .mz-howworks__steps {
+    padding-left: 0;
+  }
+
+  .mz-howworks__portrait {
+    min-height: 350px;
+  }
+
+  .mz-howworks__step {
+    grid-template-columns: auto 1fr;
+    gap: 1rem;
+  }
+
+  .mz-howworks__step-desc {
+    grid-column: 1 / -1;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 639px) {
+  .mz-howworks__header {
+    padding: 0 1.5rem;
+  }
+}

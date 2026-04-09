@@ -6,6 +6,18 @@ const nextConfig: NextConfig = {
   compiler: {
     styledComponents: true,
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+      },
+      {
+        protocol: "https",
+        hostname: "plus.unsplash.com",
+      },
+    ],
+  },
   turbopack: {
     resolveAlias: {
       // @mediapipe/face_detection is an IIFE with no ES module exports,

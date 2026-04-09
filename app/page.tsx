@@ -1,15 +1,18 @@
-import Hero from "@/Components/Home/Hero/Hero";
+// import Hero from "@/Components/Home/Hero/Hero";
 import HomeReadySignal from "@/Components/Home/HomeReadySignal";
 import HomepageEditorial from "@/Components/Home/HomepageEditorial/HomepageEditorial";
-import About from "@/Components/Home/About/AboutHero";
+import ScienceMeetsNature from "@/Components/Home/ScienceMeetsNature/ScienceMeetsNature";
+import ProductShowcase from "@/Components/Home/Products/ProductShowcase";
 
 const page = () => {
   return (
     <div className="font-saolDisplay" data-home-root>
       <HomeReadySignal />
-      <Hero />
+      <ScienceMeetsNature />
+      <ProductShowcase />
+
+      {/* <Hero /> */}
       <HomepageEditorial />
-      <About />
     </div>
   );
 };

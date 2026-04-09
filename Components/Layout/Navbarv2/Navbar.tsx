@@ -23,7 +23,7 @@ import {
 } from "@/lib/auth";
 import { CART_EVENT, getCartCount } from "@/lib/cart";
 import { Button } from "@/Components/ui/button";
-import { PageContainer } from "@/Components/ui/design-system";
+import { PageContainer, kanColorVars } from "@/Components/ui/design-system";
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -47,7 +47,6 @@ const accountLinks = [
 
 const Navbar = () => {
   const pathname = usePathname();
-  const isHomePage = pathname === "/";
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -55,7 +54,7 @@ const Navbar = () => {
   const [cartCount, setCartCount] = useState(0);
   const [accountOpen, setAccountOpen] = useState(false);
   const accountMenuRef = useRef<HTMLDivElement | null>(null);
-  const isTransparentHome = isHomePage && !isScrolled && !mobileOpen;
+  const isTransparentHome = false;
 
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
@@ -150,11 +149,9 @@ const Navbar = () => {
   return (
     <>
       <nav
+        style={{ backgroundColor: kanColorVars.navbar }}
         className={[
-          "fixed inset-x-0 top-0 z-50 transition-transform duration-300 ease-out",
-          isTransparentHome
-            ? "border-b border-transparent bg-transparent"
-            : "border-b border-slate-200/80 bg-white/95 backdrop-blur",
+          "fixed inset-x-0 top-0 z-50 border-b border-slate-200/80 transition-transform duration-300 ease-out",
           isVisible || mobileOpen ? "translate-y-0" : "-translate-y-full",
         ].join(" ")}
       >
@@ -196,7 +193,7 @@ const Navbar = () => {
                           ? "font-semibold text-white"
                           : "text-white hover:text-white/75"
                         : active
-                          ? "font-semibold text-kan-brand"
+                          ? "font-semibold text-kan-brand-accent"
                           : "text-[#1f2e5d] hover:text-kan-brand-accent",
                       item.accent && !active && !isTransparentHome
                         ? "bg-[linear-gradient(90deg,#111111_15%,#111111_15%,var(--kan-brand-accent)_100%)] bg-clip-text text-transparent"

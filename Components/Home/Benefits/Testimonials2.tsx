@@ -92,9 +92,9 @@ const Testimonials2 = () => {
   // }
 
   return (
-    <Section className="min-h-screen bg-white text-[#2b3962]">
+    <Section className="h-screen overflow-hidden bg-white text-[#2b3962]">
       <PageContainer>
-        <div className="grid items-center gap-10 lg:grid-cols-[1.02fr_0.98fr] lg:gap-16">
+        <div className="grid h-full items-center gap-10 lg:grid-cols-[1.02fr_0.98fr] lg:gap-16">
           <div className="order-2 flex flex-col justify-center lg:order-1">
             <SectionHeading
               align="center"
@@ -136,7 +136,7 @@ const Testimonials2 = () => {
           </div>
 
           <div className="order-2 lg:order-2">
-            <div className="relative h-[60vh] bg-neutral-200 sm:h-[68vh] lg:h-[78vh]">
+            <div className="relative h-[58vh] bg-neutral-200 sm:h-[64vh] lg:h-screen">
               <Image
                 key={activeIndex}
                 src={testimonials[activeIndex].image}
