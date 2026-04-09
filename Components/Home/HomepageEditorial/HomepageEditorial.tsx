@@ -142,7 +142,7 @@ export default function HomepageEditorial() {
                   className="overflow-hidden border border-[#ded8ce] bg-white"
                   data-home-reveal
                 >
-                  <div className="relative aspect-[4/5] overflow-hidden bg-[#e8dfd5] sm:aspect-5/7">
+                  <div className="relative aspect-4/5 overflow-hidden bg-[#e8dfd5] sm:aspect-5/7">
                     <Image
                       src={image}
                       alt=""
